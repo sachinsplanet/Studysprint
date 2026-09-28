@@ -1,0 +1,119 @@
+=== INPUT & FORM HAZARDS (19 form controls) ===
+
+src/App.tsx:1664 <input type="text"> SmallFont: [] inputMode: False
+  Snippet: <input
+                  type="text"
+                  placeholder="🔍 Search study kits... (tap to browse)"
+                  readOnly
+     ...
+
+src/App.tsx:1720 <input type="text"> SmallFont: [] inputMode: False
+  Snippet: <input
+                id="kit-search"
+                type="text"
+                value={searchQuery}
+                onChange={(e) =>...
+
+src/App.tsx:1797 <select type=text> SmallFont: [] inputMode: False
+  Snippet: <select
+                  value={sortBy}
+                  onChange={(e) =>...
+
+src/App.tsx:2210 <input type=text> SmallFont: [] inputMode: False
+  Snippet: <input
+              id="track-input"
+              value={trackInput}
+              onChange={(e) =>...
+
+src/App.tsx:2668 <input type=text> SmallFont: [] inputMode: False
+  Snippet: <input
+              id="ck-name"
+              required
+              value={ckName}
+              onChange={(e) =>...
+
+src/App.tsx:2677 <input type=text> SmallFont: [] inputMode: False
+  Snippet: <input
+              id="ck-addr"
+              required
+              value={ckAddress}
+              onChange={(e) =>...
+
+src/App.tsx:2686 <input type=text> SmallFont: [] inputMode: False
+  Snippet: <input
+              id="ck-pin"
+              required
+              value={ckPin}
+              onChange={(e) =>...
+
+src/App.tsx:2701 <input type="radio"> SmallFont: [] inputMode: False
+  Snippet: <input
+                    type="radio"
+                    name="pay"
+                    value="UPI"
+                    checked={payMetho...
+
+src/App.tsx:2712 <input type="radio"> SmallFont: [] inputMode: False
+  Snippet: <input
+                    type="radio"
+                    name="pay"
+                    value="Card"
+                    checked={payMeth...
+
+src/App.tsx:2723 <input type="radio"> SmallFont: [] inputMode: False
+  Snippet: <input
+                    type="radio"
+                    name="pay"
+                    value="NetBanking"
+                    checked={p...
+
+src/App.tsx:2734 <input type="radio"> SmallFont: [] inputMode: False
+  Snippet: <input
+                    type="radio"
+                    name="pay"
+                    value="COD"
+                    checked={payMetho...
+
+src/App.tsx:2787 <input type=text> SmallFont: [] inputMode: False
+  Snippet: <input
+                value={cardNumber}
+                onChange={(e) =>...
+
+src/App.tsx:2795 <input type=text> SmallFont: [] inputMode: False
+  Snippet: <input
+                  value={cardExpiry}
+                  onChange={(e) =>...
+
+src/App.tsx:2802 <input type=text> SmallFont: [] inputMode: False
+  Snippet: <input
+                  value={cardCvv}
+                  onChange={(e) =>...
+
+src/App.tsx:2961 <input type=text> SmallFont: [] inputMode: False
+  Snippet: <input
+                  required
+                  value={reviewForm.name}
+                  onChange={(e) =>...
+
+src/App.tsx:2974 <input type=text> SmallFont: [] inputMode: False
+  Snippet: <input
+                  value={reviewForm.role}
+                  onChange={(e) =>...
+
+src/App.tsx:2988 <select type=text> SmallFont: [] inputMode: False
+  Snippet: <select
+                  value={reviewForm.category}
+                  onChange={(e) =>...
+
+src/App.tsx:3009 <input type=text> SmallFont: [] inputMode: False
+  Snippet: <input
+                  value={reviewForm.tag}
+                  onChange={(e) =>...
+
+src/App.tsx:3022 <textarea type=text> SmallFont: [] inputMode: False
+  Snippet: <textarea
+                required
+                rows={4}
+                value={reviewForm.text}
+                onChange={(e) =>...
+

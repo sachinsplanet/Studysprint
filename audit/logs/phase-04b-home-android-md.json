@@ -1,0 +1,139 @@
+{
+  "route": "/",
+  "device": "android-md",
+  "viewport": {
+    "width": 360,
+    "height": 800,
+    "dpr": 3
+  },
+  "hOverflow": [
+    {
+      "culpritId": "AUD-M001",
+      "selector": "section#home .pt-4.flex.gap-6",
+      "description": "Hero feature badges row lacks flex-wrap; badges sum to 523px forcing horizontal overflow",
+      "contentWidth": 523,
+      "viewportWidth": 360,
+      "overflowDelta": 163
+    },
+    {
+      "culpritId": "AUD-M002",
+      "selector": "section#builder .doodle-card .flex.items-center.gap-6",
+      "description": "Kit builder action bar price and button row sums to 314px exceeding container width",
+      "contentWidth": 314,
+      "viewportWidth": 280,
+      "overflowDelta": 34
+    },
+    {
+      "culpritId": "AUD-M003",
+      "selector": "div[role=\"dialog\"] .flex.gap-2.border-b",
+      "description": "Achievement modal tab switcher buttons (366px total) exceed modal container width on narrow screens",
+      "contentWidth": 366,
+      "viewportWidth": 280,
+      "overflowDelta": 86
+    }
+  ],
+  "touchTargets": [
+    {
+      "selector": "button.w-7.h-7[aria-label=\"Close\"]",
+      "w": 28,
+      "h": 28,
+      "file": "src/components/fun/ProductLabModal.tsx:57"
+    },
+    {
+      "selector": "button.w-7.h-7[aria-label=\"Close\"]",
+      "w": 28,
+      "h": 28,
+      "file": "src/components/fun/BehaviorAnalysisModal.tsx:49"
+    },
+    {
+      "selector": "button.w-8.h-8[aria-label=\"Close\"]",
+      "w": 32,
+      "h": 32,
+      "file": "src/components/fun/AchievementModal.tsx:48"
+    },
+    {
+      "selector": "button.w-7.h-7[aria-label=\"Close\"]",
+      "w": 28,
+      "h": 28,
+      "file": "src/components/fun/ExamSurvivalGameModal.tsx:164"
+    },
+    {
+      "selector": "button.w-7.h-7[aria-label=\"Close\"]",
+      "w": 28,
+      "h": 28,
+      "file": "src/components/fun/DegreeGeneratorModal.tsx:133"
+    },
+    {
+      "selector": "button.p-1[title=\"Toggle audio\"]",
+      "w": 24,
+      "h": 24,
+      "file": "src/components/fun/CatchTheBooksGameModal.tsx:413"
+    },
+    {
+      "selector": "button.w-8.h-8[aria-label=\"Close\"]",
+      "w": 32,
+      "h": 32,
+      "file": "src/components/fun/CatchTheBooksGameModal.tsx:421"
+    },
+    {
+      "selector": "button.text-slate-400.text-xs.px-1",
+      "w": 16,
+      "h": 20,
+      "file": "src/components/fun/LiveActivityTicker.tsx:48"
+    },
+    {
+      "selector": "button[title=\"Developer Diagnostics\"]",
+      "w": 18,
+      "h": 18,
+      "file": "src/components/fun/FunHeaderControls.tsx:160"
+    },
+    {
+      "selector": "#cart-btn",
+      "w": 38,
+      "h": 38,
+      "file": "src/App.tsx:1506"
+    },
+    {
+      "selector": "#menu-btn",
+      "w": 38,
+      "h": 38,
+      "file": "src/App.tsx:1528"
+    },
+    {
+      "selector": ".cart-quantity-minus, .cart-quantity-plus",
+      "w": 24,
+      "h": 24,
+      "file": "src/App.tsx:2562"
+    }
+  ],
+  "textOverflow": [],
+  "fixedTheft": [],
+  "hoverGated": [],
+  "smallText": [
+    {
+      "selector": "input#kit-search",
+      "fontSize": "14px (text-sm)",
+      "file": "src/App.tsx:1726",
+      "defect": "iOS Safari auto-zoom hazard"
+    },
+    {
+      "selector": "input#track-input",
+      "fontSize": "14px (text-sm)",
+      "file": "src/App.tsx:2215",
+      "defect": "iOS Safari auto-zoom hazard"
+    },
+    {
+      "selector": "input[name=\"review-name\"]",
+      "fontSize": "14px (text-sm)",
+      "file": "src/App.tsx:2966",
+      "defect": "iOS Safari auto-zoom hazard"
+    },
+    {
+      "selector": "textarea[name=\"review-text\"]",
+      "fontSize": "14px (text-sm)",
+      "file": "src/App.tsx:3028",
+      "defect": "iOS Safari auto-zoom hazard"
+    }
+  ],
+  "safeArea": []
+}

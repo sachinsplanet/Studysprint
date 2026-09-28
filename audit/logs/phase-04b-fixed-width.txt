@@ -1,0 +1,10 @@
+=== FIXED-WIDTH & OVERFLOW HAZARDS (1 occurrences) ===
+
+src/App.tsx:1467 [negative-margin]
+  <span className="font-hand text-xs text-[#1E2A4A]/70 dark:text-slate-400 block -mt-1 font-semibold">
+
+
+=== LARGE TAILWIND WIDTH & WHITESPACE CLASSES ===
+src/App.tsx:1726 [w-80]
+  className="px-5 py-3 rounded-full bg-white dark:bg-[#1E293B] outline-none w-full sm:w-80 font-body text-sm text-[#1E2A4A] dark:text-slate-100 placeholder:text-slate-400"
+

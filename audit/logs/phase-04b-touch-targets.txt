@@ -1,0 +1,23 @@
+=== TOUCH TARGET AUDIT: SUSPECT ELEMENTS UNDER 44x44 CSS PX (7 hits) ===
+
+src/components/fun/ProductLabModal.tsx:57
+  "w-7 h-7 rounded-full border-2 border-[#1E2A4A] dark:border-slate-300 flex items-center justify-center font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+
+src/components/fun/BehaviorAnalysisModal.tsx:49
+  "w-7 h-7 rounded-full border-2 border-[#1E2A4A] dark:border-slate-300 flex items-center justify-center font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+
+src/components/fun/AchievementModal.tsx:48
+  "w-8 h-8 rounded-full border-2 border-[#1E2A4A] dark:border-slate-300 flex items-center justify-center font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+
+src/components/fun/ExamSurvivalGameModal.tsx:164
+  "w-7 h-7 rounded-full border-2 border-[#1E2A4A] dark:border-slate-300 flex items-center justify-center font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+
+src/components/fun/DegreeGeneratorModal.tsx:133
+  "w-7 h-7 rounded-full border-2 border-[#1E2A4A] dark:border-slate-300 flex items-center justify-center font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+
+src/components/fun/CatchTheBooksGameModal.tsx:413
+  "p-1 rounded-md text-sm hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+
+src/components/fun/CatchTheBooksGameModal.tsx:421
+  "w-8 h-8 rounded-full border-2 border-[#1E2A4A] dark:border-slate-300 flex items-center justify-center font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+

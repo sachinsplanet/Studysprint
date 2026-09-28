@@ -1,0 +1,33 @@
+=== BREAKPOINT INVENTORY ===
+Tailwind CSS v4 standard mobile-first breakpoints:
+  sm: 640px
+  md: 768px
+  lg: 1024px
+  xl: 1280px
+  2xl: 1536px
+
+Prefix Counts across all files:
+  sm: 95
+  md: 17
+  lg: 23
+  xl: 0
+  2xl: 0
+
+Per-file Breakpoint breakdown:
+  src/App.tsx: lg: -> 22 instances
+  src/App.tsx: md: -> 15 instances
+  src/App.tsx: sm: -> 42 instances
+  src/components/fun/AchievementModal.tsx: sm: -> 9 instances
+  src/components/fun/BehaviorAnalysisModal.tsx: sm: -> 2 instances
+  src/components/fun/BrainBatteryModal.tsx: sm: -> 4 instances
+  src/components/fun/CatchTheBooksGameModal.tsx: sm: -> 18 instances
+  src/components/fun/CompatibilityScannerModal.tsx: sm: -> 2 instances
+  src/components/fun/DegreeGeneratorModal.tsx: sm: -> 4 instances
+  src/components/fun/ExamSurvivalGameModal.tsx: sm: -> 2 instances
+  src/components/fun/FunHeaderControls.tsx: lg: -> 1 instances
+  src/components/fun/FunHeaderControls.tsx: md: -> 2 instances
+  src/components/fun/FunHeaderControls.tsx: sm: -> 3 instances
+  src/components/fun/FuturePredictorModal.tsx: sm: -> 3 instances
+  src/components/fun/MascotWidget.tsx: sm: -> 2 instances
+  src/components/fun/ProductLabModal.tsx: sm: -> 2 instances
+  src/components/fun/SuspiciousActivityModal.tsx: sm: -> 2 instances

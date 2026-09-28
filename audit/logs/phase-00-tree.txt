@@ -1,0 +1,44 @@
+.
+├── .env.example
+├── .gitignore
+├── bun.lock
+├── index.html
+├── metadata.json
+├── package.json
+├── public
+│   └── assets
+│       └── aistudio
+│           └── .gitignore
+├── src
+│   ├── App.tsx
+│   ├── components
+│   │   └── fun
+│   │       ├── AcademicCheckoutModal.tsx
+│   │       ├── AchievementModal.tsx
+│   │       ├── BehaviorAnalysisModal.tsx
+│   │       ├── BrainBatteryModal.tsx
+│   │       ├── CatchTheBooksGameModal.tsx
+│   │       ├── CompatibilityScannerModal.tsx
+│   │       ├── DegreeGeneratorModal.tsx
+│   │       ├── DevDiagnosticsModal.tsx
+│   │       ├── DoNotClickWidget.tsx
+│   │       ├── ExamSurvivalGameModal.tsx
+│   │       ├── FunHeaderControls.tsx
+│   │       ├── FunToastContainer.tsx
+│   │       ├── FuturePredictorModal.tsx
+│   │       ├── LiveActivityTicker.tsx
+│   │       ├── MascotWidget.tsx
+│   │       ├── ProductLabModal.tsx
+│   │       ├── SuspiciousActivityModal.tsx
+│   │       └── index.ts
+│   ├── index.css
+│   ├── lib
+│   │   └── fun
+│   │       ├── constants.ts
+│   │       ├── funContext.tsx
+│   │       ├── sound.ts
+│   │       ├── storage.ts
+│   │       └── types.ts
+│   └── main.tsx
+├── tsconfig.json
+└── vite.config.ts

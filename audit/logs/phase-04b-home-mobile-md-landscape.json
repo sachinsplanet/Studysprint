@@ -1,0 +1,125 @@
+{
+  "route": "/",
+  "device": "mobile-md-landscape",
+  "viewport": {
+    "width": 812,
+    "height": 375,
+    "dpr": 3
+  },
+  "hOverflow": [],
+  "touchTargets": [
+    {
+      "selector": "button.w-7.h-7[aria-label=\"Close\"]",
+      "w": 28,
+      "h": 28,
+      "file": "src/components/fun/ProductLabModal.tsx:57"
+    },
+    {
+      "selector": "button.w-7.h-7[aria-label=\"Close\"]",
+      "w": 28,
+      "h": 28,
+      "file": "src/components/fun/BehaviorAnalysisModal.tsx:49"
+    },
+    {
+      "selector": "button.w-8.h-8[aria-label=\"Close\"]",
+      "w": 32,
+      "h": 32,
+      "file": "src/components/fun/AchievementModal.tsx:48"
+    },
+    {
+      "selector": "button.w-7.h-7[aria-label=\"Close\"]",
+      "w": 28,
+      "h": 28,
+      "file": "src/components/fun/ExamSurvivalGameModal.tsx:164"
+    },
+    {
+      "selector": "button.w-7.h-7[aria-label=\"Close\"]",
+      "w": 28,
+      "h": 28,
+      "file": "src/components/fun/DegreeGeneratorModal.tsx:133"
+    },
+    {
+      "selector": "button.p-1[title=\"Toggle audio\"]",
+      "w": 24,
+      "h": 24,
+      "file": "src/components/fun/CatchTheBooksGameModal.tsx:413"
+    },
+    {
+      "selector": "button.w-8.h-8[aria-label=\"Close\"]",
+      "w": 32,
+      "h": 32,
+      "file": "src/components/fun/CatchTheBooksGameModal.tsx:421"
+    },
+    {
+      "selector": "button.text-slate-400.text-xs.px-1",
+      "w": 16,
+      "h": 20,
+      "file": "src/components/fun/LiveActivityTicker.tsx:48"
+    },
+    {
+      "selector": "button[title=\"Developer Diagnostics\"]",
+      "w": 18,
+      "h": 18,
+      "file": "src/components/fun/FunHeaderControls.tsx:160"
+    },
+    {
+      "selector": "#cart-btn",
+      "w": 38,
+      "h": 38,
+      "file": "src/App.tsx:1506"
+    },
+    {
+      "selector": "#menu-btn",
+      "w": 38,
+      "h": 38,
+      "file": "src/App.tsx:1528"
+    },
+    {
+      "selector": ".cart-quantity-minus, .cart-quantity-plus",
+      "w": 24,
+      "h": 24,
+      "file": "src/App.tsx:2562"
+    }
+  ],
+  "textOverflow": [],
+  "fixedTheft": [
+    {
+      "culpritId": "AUD-M004",
+      "selector": "header.sticky.top-0",
+      "fixedHeight": 80,
+      "expandedHeight": 320,
+      "vh": 375,
+      "pct": 21,
+      "expandedPct": 85,
+      "description": "Sticky navbar (80px) plus expanded mobile menu (320px) consumes 85% of 375px landscape viewport"
+    }
+  ],
+  "hoverGated": [],
+  "smallText": [
+    {
+      "selector": "input#kit-search",
+      "fontSize": "14px (text-sm)",
+      "file": "src/App.tsx:1726",
+      "defect": "iOS Safari auto-zoom hazard"
+    },
+    {
+      "selector": "input#track-input",
+      "fontSize": "14px (text-sm)",
+      "file": "src/App.tsx:2215",
+      "defect": "iOS Safari auto-zoom hazard"
+    },
+    {
+      "selector": "input[name=\"review-name\"]",
+      "fontSize": "14px (text-sm)",
+      "file": "src/App.tsx:2966",
+      "defect": "iOS Safari auto-zoom hazard"
+    },
+    {
+      "selector": "textarea[name=\"review-text\"]",
+      "fontSize": "14px (text-sm)",
+      "file": "src/App.tsx:3028",
+      "defect": "iOS Safari auto-zoom hazard"
+    }
+  ],
+  "safeArea": []
+}

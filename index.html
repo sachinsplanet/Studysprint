@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function() {
+        try {
+          var _origFetch = window.fetch ? window.fetch.bind(window) : undefined;
+          Object.defineProperty(window, 'fetch', {
+            get: function() {
+              return _origFetch;
+            },
+            set: function(val) {
+              _origFetch = val;
+            },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (e) {
+          try {
+            if (typeof Window !== 'undefined' && Window.prototype) {
+              var _protoFetch = Window.prototype.fetch;
+              Object.defineProperty(Window.prototype, 'fetch', {
+                get: function() {
+                  return _protoFetch;
+                },
+                set: function(val) {
+                  _protoFetch = val;
+                },
+                configurable: true,
+                enumerable: true
+              });
+            }
+          } catch (err) {}
+        }
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>StudySprint - Doodle Study Kits & Stationery</title>
+    <meta name="description" content="Cute, functional stationery kits for students and exam prep with custom kit builder, live order tracking, and express delivery." />
+    <meta name="keywords" content="stationery, study kits, student stationery, pastel highlighters, pomodoro planner, flashcards, exam prep, Bangalore stationery" />
+    <meta name="author" content="StudySprint" />
+    <meta name="theme-color" content="#FFC93C" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0B0F19" media="(prefers-color-scheme: dark)" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="StudySprint" />
+    <meta property="og:title" content="StudySprint - Doodle Study Kits & Stationery" />
+    <meta property="og:description" content="Cute, functional stationery kits for students and exam prep with custom kit builder, live order tracking, and express delivery." />
+    <meta property="og:locale" content="en_IN" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="StudySprint - Doodle Study Kits & Stationery" />
+    <meta name="twitter:description" content="Cute, functional stationery kits for students and exam prep with custom kit builder, live order tracking, and express delivery." />
+
+    <!-- Favicon (Doodle Lightning Bolt) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23FFC93C'/%3E%3Cpath d='M56 12L24 54h22l-6 34 32-42H50z' fill='%231E2A4A' stroke='%231E2A4A' stroke-width='4' stroke-linejoin='round'/%3E%3C/svg%3E" />
+
+    <!-- Schema.org Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Store",
+      "name": "StudySprint",
+      "description": "Cute, functional stationery kits for students and exam prep with custom kit builder, live order tracking, and express delivery.",
+      "telephone": "+91 98765 43210",
+      "priceRange": "₹299 - ₹799",
+      "currenciesAccepted": "INR",
+      "paymentAccepted": "UPI, Credit Card, Debit Card, Net Banking, Cash on Delivery",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "StudySprint HQ, 100 Feet Rd, Indiranagar",
+        "addressLocality": "Bangalore",
+        "addressRegion": "Karnataka",
+        "postalCode": "560038",
+        "addressCountry": "IN"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Doodle Study Kits & Stationery",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "The Deep Focus Kit",
+              "description": "Pastel Gradient Sticky Notes (300 sheets), Dual-tip Mild Color Highlighters (5-pack), A5 Daily Pomodoro Habit Tracker Journal, Ultra-fine 0.38mm Quick-Dry Gel Pens (3-pack)",
+              "offers": {
+                "@type": "Offer",
+                "price": "449",
+                "priceCurrency": "INR"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "The Pomodoro Power Sprint Box",
+              "description": "60-Day Pomodoro Tear-off Desk Pad, Soft-touch Mechanical Timer Sticker Set, Vibrant Coral & Teal Focus Highlighters, Sprint Goal Check-off Bookmark",
+              "offers": {
+                "@type": "Offer",
+                "price": "499",
+                "priceCurrency": "INR"
+              }
+            }
+          }
+        ]
+      }
+    }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Patrick+Hand&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-[#FFFDF7] dark:bg-[#0B0F19] text-[#1E2A4A] dark:text-[#F1F5F9] selection:bg-[#FFC93C] selection:text-[#1E2A4A] transition-colors duration-200">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

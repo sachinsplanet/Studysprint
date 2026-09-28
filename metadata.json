@@ -1,0 +1,6 @@
+{
+  "name": "StudySprint - Doodle Study Kits & Stationery",
+  "description": "Cute, functional stationery kits for students and exam prep with custom kit builder, live order tracking, and express delivery.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
