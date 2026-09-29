@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useFun } from '../../lib/fun/funContext';
+import { ProductImage } from '../ProductImage';
 
 export const ProductLabModal: React.FC = () => {
   const { activeModal, closeModal, modalPayload, unlockAchievement, addXP } = useFun();
@@ -62,6 +63,19 @@ export const ProductLabModal: React.FC = () => {
           >
             ×
           </button>
+        </div>
+
+        {/* Product Photograph Preview */}
+        <div className="mt-4 mb-3 rounded-xl overflow-hidden">
+          <ProductImage
+            src={product.image}
+            alt={product.imageAlt || product.name}
+            fallbackEmoji={product.emoji}
+            aspectRatio="wide"
+            sourcePage={product.sourcePage}
+            sourceLabel={product.imageSource}
+            showBadge={true}
+          />
         </div>
 
         {/* RPG Stat Sheet */}

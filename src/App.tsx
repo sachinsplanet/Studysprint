@@ -16,6 +16,8 @@ import {
   ProductLabModal,
   CompatibilityScannerModal
 } from './components/fun';
+import { ProductImage } from './components/ProductImage';
+import productImagesData from './data/productImages.json';
 
 interface Product {
   id: string;
@@ -29,6 +31,11 @@ interface Product {
   bestseller: boolean;
   blurb: string;
   items: string[];
+  image?: string | null;
+  imageSource?: string | null;
+  sourcePage?: string | null;
+  imageAlt?: string;
+  verified?: boolean;
 }
 
 interface CartItem {
@@ -38,6 +45,8 @@ interface CartItem {
   emoji: string;
   quantity: number;
   customDetails?: string[];
+  image?: string | null;
+  imageAlt?: string;
 }
 
 interface Order {
@@ -55,6 +64,11 @@ interface BuilderItem {
   price: number;
   emoji: string;
   category: string;
+  image?: string | null;
+  imageSource?: string | null;
+  sourcePage?: string | null;
+  imageAlt?: string;
+  verified?: boolean;
 }
 
 interface FunnyReview {
@@ -249,7 +263,7 @@ const RANDOM_STUDENT_EXCUSES = [
   }
 ];
 
-const PRODUCTS: Product[] = [
+const RAW_PRODUCTS = [
   // --- FOCUS KITS (1 to 10) ---
   {
     id: 'focus-deep',
@@ -798,7 +812,7 @@ const PRODUCTS: Product[] = [
   }
 ];
 
-const BUILDER_ITEMS: BuilderItem[] = [
+const RAW_BUILDER_ITEMS = [
   { id: 'b1', name: 'Pastel Gradient Sticky Notes', price: 79, emoji: '📝', category: 'Notes' },
   { id: 'b2', name: 'Dual-tip Mild Highlighters (5pc)', price: 129, emoji: '🖍️', category: 'Pens' },
   { id: 'b3', name: 'Pomodoro Daily Planner Journal', price: 149, emoji: '⏱️', category: 'Planners' },
@@ -808,6 +822,31 @@ const BUILDER_ITEMS: BuilderItem[] = [
   { id: 'b7', name: 'Cute Washi Tape Duo (Grid+Pastel)', price: 59, emoji: '🎀', category: 'Aesthetic' },
   { id: 'b8', name: 'Mistake Analysis Notebook', price: 119, emoji: '📖', category: 'Planners' },
 ];
+
+const PRODUCTS: Product[] = RAW_PRODUCTS.map((p) => {
+  const imgInfo = (productImagesData as Record<string, any>)[p.id];
+  return {
+    ...p,
+    category: p.category as 'focus' | 'exam' | 'custom',
+    image: imgInfo?.image || null,
+    imageSource: imgInfo?.imageSource || null,
+    sourcePage: imgInfo?.sourcePage || null,
+    imageAlt: imgInfo?.imageAlt || `${p.name} - StudySprint stationery`,
+    verified: imgInfo?.verified || false
+  };
+});
+
+const BUILDER_ITEMS: BuilderItem[] = RAW_BUILDER_ITEMS.map((b) => {
+  const imgInfo = (productImagesData as Record<string, any>)[b.id];
+  return {
+    ...b,
+    image: imgInfo?.image || null,
+    imageSource: imgInfo?.imageSource || null,
+    sourcePage: imgInfo?.sourcePage || null,
+    imageAlt: imgInfo?.imageAlt || `${b.name} - StudySprint custom kit item`,
+    verified: imgInfo?.verified || false
+  };
+});
 
 const TRACK_STAGES = [
   { icon: '✅', label: 'Order Confirmed' },
@@ -1171,7 +1210,9 @@ function AppContent() {
           name: product.name,
           price: product.price,
           emoji: product.emoji,
-          quantity: 1
+          quantity: 1,
+          image: product.image,
+          imageAlt: product.imageAlt
         }
       ];
     });
@@ -1221,13 +1262,16 @@ function AppContent() {
       unlockAchievement('cart_overthinker');
     }
     const customId = `custom-box-${Date.now()}`;
+    const firstBuilderWithImg = builderSelectedItems.find((i) => i.image);
     const newItem: CartItem = {
       id: customId,
       name: `Custom Study Box (${builderSelectedItems.length} items)`,
       price: finalBuilderPrice,
       emoji: '🛠️',
       quantity: 1,
-      customDetails: builderSelectedItems.map((i) => `${i.emoji} ${i.name}`)
+      customDetails: builderSelectedItems.map((i) => `${i.emoji} ${i.name}`),
+      image: firstBuilderWithImg?.image || null,
+      imageAlt: 'Custom Study Sprint Box'
     };
     setCart((prev) => [...prev, newItem]);
     showToast('Custom kit packed into cart! 🎁');
@@ -1675,7 +1719,17 @@ function AppContent() {
 
               {/* Sample Floating Kit Showcase */}
               <div className="mt-5 bg-white dark:bg-[#0F172A] p-5 rounded-xl border-2 border-[#1E2A4A] dark:border-slate-300 text-center space-y-3">
-                <div className="text-5xl float-slow">🧘✨</div>
+                <div className="w-full max-h-48 overflow-hidden rounded-lg">
+                  <ProductImage
+                    src={PRODUCTS[0].image}
+                    alt={PRODUCTS[0].imageAlt || PRODUCTS[0].name}
+                    fallbackEmoji={PRODUCTS[0].emoji}
+                    aspectRatio="wide"
+                    sourcePage={PRODUCTS[0].sourcePage || undefined}
+                    sourceLabel={PRODUCTS[0].imageSource || undefined}
+                    showBadge={false}
+                  />
+                </div>
                 <h2 className="font-display font-bold text-lg text-[#1E2A4A] dark:text-white">The Deep Focus Box</h2>
                 <p className="text-xs text-[#1E2A4A]/70 dark:text-slate-300">
                   Includes 300 pastel stickies, 5 mild highlighters & Pomodoro tracker pad.
@@ -1874,11 +1928,16 @@ function AppContent() {
               )}
 
               <div>
-                <div
-                  className="text-6xl text-center my-4 float-slow"
-                  style={{ filter: 'drop-shadow(4px 4px 0 rgba(30,42,74,.2))' }}
-                >
-                  {p.emoji}
+                <div className="my-4">
+                  <ProductImage
+                    src={p.image}
+                    alt={p.imageAlt || p.name}
+                    fallbackEmoji={p.emoji}
+                    aspectRatio="wide"
+                    sourcePage={p.sourcePage || undefined}
+                    sourceLabel={p.imageSource || undefined}
+                    showBadge={true}
+                  />
                 </div>
                 <span className="font-hand text-xl opacity-75 dark:opacity-90 font-semibold block text-[#1E2A4A] dark:text-amber-300">{p.tag}</span>
                 <h3 className="font-display font-bold text-2xl text-[#1E2A4A] dark:text-white mt-1">{p.name}</h3>
@@ -1966,10 +2025,18 @@ function AppContent() {
                       : 'bg-white dark:bg-[#0F172A] hover:bg-amber-50 dark:hover:bg-slate-800'
                   }`}
                 >
-                  <div className="flex items-start justify-between">
-                    <span className="text-3xl">{item.emoji}</span>
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="w-14 h-14 shrink-0">
+                      <ProductImage
+                        src={item.image}
+                        alt={item.imageAlt || item.name}
+                        fallbackEmoji={item.emoji}
+                        aspectRatio="square"
+                        containerClassName="w-14 h-14 rounded-lg"
+                      />
+                    </div>
                     <span
-                      className={`w-6 h-6 rounded-full border-2 border-[#1E2A4A] dark:border-slate-300 flex items-center justify-center font-bold text-xs ${
+                      className={`w-6 h-6 rounded-full border-2 border-[#1E2A4A] dark:border-slate-300 flex items-center justify-center font-bold text-xs shrink-0 ${
                         isSelected ? 'bg-[#FFC93C] text-[#1E2A4A]' : 'bg-white dark:bg-slate-800 text-[#1E2A4A] dark:text-slate-200'
                       }`}
                     >
@@ -2533,17 +2600,25 @@ function AppContent() {
                     key={item.id}
                     className="doodle-card bg-white dark:bg-[#162032] p-4 flex items-center justify-between gap-3 text-[#1E2A4A] dark:text-slate-100"
                   >
-                    <div className="flex items-center gap-3">
-                      <span className="text-3xl">{item.emoji}</span>
-                      <div>
-                        <b className="font-display text-sm text-[#1E2A4A] dark:text-white block leading-tight">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="w-12 h-12 shrink-0">
+                        <ProductImage
+                          src={item.image}
+                          alt={item.imageAlt || item.name}
+                          fallbackEmoji={item.emoji}
+                          aspectRatio="square"
+                          containerClassName="w-12 h-12 rounded-lg"
+                        />
+                      </div>
+                      <div className="min-w-0">
+                        <b className="font-display text-sm text-[#1E2A4A] dark:text-white block leading-tight truncate">
                           {item.name}
                         </b>
                         <span className="font-display font-semibold text-emerald-700 dark:text-emerald-400 text-sm">
                           ₹{item.price} each
                         </span>
                         {item.customDetails && (
-                          <div className="text-[10px] text-[#1E2A4A]/60 dark:text-slate-400 mt-0.5">
+                          <div className="text-[10px] text-[#1E2A4A]/60 dark:text-slate-400 mt-0.5 truncate">
                             {item.customDetails.slice(0, 2).join(', ')}...
                           </div>
                         )}

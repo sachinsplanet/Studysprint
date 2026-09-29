@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useFun } from '../../lib/fun/funContext';
+import { ProductImage } from '../ProductImage';
 
 const SCAN_LINES = [
   'Student biometric status detected...',
@@ -86,6 +87,17 @@ export const CompatibilityScannerModal: React.FC = () => {
           </div>
         ) : (
           <div className="my-6 space-y-3 font-body text-left">
+            <div className="w-full max-h-44 overflow-hidden rounded-xl">
+              <ProductImage
+                src={product.image}
+                alt={product.imageAlt || product.name}
+                fallbackEmoji={product.emoji}
+                aspectRatio="wide"
+                sourcePage={product.sourcePage}
+                sourceLabel={product.imageSource}
+                showBadge={true}
+              />
+            </div>
             <div className="bg-[#D8F3DC] dark:bg-[#183624] p-4 rounded-xl border-2 border-emerald-500 text-center">
               <span className="text-xs font-bold uppercase tracking-wider text-emerald-900 dark:text-emerald-300 block">
                 COMPATIBILITY SCORE
