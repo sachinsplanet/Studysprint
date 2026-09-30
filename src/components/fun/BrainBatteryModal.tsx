@@ -27,24 +27,24 @@ export const BrainBatteryModal: React.FC = () => {
       aria-modal="true"
     >
       <div
-        className="doodle-card bg-white dark:bg-[#162032] max-w-md w-full p-6 sm:p-8 text-[#1E2A4A] dark:text-slate-100 animate-in zoom-in-95 duration-200 text-center"
+        className="doodle-card bg-[#FFFDF5] dark:bg-[#131D31] max-w-md w-full p-6 sm:p-8 text-[#10182B] dark:text-slate-100 animate-in zoom-in-95 duration-200 text-center border-2 border-[#F0E3B5] dark:border-slate-800"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="w-16 h-16 rounded-full bg-[#FFF2C6] dark:bg-[#2A2312] border-3 border-[#1E2A4A] dark:border-amber-400 mx-auto flex items-center justify-center text-3xl mb-4 shadow-sm">
+        <div className="w-16 h-16 rounded-full bg-[#FFF0F5] dark:bg-[#2F1725] border-2 border-[#FFCCD9] dark:border-pink-900/50 mx-auto flex items-center justify-center text-3xl mb-4 shadow-xs">
           🧠
         </div>
 
-        <h3 className="font-display font-bold text-2xl text-[#1E2A4A] dark:text-white">
+        <h3 className="font-display font-bold text-2xl text-[#10182B] dark:text-white">
           Brain Battery Diagnostics
         </h3>
-        <p className="font-body text-xs text-[#1E2A4A]/60 dark:text-slate-400 mt-1">
+        <p className="font-body text-xs text-[#58647D] dark:text-slate-400 mt-1">
           *100% Fictional student cognitive estimate. Zero medical validity.
         </p>
 
         {/* Battery meter */}
-        <div className="my-6 bg-slate-100 dark:bg-slate-800 p-4 rounded-2xl border-2 border-[#1E2A4A] dark:border-slate-600">
+        <div className="my-6 bg-white dark:bg-[#0B1120] p-4 rounded-2xl border-2 border-[#F0E3B5] dark:border-slate-800 shadow-xs">
           <div className="flex items-center justify-between mb-2">
-            <span className="font-display font-bold text-sm text-[#1E2A4A] dark:text-slate-200">
+            <span className="font-display font-bold text-sm text-[#10182B] dark:text-slate-200">
               Current Charge
             </span>
             <span className={`font-display font-bold text-xl ${batteryStatus.color}`}>
@@ -52,43 +52,43 @@ export const BrainBatteryModal: React.FC = () => {
             </span>
           </div>
 
-          <div className="w-full h-4 bg-white dark:bg-slate-900 rounded-full border-2 border-[#1E2A4A] dark:border-slate-500 overflow-hidden p-0.5">
+          <div className="w-full h-4 bg-[#FFF9DF] dark:bg-slate-900 rounded-full border border-[#F0E3B5] dark:border-slate-700 overflow-hidden p-0.5">
             <div
               className={`h-full rounded-full transition-all duration-500 ${
                 brainBattery >= 70
-                  ? 'bg-emerald-500'
+                  ? 'bg-[#00B887]'
                   : brainBattery >= 40
-                  ? 'bg-amber-400'
-                  : 'bg-rose-500'
+                  ? 'bg-[#FFD600]'
+                  : 'bg-[#FF719A]'
               }`}
               style={{ width: `${brainBattery}%` }}
             />
           </div>
 
-          <div className="mt-3 text-left bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-700">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block">
+          <div className="mt-3 text-left bg-[#FFFDF5] dark:bg-slate-900/80 p-3 rounded-xl border border-[#F0E3B5] dark:border-slate-700">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-[#58647D] dark:text-slate-400 block">
               Estimated Study Longevity
             </span>
-            <p className="font-display font-bold text-base text-[#1E2A4A] dark:text-white">
+            <p className="font-display font-bold text-base text-[#10182B] dark:text-white">
               ~{remainingMins} minutes before subconscious phone scrolling
             </p>
           </div>
         </div>
 
         {/* Status & Recommendation */}
-        <div className="text-left space-y-3 font-body text-xs bg-amber-50 dark:bg-[#201A10] p-4 rounded-xl border-2 border-amber-300 dark:border-amber-700/60">
+        <div className="text-left space-y-3 font-body text-xs bg-[#FFF4C7] dark:bg-[#1A263F] p-4 rounded-xl border-2 border-[#F0E3B5] dark:border-slate-700">
           <div>
-            <b className="font-display text-sm text-[#1E2A4A] dark:text-amber-200 block">
+            <b className="font-display text-sm text-[#10182B] dark:text-amber-200 block">
               Status: {batteryStatus.text}
             </b>
-            <span className="text-[#1E2A4A]/80 dark:text-slate-300">{batteryStatus.subtext}</span>
+            <span className="text-[#58647D] dark:text-slate-300">{batteryStatus.subtext}</span>
           </div>
 
-          <div className="pt-2 border-t border-amber-200 dark:border-amber-900/50">
-            <b className="font-display text-xs text-amber-900 dark:text-amber-300 block mb-1">
+          <div className="pt-2 border-t border-[#F0E3B5] dark:border-slate-700">
+            <b className="font-display text-xs text-[#10182B] dark:text-amber-300 block mb-1">
               Recommended Student Action:
             </b>
-            <p className="text-[#1E2A4A] dark:text-slate-200 italic font-medium leading-relaxed">
+            <p className="text-[#10182B] dark:text-slate-200 italic font-medium leading-relaxed">
               &quot;{batteryStatus.advice}&quot;
             </p>
           </div>

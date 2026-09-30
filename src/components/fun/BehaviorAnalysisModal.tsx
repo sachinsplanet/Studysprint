@@ -36,71 +36,71 @@ export const BehaviorAnalysisModal: React.FC<{ cartCount: number }> = ({ cartCou
       aria-modal="true"
     >
       <div
-        className="doodle-card bg-white dark:bg-[#162032] max-w-md w-full p-6 sm:p-8 text-[#1E2A4A] dark:text-slate-100 animate-in zoom-in-95 duration-200"
+        className="doodle-card bg-[#FFFDF5] dark:bg-[#131D31] max-w-md w-full p-6 sm:p-8 text-[#10182B] dark:text-slate-100 animate-in zoom-in-95 duration-200 border-2 border-[#F0E3B5] dark:border-slate-800"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between pb-3 border-b-2 border-[#1E2A4A]/10 dark:border-slate-700">
+        <div className="flex items-center justify-between pb-3 border-b-2 border-[#F0E3B5] dark:border-slate-800">
           <div className="flex items-center gap-2">
             <span className="text-2xl">📊</span>
-            <h3 className="font-display font-bold text-xl text-[#1E2A4A] dark:text-white">
+            <h3 className="font-display font-bold text-xl text-[#10182B] dark:text-white">
               Student Behavior Analysis
             </h3>
           </div>
           <button
             type="button"
             onClick={closeModal}
-            className="w-7 h-7 rounded-full border-2 border-[#1E2A4A] dark:border-slate-300 flex items-center justify-center font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+            className="w-8 h-8 rounded-full border border-[#F0E3B5] dark:border-slate-700 bg-white dark:bg-slate-800 flex items-center justify-center font-bold text-[#10182B] dark:text-white hover:bg-[#FFF4C7] dark:hover:bg-slate-700 transition-colors cursor-pointer"
             aria-label="Close"
           >
             ×
           </button>
         </div>
 
-        <p className="text-xs text-[#1E2A4A]/70 dark:text-slate-300 mt-2 font-body italic">
+        <p className="text-xs text-[#58647D] dark:text-slate-300 mt-2 font-body italic">
           *Real-time session diagnostics compiled from your current visit. Zero creepy telemetry. Pure comedy.
         </p>
 
         {/* Stats Grid */}
         <div className="grid grid-cols-2 gap-3 my-4">
-          <div className="bg-slate-50 dark:bg-slate-800/80 p-3 rounded-xl border border-[#1E2A4A]/20 dark:border-slate-700">
-            <span className="text-[11px] opacity-70 block font-display">Browsing Duration</span>
-            <span className="font-display font-bold text-xl text-[#1E2A4A] dark:text-white">
+          <div className="bg-white dark:bg-slate-800/80 p-3 rounded-xl border border-[#F0E3B5] dark:border-slate-700">
+            <span className="text-[11px] text-[#58647D] dark:text-slate-400 block font-display">Browsing Duration</span>
+            <span className="font-display font-bold text-xl text-[#10182B] dark:text-white">
               {timeFormatted}
             </span>
           </div>
 
-          <div className="bg-slate-50 dark:bg-slate-800/80 p-3 rounded-xl border border-[#1E2A4A]/20 dark:border-slate-700">
-            <span className="text-[11px] opacity-70 block font-display">Kits Inspected</span>
-            <span className="font-display font-bold text-xl text-[#1E2A4A] dark:text-white">
+          <div className="bg-white dark:bg-slate-800/80 p-3 rounded-xl border border-[#F0E3B5] dark:border-slate-700">
+            <span className="text-[11px] text-[#58647D] dark:text-slate-400 block font-display">Kits Inspected</span>
+            <span className="font-display font-bold text-xl text-[#10182B] dark:text-white">
               {inspectedProductsCount}
             </span>
           </div>
 
-          <div className="bg-slate-50 dark:bg-slate-800/80 p-3 rounded-xl border border-[#1E2A4A]/20 dark:border-slate-700">
-            <span className="text-[11px] opacity-70 block font-display">Emotionally Considered</span>
-            <span className="font-display font-bold text-xl text-[#1E2A4A] dark:text-white">
+          <div className="bg-white dark:bg-slate-800/80 p-3 rounded-xl border border-[#F0E3B5] dark:border-slate-700">
+            <span className="text-[11px] text-[#58647D] dark:text-slate-400 block font-display">Emotionally Considered</span>
+            <span className="font-display font-bold text-xl text-[#10182B] dark:text-white">
               {emotionallyConsidered}
             </span>
           </div>
 
-          <div className="bg-slate-50 dark:bg-slate-800/80 p-3 rounded-xl border border-[#1E2A4A]/20 dark:border-slate-700">
-            <span className="text-[11px] opacity-70 block font-display">Added to Cart</span>
-            <span className="font-display font-bold text-xl text-[#FFC93C] dark:text-amber-300">
+          <div className="bg-white dark:bg-slate-800/80 p-3 rounded-xl border border-[#F0E3B5] dark:border-slate-700">
+            <span className="text-[11px] text-[#58647D] dark:text-slate-400 block font-display">Added to Cart</span>
+            <span className="font-display font-bold text-xl text-[#10182B] dark:text-yellow-400">
               {cartCount}
             </span>
           </div>
         </div>
 
         {/* Progress Bars */}
-        <div className="space-y-3 font-body text-xs my-4 bg-[#FFFDF7] dark:bg-[#0B0F19] p-4 rounded-xl border-2 border-[#1E2A4A]/20 dark:border-slate-700">
+        <div className="space-y-3 font-body text-xs my-4 bg-[#FFF4C7] dark:bg-[#1A263F] p-4 rounded-xl border-2 border-[#F0E3B5] dark:border-slate-700">
           <div>
             <div className="flex justify-between mb-1 font-display font-bold">
               <span>Motivation</span>
-              <span className="text-amber-600 dark:text-amber-400">{motivationLevel}%</span>
+              <span className="text-[#10182B] dark:text-yellow-300">{motivationLevel}%</span>
             </div>
-            <div className="w-full h-2.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+            <div className="w-full h-2.5 bg-white dark:bg-slate-700 rounded-full overflow-hidden border border-[#F0E3B5]/60">
               <div
-                className="h-full bg-amber-400 transition-all duration-500"
+                className="h-full bg-[#FFD600] transition-all duration-500"
                 style={{ width: `${motivationLevel}%` }}
               />
             </div>
@@ -109,11 +109,11 @@ export const BehaviorAnalysisModal: React.FC<{ cartCount: number }> = ({ cartCou
           <div>
             <div className="flex justify-between mb-1 font-display font-bold">
               <span>Procrastination Coefficient</span>
-              <span className="text-rose-500">{procrastinationLevel}%</span>
+              <span className="text-[#FF719A]">{procrastinationLevel}%</span>
             </div>
-            <div className="w-full h-2.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+            <div className="w-full h-2.5 bg-white dark:bg-slate-700 rounded-full overflow-hidden border border-[#F0E3B5]/60">
               <div
-                className="h-full bg-rose-500 transition-all duration-500"
+                className="h-full bg-[#FF719A] transition-all duration-500"
                 style={{ width: `${procrastinationLevel}%` }}
               />
             </div>
@@ -122,19 +122,19 @@ export const BehaviorAnalysisModal: React.FC<{ cartCount: number }> = ({ cartCou
           <div>
             <div className="flex justify-between mb-1 font-display font-bold">
               <span>Academic Confidence (Inflated)</span>
-              <span className="text-emerald-600 dark:text-emerald-400">{confidenceLevel}%</span>
+              <span className="text-[#00B887] dark:text-emerald-400">{confidenceLevel}%</span>
             </div>
-            <div className="w-full h-2.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+            <div className="w-full h-2.5 bg-white dark:bg-slate-700 rounded-full overflow-hidden border border-[#F0E3B5]/60">
               <div
-                className="h-full bg-emerald-400 transition-all duration-500"
+                className="h-full bg-[#00B887] transition-all duration-500"
                 style={{ width: `${confidenceLevel}%` }}
               />
             </div>
           </div>
 
-          <div className="pt-2 border-t border-slate-200 dark:border-slate-800 flex justify-between items-center text-xs">
-            <span className="font-bold text-slate-500 dark:text-slate-400">Scientific Validity:</span>
-            <span className="font-display font-bold text-rose-500">0.0% (Certified Placebo)</span>
+          <div className="pt-2 border-t border-[#F0E3B5] dark:border-slate-700 flex justify-between items-center text-xs">
+            <span className="font-bold text-[#58647D] dark:text-slate-400">Scientific Validity:</span>
+            <span className="font-display font-bold text-[#FF719A]">0.0% (Certified Placebo)</span>
           </div>
         </div>
 

@@ -45,7 +45,7 @@ export const StudySprintHeader: React.FC<StudySprintHeaderProps> = ({
   const batteryPercent = brainBattery || 24;
 
   return (
-    <header className="w-full bg-[#0B1120] text-slate-100 border-b border-slate-800/90 shadow-md relative z-40 transition-colors pt-[env(safe-area-inset-top,0px)]">
+    <header className="w-full bg-[#FFFDF5] dark:bg-[#0B1120] text-[#10182B] dark:text-slate-100 border-b border-[#F0E3B5] dark:border-slate-800 shadow-[0_2px_12px_rgba(240,227,181,0.35)] dark:shadow-md relative z-40 transition-colors pt-[env(safe-area-inset-top,0px)]">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3.5 flex flex-col gap-2.5 sm:gap-3">
         {/* ========================================================
             SECTION A: PROMOTIONAL BANNER
@@ -54,7 +54,7 @@ export const StudySprintHeader: React.FC<StudySprintHeaderProps> = ({
           <div
             id="promo-banner"
             role="banner"
-            className="w-full bg-[#FFE500] text-slate-950 rounded-xl px-3 py-2 sm:px-4 sm:py-2.5 flex items-center justify-between gap-2 shadow-xs transition-all duration-200"
+            className="w-full bg-[#FFE500] text-slate-950 rounded-xl px-3 py-2 sm:px-4 sm:py-2.5 flex items-center justify-between gap-2 border border-[#F0E3B5] shadow-xs transition-all duration-200"
           >
             <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
               <span className="text-base sm:text-lg flex-shrink-0 select-none" aria-hidden="true">
@@ -87,14 +87,14 @@ export const StudySprintHeader: React.FC<StudySprintHeaderProps> = ({
             ======================================================== */}
         <div
           id="xp-gamification-panel"
-          className="w-full bg-[#131D31] border border-slate-800/90 rounded-xl p-2.5 sm:p-3 shadow-inner"
+          className="w-full bg-[#FFF4C7] dark:bg-[#131D31] border border-[#F0E3B5] dark:border-slate-800 rounded-xl p-2.5 sm:p-3 shadow-xs"
         >
           <div className="grid grid-cols-2 gap-2 sm:gap-4 items-center">
             {/* Left Area: Level & XP */}
             <button
               type="button"
               onClick={() => openModal('achievements')}
-              className="flex items-center gap-2 sm:gap-2.5 min-w-0 text-left cursor-pointer group hover:opacity-95 transition-opacity focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:outline-none rounded-lg p-1 -m-1"
+              className="flex items-center gap-2 sm:gap-2.5 min-w-0 text-left cursor-pointer group hover:opacity-90 transition-opacity focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:outline-none rounded-lg p-1 -m-1"
               title="Click to view Academic Achievements"
               aria-label={`Level ${levelNumber}: ${levelTitle}, ${displayXP} XP`}
             >
@@ -102,10 +102,10 @@ export const StudySprintHeader: React.FC<StudySprintHeaderProps> = ({
                 ⚔️
               </span>
               <div className="min-w-0 flex flex-col justify-center">
-                <span className="font-display font-bold text-xs sm:text-sm text-[#FFE500] truncate leading-tight group-hover:underline">
+                <span className="font-display font-bold text-xs sm:text-sm text-[#10182B] dark:text-[#FFE500] truncate leading-tight group-hover:underline">
                   Lv {levelNumber}: {levelTitle}
                 </span>
-                <span className="text-[11px] sm:text-xs text-slate-400 font-medium leading-tight">
+                <span className="text-[11px] sm:text-xs text-[#58647D] dark:text-slate-400 font-medium leading-tight">
                   {displayXP} XP
                 </span>
               </div>
@@ -115,27 +115,27 @@ export const StudySprintHeader: React.FC<StudySprintHeaderProps> = ({
             <button
               type="button"
               onClick={() => openModal('brainBattery')}
-              className="flex items-center justify-end gap-2 sm:gap-2.5 min-w-0 cursor-pointer group hover:opacity-95 transition-opacity focus-visible:ring-2 focus-visible:ring-pink-400 focus-visible:outline-none rounded-lg p-1 -m-1 ml-auto w-full max-w-[220px]"
+              className="flex items-center justify-end gap-2 sm:gap-2.5 min-w-0 cursor-pointer group hover:opacity-90 transition-opacity focus-visible:ring-2 focus-visible:ring-pink-400 focus-visible:outline-none rounded-lg p-1 -m-1 ml-auto w-full max-w-[220px]"
               title="Check Brain Battery Status"
               aria-label={`Brain Battery: ${batteryPercent}%`}
             >
               <span
-                className="text-base sm:text-lg flex-shrink-0 select-none text-[#FF6B8B]"
+                className="text-base sm:text-lg flex-shrink-0 select-none text-[#FF719A]"
                 aria-hidden="true"
               >
                 🧠
               </span>
               <div className="w-full flex flex-col gap-1 min-w-0">
                 <div className="flex items-center justify-between text-xs leading-none">
-                  <span className="text-[10px] text-slate-400 font-medium hidden sm:inline">
+                  <span className="text-[10px] text-[#58647D] dark:text-slate-400 font-medium hidden sm:inline">
                     Brain Battery
                   </span>
-                  <span className="font-display font-bold text-xs text-[#FF6B8B] ml-auto">
+                  <span className="font-display font-bold text-xs text-[#FF719A] ml-auto">
                     {batteryPercent}%
                   </span>
                 </div>
                 <div
-                  className="w-full h-2 sm:h-2.5 bg-[#0A0F1D] rounded-full overflow-hidden border border-slate-800 p-[1px] shadow-inner"
+                  className="w-full h-2 sm:h-2.5 bg-white dark:bg-[#0A0F1D] rounded-full overflow-hidden border border-[#F0E3B5] dark:border-slate-800 p-[1px] shadow-inner"
                   role="progressbar"
                   aria-valuenow={batteryPercent}
                   aria-valuemin={0}
@@ -158,11 +158,11 @@ export const StudySprintHeader: React.FC<StudySprintHeaderProps> = ({
           id="quick-actions-row"
           className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-2.5 w-full"
         >
-          {/* 1. Mini-Games: Game controller icon with dark card */}
+          {/* 1. Mini-Games: Game controller icon with cream card */}
           <button
             type="button"
             onClick={() => openModal('catchBooksGame')}
-            className="w-full h-10 sm:h-11 px-3 py-1.5 rounded-lg bg-[#131D31] hover:bg-[#1A263F] border border-slate-800 hover:border-slate-700 text-slate-200 flex items-center justify-center gap-1.5 transition-all cursor-pointer text-xs font-display font-semibold active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:outline-none"
+            className="w-full h-10 sm:h-11 px-3 py-1.5 rounded-xl bg-white dark:bg-[#131D31] hover:bg-[#FFF9DF] dark:hover:bg-[#1A263F] border border-[#F0E3B5] dark:border-slate-800 text-[#10182B] dark:text-slate-200 shadow-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer text-xs font-display font-semibold active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:outline-none"
             title="Play Study Mini-Game"
             aria-label="Open Mini-Games"
           >
@@ -172,11 +172,11 @@ export const StudySprintHeader: React.FC<StudySprintHeaderProps> = ({
             <span className="truncate">Mini-Games</span>
           </button>
 
-          {/* 2. Stats: Bar-chart icon with dark card */}
+          {/* 2. Stats: Bar-chart icon with cream card */}
           <button
             type="button"
             onClick={() => openModal('behaviorStats')}
-            className="w-full h-10 sm:h-11 px-3 py-1.5 rounded-lg bg-[#131D31] hover:bg-[#1A263F] border border-slate-800 hover:border-slate-700 text-slate-200 flex items-center justify-center gap-1.5 transition-all cursor-pointer text-xs font-display font-semibold active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:outline-none"
+            className="w-full h-10 sm:h-11 px-3 py-1.5 rounded-xl bg-white dark:bg-[#131D31] hover:bg-[#FFF9DF] dark:hover:bg-[#1A263F] border border-[#F0E3B5] dark:border-slate-800 text-[#10182B] dark:text-slate-200 shadow-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer text-xs font-display font-semibold active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:outline-none"
             title="View harmless student behavior stats"
             aria-label="View Student Stats"
           >
@@ -190,10 +190,10 @@ export const StudySprintHeader: React.FC<StudySprintHeaderProps> = ({
           <button
             type="button"
             onClick={toggleSound}
-            className={`w-full h-10 sm:h-11 px-3 py-1.5 rounded-lg border flex items-center justify-center gap-1.5 transition-all cursor-pointer text-xs font-display font-semibold active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:outline-none ${
+            className={`w-full h-10 sm:h-11 px-3 py-1.5 rounded-xl border flex items-center justify-center gap-1.5 transition-all cursor-pointer text-xs font-display font-semibold active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:outline-none shadow-xs ${
               soundEnabled
-                ? 'bg-[#131D31] text-emerald-400 border-emerald-500/40 hover:border-emerald-400/60 shadow-[0_0_8px_rgba(16,185,129,0.12)]'
-                : 'bg-[#131D31] text-slate-400 border-slate-800 hover:border-slate-700'
+                ? 'bg-[#E9FFF5] dark:bg-[#131D31] text-[#00B887] dark:text-emerald-400 border-[#A7F3D0] dark:border-emerald-500/40 hover:bg-[#D1FAE5]'
+                : 'bg-white dark:bg-[#131D31] text-[#7B8498] dark:text-slate-400 border-[#F0E3B5] dark:border-slate-800'
             }`}
             title="Toggle tactile sound effects"
             aria-label={`Toggle Sound, currently ${soundEnabled ? 'ON' : 'OFF'}`}
@@ -204,14 +204,14 @@ export const StudySprintHeader: React.FC<StudySprintHeaderProps> = ({
             <span className="truncate">Sound: {soundEnabled ? 'ON' : 'OFF'}</span>
           </button>
 
-          {/* 4. Fun Mode: ON: Controller icon with yellow background & dark text */}
+          {/* 4. Fun Mode: ON: Controller icon with primary yellow background & dark text */}
           <button
             type="button"
             onClick={toggleFunMode}
-            className={`w-full h-10 sm:h-11 px-3 py-1.5 rounded-lg border flex items-center justify-center gap-1.5 transition-all cursor-pointer text-xs font-display font-bold active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:outline-none ${
+            className={`w-full h-10 sm:h-11 px-3 py-1.5 rounded-xl border flex items-center justify-center gap-1.5 transition-all cursor-pointer text-xs font-display font-bold active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:outline-none shadow-xs ${
               funMode
-                ? 'bg-[#FFE500] text-slate-950 border-[#FFE500] hover:bg-[#ebd300] shadow-[0_0_10px_rgba(255,229,0,0.18)]'
-                : 'bg-[#131D31] text-slate-400 border-slate-800 hover:border-slate-700'
+                ? 'bg-[#FFD600] text-[#10182B] border-[#FFC928] hover:bg-[#FFC928]'
+                : 'bg-white dark:bg-[#131D31] text-[#7B8498] dark:text-slate-400 border-[#F0E3B5] dark:border-slate-800'
             }`}
             title="Toggle playful student Easter egg layer"
             aria-label={`Toggle Fun Mode, currently ${funMode ? 'ON' : 'OFF'}`}
@@ -228,7 +228,7 @@ export const StudySprintHeader: React.FC<StudySprintHeaderProps> = ({
             ======================================================== */}
         <div
           id="main-brand-navigation"
-          className="pt-2 sm:pt-2.5 pb-0.5 flex items-center justify-between gap-2 sm:gap-4 border-t border-slate-800/80"
+          className="pt-2 sm:pt-2.5 pb-0.5 flex items-center justify-between gap-2 sm:gap-4 border-t border-[#F0E3B5] dark:border-slate-800/80"
         >
           {/* Left Side: StudySprint lightning-bolt logo, brand name & tagline */}
           <a
@@ -237,17 +237,17 @@ export const StudySprintHeader: React.FC<StudySprintHeaderProps> = ({
             className="flex items-center gap-2 group select-none min-w-0 focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:outline-none rounded-lg p-0.5"
             aria-label="StudySprint Home"
           >
-            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-yellow-400/10 border border-yellow-400/20 flex items-center justify-center flex-shrink-0 group-hover:rotate-12 transition-transform duration-200">
-              <span className="text-xl sm:text-2xl text-[#FFE500] leading-none" aria-hidden="true">
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#FFF4C7] dark:bg-yellow-400/10 border border-[#F0E3B5] dark:border-yellow-400/20 flex items-center justify-center flex-shrink-0 group-hover:rotate-12 transition-transform duration-200">
+              <span className="text-xl sm:text-2xl text-[#10182B] dark:text-[#FFD600] leading-none" aria-hidden="true">
                 ⚡
               </span>
             </div>
             <div className="min-w-0">
-              <div className="font-display font-black text-lg sm:text-xl md:text-2xl tracking-tight text-white flex items-center leading-none">
+              <div className="font-display font-black text-lg sm:text-xl md:text-2xl tracking-tight text-[#10182B] dark:text-white flex items-center leading-none">
                 <span>StudySprint</span>
-                <span className="text-[#FFE500]">.</span>
+                <span className="text-[#FFD600]">.</span>
               </div>
-              <div className="text-[11px] sm:text-xs text-slate-400 font-medium truncate mt-0.5">
+              <div className="text-[11px] sm:text-xs text-[#58647D] dark:text-slate-400 font-medium truncate mt-0.5">
                 cute stationery that works
               </div>
             </div>
@@ -256,41 +256,41 @@ export const StudySprintHeader: React.FC<StudySprintHeaderProps> = ({
           {/* Desktop Navigation Links (lg+ screens) */}
           <nav
             aria-label="Main Navigation"
-            className="hidden lg:flex items-center gap-5 xl:gap-6 font-display font-medium text-sm text-slate-300"
+            className="hidden lg:flex items-center gap-5 xl:gap-6 font-display font-medium text-sm text-[#58647D] dark:text-slate-300"
           >
             <a
               href="#home"
-              className="hover:text-[#FFE500] transition-colors focus-visible:underline focus-visible:outline-none"
+              className="hover:text-[#10182B] dark:hover:text-[#FFD600] transition-colors focus-visible:underline focus-visible:outline-none"
             >
               🏠 Home
             </a>
             <a
               href="#kits"
-              className="hover:text-[#FFE500] transition-colors focus-visible:underline focus-visible:outline-none"
+              className="hover:text-[#10182B] dark:hover:text-[#FFD600] transition-colors focus-visible:underline focus-visible:outline-none"
             >
               📦 Kits
             </a>
             <a
               href="#builder"
-              className="hover:text-[#FFE500] transition-colors focus-visible:underline focus-visible:outline-none"
+              className="hover:text-[#10182B] dark:hover:text-[#FFD600] transition-colors focus-visible:underline focus-visible:outline-none"
             >
               🛠️ Customize
             </a>
             <a
               href="#reviews"
-              className="hover:text-[#FFE500] transition-colors focus-visible:underline focus-visible:outline-none"
+              className="hover:text-[#10182B] dark:hover:text-[#FFD600] transition-colors focus-visible:underline focus-visible:outline-none"
             >
               ⭐ Reviews
             </a>
             <a
               href="#delivery"
-              className="hover:text-[#FFE500] transition-colors focus-visible:underline focus-visible:outline-none"
+              className="hover:text-[#10182B] dark:hover:text-[#FFD600] transition-colors focus-visible:underline focus-visible:outline-none"
             >
               🚚 Track Order
             </a>
             <a
               href="#about"
-              className="hover:text-[#FFE500] transition-colors focus-visible:underline focus-visible:outline-none"
+              className="hover:text-[#10182B] dark:hover:text-[#FFD600] transition-colors focus-visible:underline focus-visible:outline-none"
             >
               💡 About
             </a>
@@ -304,7 +304,7 @@ export const StudySprintHeader: React.FC<StudySprintHeaderProps> = ({
                 id="wishlist-btn"
                 type="button"
                 onClick={onOpenWishlist}
-                className="relative w-10 h-10 rounded-lg bg-[#131D31] hover:bg-[#1A263F] border border-slate-800 hover:border-slate-700 text-slate-200 flex items-center justify-center transition-all cursor-pointer active:scale-95 text-lg focus-visible:ring-2 focus-visible:ring-rose-400 focus-visible:outline-none"
+                className="relative w-10 h-10 rounded-xl bg-white dark:bg-[#131D31] hover:bg-[#FFF9DF] dark:hover:bg-[#1A263F] border border-[#F0E3B5] dark:border-slate-800 text-[#10182B] dark:text-slate-200 flex items-center justify-center transition-all cursor-pointer active:scale-95 text-lg shadow-xs focus-visible:ring-2 focus-visible:ring-rose-400 focus-visible:outline-none"
                 aria-label={`Open wishlist with ${wishlistCount} saved items`}
                 title="View your saved Wishlist 💖"
               >
@@ -314,7 +314,7 @@ export const StudySprintHeader: React.FC<StudySprintHeaderProps> = ({
                 {wishlistCount > 0 && (
                   <span
                     id="wishlist-count-badge"
-                    className="absolute -top-1.5 -right-1.5 bg-[#FF6B8B] text-white font-display font-black text-xs w-5 h-5 rounded-full flex items-center justify-center border-2 border-[#0B1120] shadow-sm leading-none select-none animate-fadeIn"
+                    className="absolute -top-1.5 -right-1.5 bg-[#FF719A] text-white font-display font-black text-xs w-5 h-5 rounded-full flex items-center justify-center border-2 border-[#FFFDF5] dark:border-[#0B1120] shadow-sm leading-none select-none"
                   >
                     {wishlistCount}
                   </span>
@@ -327,7 +327,7 @@ export const StudySprintHeader: React.FC<StudySprintHeaderProps> = ({
               id="theme-toggle-btn"
               type="button"
               onClick={toggleTheme}
-              className="w-10 h-10 rounded-lg bg-[#131D31] hover:bg-[#1A263F] border border-slate-800 hover:border-slate-700 text-slate-200 flex items-center justify-center transition-all cursor-pointer active:scale-95 text-lg focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:outline-none"
+              className="w-10 h-10 rounded-xl bg-white dark:bg-[#131D31] hover:bg-[#FFF9DF] dark:hover:bg-[#1A263F] border border-[#F0E3B5] dark:border-slate-800 text-[#10182B] dark:text-slate-200 flex items-center justify-center transition-all cursor-pointer active:scale-95 text-lg shadow-xs focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:outline-none"
               aria-label={theme === 'dark' ? 'Switch to Day Light Mode' : 'Switch to Midnight Dark Mode'}
               title={theme === 'dark' ? 'Switch to Day Mode ☀️' : 'Switch to Midnight Dark Mode 🌙'}
             >
@@ -342,7 +342,7 @@ export const StudySprintHeader: React.FC<StudySprintHeaderProps> = ({
               type="button"
               onClick={() => setCartOpen(true)}
               onAnimationEnd={() => setCartPopping(false)}
-              className={`relative w-10 h-10 rounded-lg bg-[#131D31] hover:bg-[#1A263F] border border-slate-800 hover:border-slate-700 text-slate-200 flex items-center justify-center transition-all cursor-pointer active:scale-95 text-lg focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:outline-none ${
+              className={`relative w-10 h-10 rounded-xl bg-white dark:bg-[#131D31] hover:bg-[#FFF9DF] dark:hover:bg-[#1A263F] border border-[#F0E3B5] dark:border-slate-800 text-[#10182B] dark:text-slate-200 flex items-center justify-center transition-all cursor-pointer active:scale-95 text-lg shadow-xs focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:outline-none ${
                 cartPopping ? 'cart-pop-active' : ''
               }`}
               aria-label={`Open shopping cart with ${cartCount} items`}
@@ -353,7 +353,7 @@ export const StudySprintHeader: React.FC<StudySprintHeaderProps> = ({
               </span>
               <span
                 id="cart-count-badge"
-                className="absolute -top-1.5 -right-1.5 bg-[#FFE500] text-slate-950 font-display font-black text-xs w-5 h-5 rounded-full flex items-center justify-center border-2 border-[#0B1120] shadow-sm leading-none select-none"
+                className="absolute -top-1.5 -right-1.5 bg-[#FFE500] text-slate-950 font-display font-black text-xs w-5 h-5 rounded-full flex items-center justify-center border-2 border-[#FFFDF5] dark:border-[#0B1120] shadow-sm leading-none select-none"
               >
                 {cartCount}
               </span>

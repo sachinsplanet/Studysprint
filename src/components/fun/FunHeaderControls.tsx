@@ -29,7 +29,7 @@ export const FunHeaderControls: React.FC = () => {
   const discoveredEggsCount = easterEggs.filter((e) => e.discovered).length;
 
   return (
-    <div className="w-full bg-[#FFF2C6]/80 dark:bg-[#151D2C] border-b-2 border-[#1E2A4A]/20 dark:border-slate-800 text-[#1E2A4A] dark:text-slate-200 text-xs py-1.5 px-4 transition-colors">
+    <div className="w-full bg-[#FFF4C7] dark:bg-[#151D2C] border-b border-[#F0E3B5] dark:border-slate-800 text-[#10182B] dark:text-slate-200 text-xs py-1.5 px-4 transition-colors">
       <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
         {/* Left: XP Level & Brain Battery */}
         <div className="flex items-center flex-wrap gap-2.5">
@@ -37,17 +37,17 @@ export const FunHeaderControls: React.FC = () => {
           <button
             type="button"
             onClick={() => openModal('achievements')}
-            className="inline-flex items-center gap-1.5 bg-white dark:bg-[#0B0F19] px-2.5 py-1 rounded-full border border-[#1E2A4A]/30 dark:border-slate-700 shadow-xs hover:border-[#1E2A4A] dark:hover:border-amber-400 hover:scale-[1.02] transition-all cursor-pointer"
+            className="inline-flex items-center gap-1.5 bg-white dark:bg-[#0B0F19] px-2.5 py-1 rounded-full border border-[#F0E3B5] dark:border-slate-700 shadow-xs hover:border-[#FFD600] dark:hover:border-amber-400 hover:scale-[1.02] transition-all cursor-pointer"
             title="Click to view Academic Achievements & Easter Eggs"
           >
             <span>{level.emoji}</span>
-            <span className="font-display font-bold text-[#1E2A4A] dark:text-amber-300">
+            <span className="font-display font-bold text-[#10182B] dark:text-amber-300">
               Lvl {level.level}: {level.title}
             </span>
-            <span className="text-[10px] opacity-70">({xp} XP)</span>
-            <div className="w-12 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden ml-1 hidden sm:block">
+            <span className="text-[10px] text-[#58647D] dark:text-slate-400">({xp} XP)</span>
+            <div className="w-12 h-1.5 bg-[#FFF9DF] dark:bg-slate-700 rounded-full overflow-hidden ml-1 hidden sm:block border border-[#F0E3B5]/60">
               <div
-                className="h-full bg-[#FFC93C]"
+                className="h-full bg-[#FFD600]"
                 style={{ width: `${progressPercent}%` }}
               />
             </div>
@@ -57,14 +57,14 @@ export const FunHeaderControls: React.FC = () => {
           <button
             type="button"
             onClick={() => openModal('brainBattery')}
-            className="inline-flex items-center gap-1.5 bg-white dark:bg-[#0B0F19] px-2.5 py-1 rounded-full border border-[#1E2A4A]/30 dark:border-slate-700 shadow-xs hover:border-[#1E2A4A] dark:hover:border-amber-400 hover:scale-[1.02] transition-all cursor-pointer"
+            className="inline-flex items-center gap-1.5 bg-white dark:bg-[#0B0F19] px-2.5 py-1 rounded-full border border-[#F0E3B5] dark:border-slate-700 shadow-xs hover:border-[#FFD600] dark:hover:border-amber-400 hover:scale-[1.02] transition-all cursor-pointer"
             title="Check Brain Battery Status"
           >
             <span>🧠</span>
             <span className={`font-display font-bold ${batteryStatus.color}`}>
               {brainBattery}%
             </span>
-            <span className="hidden md:inline text-[11px] opacity-75">
+            <span className="hidden md:inline text-[11px] text-[#58647D] dark:text-slate-400">
               · {batteryStatus.text}
             </span>
           </button>
@@ -73,7 +73,7 @@ export const FunHeaderControls: React.FC = () => {
           <button
             type="button"
             onClick={() => openModal('achievements')}
-            className="hidden lg:inline-flex items-center gap-2 bg-white/70 dark:bg-[#0B0F19]/70 px-2 py-0.5 rounded-full border border-dashed border-[#1E2A4A]/30 dark:border-slate-700 hover:bg-white dark:hover:bg-[#0B0F19] transition-all cursor-pointer"
+            className="hidden lg:inline-flex items-center gap-2 bg-white/80 dark:bg-[#0B0F19]/70 px-2 py-0.5 rounded-full border border-dashed border-[#F0E3B5] dark:border-slate-700 hover:bg-white dark:hover:bg-[#0B0F19] transition-all cursor-pointer"
             title="Easter Eggs & Achievements unlocked"
           >
             <span>🏆 {unlockedCount}/{achievements.length}</span>
@@ -110,7 +110,7 @@ export const FunHeaderControls: React.FC = () => {
           <button
             type="button"
             onClick={() => openModal('catchBooksGame')}
-            className="px-2 py-0.5 rounded-md hover:bg-white dark:hover:bg-slate-800 transition-colors cursor-pointer font-display text-[11px] flex items-center gap-1 text-pink-700 dark:text-pink-300 font-bold"
+            className="px-2 py-0.5 rounded-md hover:bg-white dark:hover:bg-slate-800 transition-colors cursor-pointer font-display text-[11px] flex items-center gap-1 text-[#FF719A] dark:text-pink-300 font-bold"
             title="Play 30s Study Mini-Game"
           >
             <span>🎮</span>
@@ -134,8 +134,8 @@ export const FunHeaderControls: React.FC = () => {
             onClick={toggleSound}
             className={`px-2 py-0.5 rounded-full border text-[11px] font-display font-medium transition-all cursor-pointer ${
               soundEnabled
-                ? 'bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border-emerald-400'
-                : 'bg-slate-100 dark:bg-slate-800 text-slate-500 border-slate-300 dark:border-slate-700'
+                ? 'bg-[#E9FFF5] dark:bg-emerald-950 text-[#00B887] dark:text-emerald-300 border-[#A7F3D0]'
+                : 'bg-white dark:bg-slate-800 text-[#7B8498] border-[#F0E3B5] dark:border-slate-700'
             }`}
             title="Toggle synthesized tactile UI audio"
           >
@@ -148,8 +148,8 @@ export const FunHeaderControls: React.FC = () => {
             onClick={toggleFunMode}
             className={`px-2.5 py-0.5 rounded-full border text-[11px] font-display font-bold transition-all cursor-pointer ${
               funMode
-                ? 'bg-[#FFC93C] text-[#1E2A4A] border-[#1E2A4A]'
-                : 'bg-slate-200 dark:bg-slate-800 text-slate-500 border-slate-300 dark:border-slate-700'
+                ? 'bg-[#FFD600] text-[#10182B] border-[#FFC928]'
+                : 'bg-white dark:bg-slate-800 text-[#7B8498] border-[#F0E3B5] dark:border-slate-700'
             }`}
             title="Toggle playful student Easter eggs and secret layer"
           >

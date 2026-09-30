@@ -29,26 +29,26 @@ export const AchievementModal: React.FC = () => {
       aria-modal="true"
     >
       <div
-        className="doodle-card bg-white dark:bg-[#162032] max-w-2xl w-full p-6 sm:p-8 max-h-[90vh] overflow-y-auto text-[#1E2A4A] dark:text-slate-100 animate-in zoom-in-95 duration-200"
+        className="doodle-card bg-[#FFFDF5] dark:bg-[#131D31] max-w-2xl w-full p-6 sm:p-8 max-h-[90vh] overflow-y-auto text-[#10182B] dark:text-slate-100 animate-in zoom-in-95 duration-200 border-2 border-[#F0E3B5] dark:border-slate-800"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-start justify-between border-b-2 border-[#1E2A4A]/10 dark:border-slate-700 pb-4">
+        <div className="flex items-start justify-between border-b-2 border-[#F0E3B5] dark:border-slate-800 pb-4">
           <div>
             <div className="flex items-center gap-2">
               <span className="text-3xl">🏆</span>
-              <h3 className="font-display font-bold text-2xl text-[#1E2A4A] dark:text-white">
+              <h3 className="font-display font-bold text-2xl text-[#10182B] dark:text-white">
                 Academic Hall of Fame
               </h3>
             </div>
-            <p className="font-body text-xs sm:text-sm text-[#1E2A4A]/70 dark:text-slate-300 mt-1">
-              Current Status: <b>{level.emoji} {level.title}</b> ({xp} Academic XP)
+            <p className="font-body text-xs sm:text-sm text-[#58647D] dark:text-slate-300 mt-1">
+              Current Status: <b className="text-[#10182B] dark:text-yellow-400">{level.emoji} {level.title}</b> ({xp} Academic XP)
             </p>
           </div>
           <button
             type="button"
             onClick={closeModal}
-            className="w-8 h-8 rounded-full border-2 border-[#1E2A4A] dark:border-slate-300 flex items-center justify-center font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+            className="w-8 h-8 rounded-full border border-[#F0E3B5] dark:border-slate-700 bg-white dark:bg-slate-800 flex items-center justify-center font-bold text-[#10182B] dark:text-white hover:bg-[#FFF4C7] dark:hover:bg-slate-700 transition-colors cursor-pointer"
             aria-label="Close"
           >
             ×
@@ -56,14 +56,14 @@ export const AchievementModal: React.FC = () => {
         </div>
 
         {/* Tab switchers */}
-        <div className="flex gap-2 my-4 border-b border-[#1E2A4A]/10 dark:border-slate-700 pb-3">
+        <div className="flex gap-2 my-4 border-b border-[#F0E3B5] dark:border-slate-800 pb-3">
           <button
             type="button"
             onClick={() => setTab('achievements')}
             className={`px-3 py-1.5 rounded-full font-display text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
               tab === 'achievements'
-                ? 'bg-[#FFC93C] text-[#1E2A4A] shadow-xs scale-105'
-                : 'bg-slate-100 dark:bg-slate-800 text-[#1E2A4A]/70 dark:text-slate-300 hover:bg-slate-200'
+                ? 'bg-[#FFD600] text-[#10182B] shadow-xs scale-105 border border-[#E5C000]'
+                : 'bg-white dark:bg-slate-800 text-[#58647D] dark:text-slate-300 border border-[#F0E3B5] dark:border-slate-700 hover:bg-[#FFF9DF]'
             }`}
           >
             Trophies ({unlockedCount}/{achievements.length})
@@ -73,8 +73,8 @@ export const AchievementModal: React.FC = () => {
             onClick={() => setTab('eggs')}
             className={`px-3 py-1.5 rounded-full font-display text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
               tab === 'eggs'
-                ? 'bg-[#FFD6E0] dark:bg-[#4A1D34] text-[#1E2A4A] dark:text-pink-100 shadow-xs scale-105'
-                : 'bg-slate-100 dark:bg-slate-800 text-[#1E2A4A]/70 dark:text-slate-300 hover:bg-slate-200'
+                ? 'bg-[#FF719A] text-white shadow-xs scale-105'
+                : 'bg-white dark:bg-slate-800 text-[#58647D] dark:text-slate-300 border border-[#F0E3B5] dark:border-slate-700 hover:bg-[#FFF9DF]'
             }`}
           >
             🥚 Easter Eggs ({discoveredEggsCount}/10)
@@ -84,8 +84,8 @@ export const AchievementModal: React.FC = () => {
             onClick={() => setTab('roadmap')}
             className={`px-3 py-1.5 rounded-full font-display text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
               tab === 'roadmap'
-                ? 'bg-[#CDE7FF] dark:bg-[#163359] text-[#1E2A4A] dark:text-blue-100 shadow-xs scale-105'
-                : 'bg-slate-100 dark:bg-slate-800 text-[#1E2A4A]/70 dark:text-slate-300 hover:bg-slate-200'
+                ? 'bg-[#FFF4C7] text-[#10182B] shadow-xs scale-105 border border-[#F0E3B5]'
+                : 'bg-white dark:bg-slate-800 text-[#58647D] dark:text-slate-300 border border-[#F0E3B5] dark:border-slate-700 hover:bg-[#FFF9DF]'
             }`}
           >
             🗺️ Levels Roadmap
@@ -100,8 +100,8 @@ export const AchievementModal: React.FC = () => {
                 key={item.id}
                 className={`p-3.5 rounded-xl border-2 transition-all flex items-start gap-3 ${
                   item.unlocked
-                    ? 'border-amber-400 bg-amber-50/60 dark:bg-[#252014] text-[#1E2A4A] dark:text-slate-100'
-                    : 'border-dashed border-slate-300 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/40 opacity-60'
+                    ? 'border-[#FFD600] bg-white dark:bg-[#1A263F] text-[#10182B] dark:text-slate-100 shadow-xs'
+                    : 'border-dashed border-[#F0E3B5] dark:border-slate-700 bg-white/60 dark:bg-slate-800/40 opacity-60'
                 }`}
               >
                 <span className={`text-2xl shrink-0 ${!item.unlocked && 'grayscale'}`}>
@@ -109,16 +109,16 @@ export const AchievementModal: React.FC = () => {
                 </span>
                 <div className="min-w-0">
                   <div className="flex items-center gap-1.5">
-                    <p className="font-display font-bold text-xs sm:text-sm text-[#1E2A4A] dark:text-white">
+                    <p className="font-display font-bold text-xs sm:text-sm text-[#10182B] dark:text-white">
                       {item.title}
                     </p>
                     {item.unlocked && (
-                      <span className="text-[10px] bg-emerald-100 dark:bg-emerald-900 text-emerald-800 dark:text-emerald-200 px-1.5 py-0.2 rounded-full font-bold">
+                      <span className="text-[10px] bg-[#E9FFF5] text-[#00B887] border border-[#A7F3D0] px-1.5 py-0.2 rounded-full font-bold">
                         UNLOCKED
                       </span>
                     )}
                   </div>
-                  <p className="font-body text-xs text-[#1E2A4A]/80 dark:text-slate-300 mt-1">
+                  <p className="font-body text-xs text-[#58647D] dark:text-slate-300 mt-1">
                     {item.description}
                   </p>
                 </div>
@@ -130,7 +130,7 @@ export const AchievementModal: React.FC = () => {
         {/* TAB 2: EASTER EGGS TRACKER */}
         {tab === 'eggs' && (
           <div className="space-y-3 mt-4">
-            <div className="bg-[#FFF2C6] dark:bg-[#2A2312] p-3 rounded-xl border border-amber-300 text-xs font-body text-[#1E2A4A] dark:text-amber-200 flex items-center justify-between">
+            <div className="bg-[#FFF4C7] dark:bg-[#1A263F] p-3 rounded-xl border border-[#F0E3B5] text-xs font-body text-[#10182B] dark:text-amber-200 flex items-center justify-between">
               <span>Find and interact with secret elements across the website to uncover all 10 Easter Eggs!</span>
               <span className="font-display font-bold text-sm shrink-0 ml-2">
                 {discoveredEggsCount} / 10 Found
@@ -143,15 +143,15 @@ export const AchievementModal: React.FC = () => {
                   key={egg.id}
                   className={`p-3 rounded-xl border-2 flex items-center justify-between gap-3 text-xs font-body ${
                     egg.discovered
-                      ? 'border-pink-300 bg-pink-50/50 dark:bg-[#2F1725] text-[#1E2A4A] dark:text-pink-100'
-                      : 'border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/40 text-slate-500 dark:text-slate-400'
+                      ? 'border-[#FFCCD9] bg-[#FFF0F5] dark:bg-[#2F1725] text-[#10182B] dark:text-pink-100'
+                      : 'border-[#F0E3B5] dark:border-slate-700 bg-white dark:bg-slate-800/40 text-[#7B8498] dark:text-slate-400'
                   }`}
                 >
                   <div className="flex items-center gap-2.5 min-w-0">
-                    <span className="font-display font-bold text-sm">#{index + 1}</span>
+                    <span className="font-display font-bold text-sm text-[#58647D] dark:text-slate-400">#{index + 1}</span>
                     <span className="text-base">{egg.discovered ? '✨' : '❓'}</span>
                     <div className="min-w-0">
-                      <b className="font-display block text-xs sm:text-sm text-[#1E2A4A] dark:text-white truncate">
+                      <b className="font-display block text-xs sm:text-sm text-[#10182B] dark:text-white truncate">
                         {egg.discovered ? egg.name : 'Undiscovered Mystery'}
                       </b>
                       <span className="text-[11px] opacity-80 block truncate">
@@ -179,32 +179,32 @@ export const AchievementModal: React.FC = () => {
                   key={lvl.level}
                   className={`p-3.5 rounded-xl border-2 flex items-center justify-between gap-3 ${
                     isCurrent
-                      ? 'border-[#FFC93C] bg-amber-50/80 dark:bg-[#2E2714] shadow-xs'
+                      ? 'border-[#FFD600] bg-[#FFF4C7] dark:bg-[#1A263F] shadow-xs'
                       : isUnlocked
-                      ? 'border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800'
-                      : 'border-dashed border-slate-200 dark:border-slate-800 opacity-50 bg-slate-50 dark:bg-slate-900'
+                      ? 'border-[#F0E3B5] dark:border-slate-700 bg-white dark:bg-slate-800'
+                      : 'border-dashed border-[#F0E3B5]/60 dark:border-slate-800 opacity-50 bg-[#FFFDF5] dark:bg-slate-900'
                   }`}
                 >
                   <div className="flex items-center gap-3">
                     <span className="text-2xl">{lvl.emoji}</span>
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="font-display font-bold text-sm text-[#1E2A4A] dark:text-white">
+                        <span className="font-display font-bold text-sm text-[#10182B] dark:text-white">
                           Level {lvl.level}: {lvl.title}
                         </span>
                         {isCurrent && (
-                          <span className="text-[10px] bg-[#FFC93C] text-[#1E2A4A] font-bold px-2 py-0.5 rounded-full">
+                          <span className="text-[10px] bg-[#FFD600] text-[#10182B] font-bold px-2 py-0.5 rounded-full">
                             YOU ARE HERE
                           </span>
                         )}
                       </div>
-                      <p className="font-body text-xs text-[#1E2A4A]/70 dark:text-slate-300 mt-0.5">
+                      <p className="font-body text-xs text-[#58647D] dark:text-slate-300 mt-0.5">
                         {lvl.perk}
                       </p>
                     </div>
                   </div>
                   <div className="text-right shrink-0">
-                    <span className="font-display font-bold text-xs text-[#1E2A4A] dark:text-white">
+                    <span className="font-display font-bold text-xs text-[#10182B] dark:text-white">
                       {lvl.minXP} XP
                     </span>
                   </div>
@@ -214,7 +214,7 @@ export const AchievementModal: React.FC = () => {
           </div>
         )}
 
-        <div className="mt-6 pt-4 border-t border-[#1E2A4A]/10 dark:border-slate-700 text-right">
+        <div className="mt-6 pt-4 border-t border-[#F0E3B5] dark:border-slate-800 text-right">
           <button
             type="button"
             onClick={closeModal}

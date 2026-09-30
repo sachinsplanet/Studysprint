@@ -62,32 +62,32 @@ export const CompatibilityScannerModal: React.FC = () => {
       aria-modal="true"
     >
       <div
-        className="doodle-card bg-white dark:bg-[#162032] max-w-md w-full p-6 sm:p-8 text-[#1E2A4A] dark:text-slate-100 animate-in zoom-in-95 duration-200 text-center"
+        className="doodle-card bg-[#FFFDF5] dark:bg-[#131D31] max-w-md w-full p-6 sm:p-8 text-[#10182B] dark:text-slate-100 animate-in zoom-in-95 duration-200 text-center border-2 border-[#F0E3B5] dark:border-slate-800"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="w-14 h-14 rounded-full bg-[#D8F3DC] dark:bg-[#143021] border-3 border-[#1E2A4A] dark:border-emerald-400 mx-auto flex items-center justify-center text-3xl mb-3">
+        <div className="w-14 h-14 rounded-full bg-[#E9FFF5] dark:bg-[#143021] border-2 border-[#A7F3D0] dark:border-emerald-400 mx-auto flex items-center justify-center text-3xl mb-3">
           🔍
         </div>
 
-        <h3 className="font-display font-bold text-xl text-[#1E2A4A] dark:text-white">
+        <h3 className="font-display font-bold text-xl text-[#10182B] dark:text-white">
           Academic Compatibility Scanner
         </h3>
-        <p className="font-body text-xs text-[#1E2A4A]/70 dark:text-slate-300 mt-1">
+        <p className="font-body text-xs text-[#58647D] dark:text-slate-300 mt-1">
           Evaluating synergy with <b>{product.name}</b> {product.emoji}
         </p>
 
         {!done ? (
-          <div className="my-6 p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-left font-mono text-xs space-y-1.5 min-h-[140px]">
+          <div className="my-6 p-4 rounded-xl bg-white dark:bg-slate-900 border border-[#F0E3B5] dark:border-slate-800 text-left font-mono text-xs space-y-1.5 min-h-[140px]">
             {SCAN_LINES.slice(0, stepIdx + 1).map((line, i) => (
-              <div key={i} className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400">
+              <div key={i} className="flex items-center gap-2 text-[#00B887]">
                 <span>✓</span>
-                <span className="text-[#1E2A4A] dark:text-slate-200">{line}</span>
+                <span className="text-[#10182B] dark:text-slate-200">{line}</span>
               </div>
             ))}
           </div>
         ) : (
           <div className="my-6 space-y-3 font-body text-left">
-            <div className="w-full max-h-44 overflow-hidden rounded-xl">
+            <div className="w-full max-h-44 overflow-hidden rounded-xl border border-[#F0E3B5]">
               <ProductImage
                 src={product.image}
                 alt={product.imageAlt || product.name}
@@ -98,19 +98,19 @@ export const CompatibilityScannerModal: React.FC = () => {
                 showBadge={true}
               />
             </div>
-            <div className="bg-[#D8F3DC] dark:bg-[#183624] p-4 rounded-xl border-2 border-emerald-500 text-center">
-              <span className="text-xs font-bold uppercase tracking-wider text-emerald-900 dark:text-emerald-300 block">
+            <div className="bg-[#E9FFF5] dark:bg-[#183624] p-4 rounded-xl border-2 border-[#00B887] text-center">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#00B887] dark:text-emerald-300 block">
                 COMPATIBILITY SCORE
               </span>
-              <span className="font-display font-black text-4xl text-emerald-700 dark:text-emerald-300 my-1 block">
+              <span className="font-display font-black text-4xl text-[#00B887] dark:text-emerald-300 my-1 block">
                 98.7%
               </span>
-              <p className="text-xs font-semibold text-[#1E2A4A] dark:text-slate-100 italic">
+              <p className="text-xs font-semibold text-[#10182B] dark:text-slate-100 italic">
                 &quot;This kit is dangerously compatible with your academic situation and current state of denial.&quot;
               </p>
             </div>
 
-            <div className="bg-slate-50 dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-800 text-xs space-y-1">
+            <div className="bg-white dark:bg-slate-900 p-3 rounded-xl border border-[#F0E3B5] dark:border-slate-800 text-xs space-y-1 text-[#10182B] dark:text-slate-200">
               <p>• <b>Placebo Factor:</b> +45% Instant confidence boost</p>
               <p>• <b>Tear Absorbency:</b> High (Guaranteed 100 GSM)</p>
               <p>• <b>Parental Approval:</b> Guaranteed smile upon unboxing</p>

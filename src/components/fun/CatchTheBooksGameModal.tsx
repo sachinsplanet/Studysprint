@@ -390,22 +390,22 @@ export const CatchTheBooksGameModal: React.FC = () => {
       aria-modal="true"
     >
       <div
-        className="doodle-card bg-[#FFFDF7] dark:bg-[#162032] max-w-lg w-full max-h-[92vh] overflow-y-auto my-auto p-4 sm:p-6 text-[#1E2A4A] dark:text-slate-100 animate-in zoom-in-95 duration-200 select-none shadow-2xl relative"
+        className="doodle-card bg-[#FFFDF5] dark:bg-[#131D31] max-w-lg w-full max-h-[92vh] overflow-y-auto my-auto p-4 sm:p-6 text-[#10182B] dark:text-slate-100 animate-in zoom-in-95 duration-200 select-none shadow-2xl relative border-2 border-[#F0E3B5] dark:border-slate-800"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex justify-between items-center pb-3 border-b-2 border-[#1E2A4A]/10 dark:border-slate-700">
+        <div className="flex justify-between items-center pb-3 border-b-2 border-[#F0E3B5] dark:border-slate-800">
           <div>
             <div className="flex items-center gap-2">
               <span className="text-2xl animate-bounce">🎒</span>
-              <h3 className="font-display font-bold text-lg sm:text-xl text-[#1E2A4A] dark:text-white">
+              <h3 className="font-display font-bold text-lg sm:text-xl text-[#10182B] dark:text-white">
                 Catch The Books!
               </h3>
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#FFC93C] text-[#1E2A4A]">
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#FFD600] text-[#10182B]">
                 Mini-Game
               </span>
             </div>
-            <p className="text-xs text-[#1E2A4A]/70 dark:text-slate-300">
+            <p className="text-xs text-[#58647D] dark:text-slate-300">
               Catch study essentials (📚✏️📓☕), dodge distractions (📱🎮🛌)!
             </p>
           </div>
@@ -413,7 +413,7 @@ export const CatchTheBooksGameModal: React.FC = () => {
             <button
               type="button"
               onClick={toggleSound}
-              className="p-1 rounded-md text-sm hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              className="p-1.5 rounded-lg border border-[#F0E3B5] dark:border-slate-700 bg-white dark:bg-slate-800 text-sm hover:bg-[#FFF4C7] dark:hover:bg-slate-700 transition-colors"
               title={soundEnabled ? 'Mute audio' : 'Enable audio'}
             >
               {soundEnabled ? '🔊' : '🔇'}
@@ -421,7 +421,7 @@ export const CatchTheBooksGameModal: React.FC = () => {
             <button
               type="button"
               onClick={closeModal}
-              className="w-8 h-8 rounded-full border-2 border-[#1E2A4A] dark:border-slate-300 flex items-center justify-center font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+              className="w-8 h-8 rounded-full border border-[#F0E3B5] dark:border-slate-700 bg-white dark:bg-slate-800 flex items-center justify-center font-bold text-[#10182B] dark:text-white hover:bg-[#FFF4C7] dark:hover:bg-slate-700 transition-colors cursor-pointer"
               aria-label="Close"
             >
               ×
@@ -431,23 +431,23 @@ export const CatchTheBooksGameModal: React.FC = () => {
 
         {/* HUD: Time, Score, Combo, High Score */}
         <div className="grid grid-cols-4 gap-2 my-3 font-display text-center">
-          <div className={`px-2 py-1.5 rounded-xl border ${timeLeft <= 10 ? 'bg-rose-50 dark:bg-rose-950/40 border-rose-300 text-rose-600 animate-pulse' : 'bg-blue-50 dark:bg-slate-800/80 border-blue-200 dark:border-slate-700'}`}>
-            <span className="text-[10px] uppercase block tracking-wider opacity-70">Time</span>
-            <b className="text-sm sm:text-base">{timeLeft}s</b>
+          <div className={`px-2 py-1.5 rounded-xl border ${timeLeft <= 10 ? 'bg-[#FFF0F5] dark:bg-rose-950/40 border-[#FFCCD9] text-[#FF719A] animate-pulse' : 'bg-white dark:bg-slate-800/80 border-[#F0E3B5] dark:border-slate-700'}`}>
+            <span className="text-[10px] uppercase block tracking-wider text-[#58647D] dark:text-slate-400">Time</span>
+            <b className="text-sm sm:text-base text-[#10182B] dark:text-white">{timeLeft}s</b>
           </div>
-          <div className="px-2 py-1.5 rounded-xl border bg-amber-50 dark:bg-slate-800/80 border-amber-200 dark:border-slate-700">
-            <span className="text-[10px] uppercase block tracking-wider opacity-70">Score</span>
-            <b className="text-sm sm:text-base text-amber-600 dark:text-amber-300">{score}</b>
+          <div className="px-2 py-1.5 rounded-xl border bg-white dark:bg-slate-800/80 border-[#F0E3B5] dark:border-slate-700">
+            <span className="text-[10px] uppercase block tracking-wider text-[#58647D] dark:text-slate-400">Score</span>
+            <b className="text-sm sm:text-base text-[#10182B] dark:text-yellow-400">{score}</b>
           </div>
-          <div className="px-2 py-1.5 rounded-xl border bg-orange-50 dark:bg-slate-800/80 border-orange-200 dark:border-slate-700">
-            <span className="text-[10px] uppercase block tracking-wider opacity-70">Combo</span>
-            <b className={`text-sm sm:text-base ${combo >= 3 ? 'text-orange-500 font-bold animate-bounce' : 'text-slate-700 dark:text-slate-300'}`}>
+          <div className="px-2 py-1.5 rounded-xl border bg-white dark:bg-slate-800/80 border-[#F0E3B5] dark:border-slate-700">
+            <span className="text-[10px] uppercase block tracking-wider text-[#58647D] dark:text-slate-400">Combo</span>
+            <b className={`text-sm sm:text-base ${combo >= 3 ? 'text-amber-500 font-bold animate-bounce' : 'text-[#10182B] dark:text-slate-300'}`}>
               {combo > 1 ? `x${combo} 🔥` : 'x1'}
             </b>
           </div>
-          <div className="px-2 py-1.5 rounded-xl border bg-emerald-50 dark:bg-slate-800/80 border-emerald-200 dark:border-slate-700">
-            <span className="text-[10px] uppercase block tracking-wider opacity-70">High</span>
-            <b className="text-sm sm:text-base text-emerald-600 dark:text-emerald-400">{highScore}</b>
+          <div className="px-2 py-1.5 rounded-xl border bg-white dark:bg-slate-800/80 border-[#F0E3B5] dark:border-slate-700">
+            <span className="text-[10px] uppercase block tracking-wider text-[#58647D] dark:text-slate-400">High</span>
+            <b className="text-sm sm:text-base text-[#00B887] dark:text-emerald-400">{highScore}</b>
           </div>
         </div>
 
@@ -455,34 +455,34 @@ export const CatchTheBooksGameModal: React.FC = () => {
         <div
           ref={containerRef}
           onPointerMove={handleArenaPointerMove}
-          className={`relative w-full h-80 bg-gradient-to-b from-blue-50/60 via-amber-50/40 to-yellow-50/50 dark:from-slate-900 dark:via-slate-850 dark:to-slate-800 rounded-2xl border-3 border-[#1E2A4A] dark:border-slate-600 overflow-hidden touch-none select-none ${
+          className={`relative w-full h-80 bg-gradient-to-b from-[#FFFDF5] via-[#FFF9E8] to-[#FFF4C7] dark:from-slate-900 dark:via-slate-850 dark:to-slate-800 rounded-2xl border-2 border-[#F0E3B5] dark:border-slate-700 overflow-hidden touch-none select-none ${
             shakeArena ? 'animate-wiggle' : ''
           }`}
           style={{ cursor: gameState === 'playing' ? 'ew-resize' : 'default' }}
         >
           {/* Subtle arena background pattern */}
-          <div className="absolute inset-0 opacity-[0.04] pointer-events-none bg-[radial-gradient(#1E2A4A_1px,transparent_1px)] [background-size:16px_16px]" />
+          <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[radial-gradient(#10182B_1.5px,transparent_1.5px)] [background-size:20px_20px]" />
 
           {/* Crunch time banner in last 10s */}
           {gameState === 'playing' && timeLeft <= 10 && (
-            <div className="absolute top-2 left-1/2 -translate-x-1/2 z-10 px-3 py-0.5 rounded-full bg-rose-500 text-white font-display text-[10px] font-bold tracking-wider uppercase animate-pulse shadow-md">
+            <div className="absolute top-2 left-1/2 -translate-x-1/2 z-10 px-3 py-0.5 rounded-full bg-[#FF719A] text-white font-display text-[10px] font-bold tracking-wider uppercase animate-pulse shadow-md">
               ⚡ FINAL EXAM CRUNCH MODE! (+SPEED)
             </div>
           )}
 
           {/* Idle screen */}
           {gameState === 'idle' && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-white/95 dark:bg-[#162032]/95 backdrop-blur-xs z-20">
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-[#FFFDF5]/95 dark:bg-[#131D31]/95 backdrop-blur-xs z-20">
               <div className="text-5xl mb-2 animate-bounce">🎒</div>
-              <h4 className="font-display font-bold text-xl mb-1 text-[#1E2A4A] dark:text-white">
+              <h4 className="font-display font-bold text-xl mb-1 text-[#10182B] dark:text-white">
                 Catch The Knowledge!
               </h4>
-              <p className="font-body text-xs text-slate-600 dark:text-slate-300 mb-3 max-w-sm">
+              <p className="font-body text-xs text-[#58647D] dark:text-slate-300 mb-3 max-w-sm">
                 Control the StudyKit basket to catch study essentials before they hit the ground. Dodge distractions or lose precious exam points!
               </p>
-              <div className="flex flex-wrap justify-center gap-2 text-[11px] mb-4 bg-amber-50/80 dark:bg-slate-800 p-2 rounded-xl border border-amber-200 dark:border-slate-700">
-                <span className="text-emerald-700 dark:text-emerald-300 font-semibold">Catch: 📚 ✏️ 📓 📐 ☕</span>
-                <span className="text-rose-600 dark:text-rose-400 font-semibold">Avoid: 📱 🎮 🍿 🛌</span>
+              <div className="flex flex-wrap justify-center gap-2 text-[11px] mb-4 bg-white dark:bg-slate-800 p-2 rounded-xl border border-[#F0E3B5] dark:border-slate-700">
+                <span className="text-[#00B887] font-semibold">Catch: 📚 ✏️ 📓 📐 ☕</span>
+                <span className="text-[#FF719A] font-semibold">Avoid: 📱 🎮 🍿 🛌</span>
               </div>
               <button
                 type="button"
@@ -512,45 +512,45 @@ export const CatchTheBooksGameModal: React.FC = () => {
 
           {/* Game Over screen */}
           {gameState === 'over' && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-5 text-center bg-white/95 dark:bg-[#162032]/95 backdrop-blur-xs z-20 animate-in zoom-in-95 duration-200">
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-5 text-center bg-[#FFFDF5]/95 dark:bg-[#131D31]/95 backdrop-blur-xs z-20 animate-in zoom-in-95 duration-200">
               <div className="text-4xl mb-1">🏁</div>
-              <h4 className="font-display font-bold text-lg sm:text-xl text-[#1E2A4A] dark:text-white">
+              <h4 className="font-display font-bold text-lg sm:text-xl text-[#10182B] dark:text-white">
                 Study Sprint Complete!
               </h4>
 
               {/* Performance Card */}
-              <div className="my-2.5 w-full max-w-xs bg-amber-50 dark:bg-slate-800 p-3 rounded-2xl border-2 border-amber-200 dark:border-slate-700 text-center shadow-xs">
+              <div className="my-2.5 w-full max-w-xs bg-white dark:bg-slate-800 p-3 rounded-2xl border-2 border-[#F0E3B5] dark:border-slate-700 text-center shadow-xs">
                 <div className="flex items-center justify-center gap-3">
                   <div className={`font-display font-black text-4xl ${gradeColor}`}>
                     {gradeLetter}
                   </div>
                   <div className="text-left">
-                    <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider block">
-                      Score: <b className="text-amber-600 dark:text-amber-300 text-base">{score} pts</b>
+                    <span className="text-[10px] uppercase font-bold text-[#58647D] tracking-wider block">
+                      Score: <b className="text-[#10182B] dark:text-amber-300 text-base">{score} pts</b>
                     </span>
-                    <span className="font-display font-bold text-xs text-[#1E2A4A] dark:text-slate-100 block">
+                    <span className="font-display font-bold text-xs text-[#10182B] dark:text-slate-100 block">
                       {gradeTitle}
                     </span>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-1 mt-2 pt-2 border-t border-amber-200/60 dark:border-slate-700 text-[10px]">
+                <div className="grid grid-cols-3 gap-1 mt-2 pt-2 border-t border-[#F0E3B5] dark:border-slate-700 text-[10px]">
                   <div>
-                    <span className="opacity-70 block">Caught</span>
-                    <b>{studyCaught} 📚</b>
+                    <span className="text-[#58647D] block">Caught</span>
+                    <b className="text-[#10182B] dark:text-white">{studyCaught} 📚</b>
                   </div>
                   <div>
-                    <span className="opacity-70 block">Distractions</span>
-                    <b className="text-rose-500">{distractionsHit} 📱</b>
+                    <span className="text-[#58647D] block">Distractions</span>
+                    <b className="text-[#FF719A]">{distractionsHit} 📱</b>
                   </div>
                   <div>
-                    <span className="opacity-70 block">Max Combo</span>
-                    <b className="text-orange-500">{maxCombo}x 🔥</b>
+                    <span className="text-[#58647D] block">Max Combo</span>
+                    <b className="text-amber-500">{maxCombo}x 🔥</b>
                   </div>
                 </div>
               </div>
 
-              <p className="text-xs text-emerald-600 dark:text-emerald-400 font-display font-semibold mb-3">
+              <p className="text-xs text-[#00B887] dark:text-emerald-400 font-display font-semibold mb-3">
                 +{Math.max(15, Math.round(score * 0.8))} Academic XP added to your student profile!
               </p>
 
@@ -565,7 +565,7 @@ export const CatchTheBooksGameModal: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => openModal('examSurvivalGame')}
-                  className="btn-doodle btn-ghost px-3 py-2 text-xs cursor-pointer border border-[#1E2A4A]/20"
+                  className="btn-doodle btn-ghost px-3 py-2 text-xs cursor-pointer border border-[#F0E3B5]"
                   title="Switch to Exam Survival reflex game"
                 >
                   ⏱️ Exam Survival

@@ -873,22 +873,15 @@ function AppContent() {
   const [logoClicks, setLogoClicks] = useState(0);
   const [fictionalTrackingStep, setFictionalTrackingStep] = useState<number>(-1);
 
-  // Theme state: initialized from localStorage or system preference
+  // Theme state: initialized from localStorage or default to 'light' for StudySprint Yellow & Cream
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     try {
       const saved = localStorage.getItem('ss-theme');
       if (saved === 'dark' || saved === 'light') return saved;
-      if (
-        typeof window !== 'undefined' &&
-        window.matchMedia &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches
-      ) {
-        return 'dark';
-      }
     } catch {
       // fallback
     }
-    return 'dark';
+    return 'light';
   });
 
   // Navigation & UI States
@@ -1052,27 +1045,10 @@ function AppContent() {
     setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
   };
 
-  // Helper for product card pastel backgrounds in dark mode
-  const getProductCardBg = (lightColor: string) => {
-    if (theme !== 'dark') return lightColor;
-    switch (lightColor.toUpperCase()) {
-      case '#CDE7FF': // Focus blue
-        return '#14233D';
-      case '#FFF2C6': // Amber / sprint yellow
-        return '#252114';
-      case '#E2ECE9': // Midnight sage
-        return '#142523';
-      case '#FFE5D9': // Vintage peach
-        return '#281C18';
-      case '#E8D7FF': // Bujo lavender
-        return '#211833';
-      case '#FFD6E0': // Washi pink
-        return '#291623';
-      case '#D8F3DC': // Cornell mint
-        return '#12271C';
-      default:
-        return '#1A2234';
-    }
+  // Helper for product card backgrounds: clean white in light mode, deep navy in dark mode
+  const getProductCardBg = (_lightColor: string) => {
+    if (theme !== 'dark') return '#FFFFFF';
+    return '#131D31';
   };
 
   // Cart & Orders state
@@ -1572,7 +1548,7 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen doodle-pattern text-[#1E2A4A] dark:text-[#F1F5F9] flex flex-col font-body transition-colors duration-200">
+    <div className="min-h-screen doodle-pattern text-[#10182B] dark:text-[#F1F5F9] flex flex-col font-body transition-colors duration-200">
       {/* ⚡ REDESIGNED STUDYSPRINT MOBILE-FIRST HEADER (Sections A, B, C, D) */}
       <StudySprintHeader
         theme={theme}
@@ -1605,19 +1581,19 @@ function AppContent() {
       <section id="home" className="pt-10 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 bg-[#D8F3DC] dark:bg-[#133020] border-2 border-[#1E2A4A] dark:border-slate-300 px-4 py-1.5 rounded-full shadow-[2px_2px_0_#1E2A4A] dark:shadow-[2px_2px_0_#000000] text-[#1E2A4A] dark:text-emerald-200">
+            <div className="inline-flex items-center gap-2 bg-[#FFF4C7] dark:bg-[#131D31] border border-[#F0E3B5] dark:border-slate-800 px-4 py-1.5 rounded-full shadow-xs text-[#10182B] dark:text-yellow-300">
               <span className="text-base">🎒</span>
               <span className="font-display font-semibold text-xs sm:text-sm">
                 Exam Season Survival Kit · Free Shipping &gt; ₹500
               </span>
             </div>
 
-            <h1 className="font-display font-black text-4xl sm:text-5xl lg:text-6xl leading-[1.15] text-[#1E2A4A] dark:text-white">
+            <h1 className="font-display font-black text-4xl sm:text-5xl lg:text-6xl leading-[1.15] text-[#10182B] dark:text-white">
               Supercharge your grind with stationery you&apos;ll{' '}
-              <span className="hl-underline text-[#1E2A4A] dark:text-white">actually love</span>.
+              <span className="hl-underline text-[#10182B] dark:text-white">actually love</span>.
             </h1>
 
-            <p className="text-lg sm:text-xl text-[#1E2A4A]/80 dark:text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-body">
+            <p className="text-lg sm:text-xl text-[#58647D] dark:text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-body">
               Say goodbye to boring study desks. Aesthetic pastel highlighters, active-recall flashcard rings, and Pomodoro planners designed to help you ace your exams.
             </p>
 
@@ -1630,31 +1606,31 @@ function AppContent() {
               </a>
             </div>
 
-            <div className="pt-4 flex items-center justify-center lg:justify-start gap-6 text-sm font-display font-medium text-[#1E2A4A]/80 dark:text-slate-300">
+            <div className="pt-4 flex items-center justify-center lg:justify-start gap-6 text-sm font-display font-medium text-[#58647D] dark:text-slate-300">
               <div className="flex items-center gap-1.5">
-                <span className="text-emerald-600 dark:text-emerald-400">✓</span> 100% Student Tested
+                <span className="text-[#00B887] font-bold">✓</span> 100% Student Tested
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="text-emerald-600 dark:text-emerald-400">✓</span> 2–5 Day Fast Delivery
+                <span className="text-[#00B887] font-bold">✓</span> 2–5 Day Fast Delivery
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="text-emerald-600 dark:text-emerald-400">✓</span> 7-Day Easy Returns
+                <span className="text-[#00B887] font-bold">✓</span> 7-Day Easy Returns
               </div>
             </div>
           </div>
 
           {/* Interactive Hero Showcase / Mockup Preview */}
           <div className="lg:col-span-5 flex justify-center">
-            <div className="doodle-card bg-[#CDE7FF] dark:bg-[#14233D] p-6 max-w-md w-full rotate-1 hover-lift">
+            <div className="doodle-card bg-[#FFFDF5] dark:bg-[#131D31] border border-[#F0E3B5] dark:border-slate-800 p-6 max-w-md w-full rotate-1 hover-lift shadow-[0_4px_16px_-2px_rgba(240,227,181,0.4),0_2px_6px_-1px_rgba(16,24,43,0.04)]">
               {/* Laptop / Desk screen header */}
-              <div className="flex items-center justify-between pb-4 border-b-2 border-[#1E2A4A] dark:border-slate-300">
+              <div className="flex items-center justify-between pb-4 border-b border-[#F0E3B5] dark:border-slate-700">
                 <div className="flex gap-1.5">
-                  <span className="w-3.5 h-3.5 rounded-full bg-[#FFD6E0] border border-[#1E2A4A] dark:border-slate-400" />
-                  <span className="w-3.5 h-3.5 rounded-full bg-[#FFC93C] border border-[#1E2A4A] dark:border-slate-400" />
-                  <span className="w-3.5 h-3.5 rounded-full bg-[#D8F3DC] border border-[#1E2A4A] dark:border-slate-400" />
+                  <span className="w-3.5 h-3.5 rounded-full bg-[#FFF0F5] border border-[#FFCCD9]" />
+                  <span className="w-3.5 h-3.5 rounded-full bg-[#FFD600] border border-[#E5C000]" />
+                  <span className="w-3.5 h-3.5 rounded-full bg-[#E9FFF5] border border-[#A7F3D0]" />
                 </div>
-                <span className="font-hand font-bold text-sm text-[#1E2A4A] dark:text-slate-200">studysprint.in/today</span>
-                <span className="text-xs bg-white dark:bg-[#0F172A] px-2 py-0.5 rounded-md border border-[#1E2A4A] dark:border-slate-300 text-[#1E2A4A] dark:text-slate-200">Live</span>
+                <span className="font-hand font-bold text-sm text-[#10182B] dark:text-slate-200">studysprint.in/today</span>
+                <span className="text-xs bg-[#FFF4C7] dark:bg-yellow-400/10 px-2 py-0.5 rounded-md border border-[#F0E3B5] dark:border-yellow-400/20 text-[#10182B] dark:text-yellow-400 font-semibold">Live</span>
               </div>
 
               {/* Fake Interactive Search Input (as requested in prompt) */}
@@ -1670,12 +1646,12 @@ function AppContent() {
                     }
                     window.location.hash = '#kits';
                   }}
-                  className="w-full bg-white dark:bg-[#0F172A] px-4 py-2.5 rounded-full border-2 border-[#1E2A4A] dark:border-slate-300 text-xs font-display text-[#1E2A4A] dark:text-slate-200 cursor-pointer hover:bg-amber-50 dark:hover:bg-slate-800"
+                  className="w-full bg-white dark:bg-[#0F172A] px-4 py-2.5 rounded-full border border-[#F0E3B5] dark:border-slate-700 text-xs font-display text-[#10182B] dark:text-slate-200 cursor-pointer hover:bg-[#FFFDF5] dark:hover:bg-slate-800 shadow-xs"
                 />
               </div>
 
               {/* Sample Floating Kit Showcase */}
-              <div className="mt-5 bg-white dark:bg-[#0F172A] p-5 rounded-xl border-2 border-[#1E2A4A] dark:border-slate-300 text-center space-y-3">
+              <div className="mt-5 bg-white dark:bg-[#0F172A] p-5 rounded-xl border border-[#F0E3B5] dark:border-slate-700 text-center space-y-3 shadow-xs">
                 <div className="w-full max-h-48 overflow-hidden rounded-lg">
                   <ProductImage
                     src={PRODUCTS[0].image}
@@ -1687,12 +1663,12 @@ function AppContent() {
                     showBadge={false}
                   />
                 </div>
-                <h2 className="font-display font-bold text-lg text-[#1E2A4A] dark:text-white">The Deep Focus Box</h2>
-                <p className="text-xs text-[#1E2A4A]/70 dark:text-slate-300">
+                <h2 className="font-display font-bold text-lg text-[#10182B] dark:text-white">The Deep Focus Box</h2>
+                <p className="text-xs text-[#58647D] dark:text-slate-300">
                   Includes 300 pastel stickies, 5 mild highlighters & Pomodoro tracker pad.
                 </p>
                 <div className="flex items-center justify-between pt-2">
-                  <span className="font-display font-bold text-xl text-emerald-700 dark:text-emerald-400">₹449</span>
+                  <span className="price-tag">₹449</span>
                   <button
                     onClick={() => addToCart(PRODUCTS[0])}
                     className="btn-doodle btn-primary px-4 py-1.5 text-sm"
@@ -1702,7 +1678,7 @@ function AppContent() {
                 </div>
               </div>
 
-              <div className="mt-4 flex justify-between items-center text-xs font-hand text-[#1E2A4A]/80 dark:text-slate-300 font-bold px-1">
+              <div className="mt-4 flex justify-between items-center text-xs font-hand text-[#58647D] dark:text-slate-300 font-bold px-1">
                 <span>⭐ 4.9/5 Rating (1,240+ students)</span>
                 <span>📦 Dispatched today</span>
               </div>
@@ -1714,15 +1690,15 @@ function AppContent() {
       {/* 2️⃣ KITS SECTION (WORKING SEARCH + CATEGORY FILTERS) */}
       <section id="kits" className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         <div className="text-center max-w-2xl mx-auto">
-          <span className="font-hand text-2xl text-amber-700 dark:text-amber-400 font-bold block">ready to pack</span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#1E2A4A] dark:text-white">
+          <span className="font-hand text-2xl text-[#FFC928] dark:text-yellow-400 font-bold block">ready to pack</span>
+          <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#10182B] dark:text-white">
             Curated Study Kits 📦
           </h2>
-          <p className="mt-3 opacity-75 dark:opacity-90 font-body text-base text-[#1E2A4A]/75 dark:text-slate-300">
+          <p className="mt-3 opacity-85 font-body text-base text-[#58647D] dark:text-slate-300">
             Pinned to the board… Picked for your grind.
           </p>
 
-          {/* Search + Category Filter Bar (Exact HTML structure matching prompt requirements) */}
+          {/* Search + Category Filter Bar */}
           <div className="max-w-3xl mx-auto mt-8">
             <div className="flex flex-col sm:flex-row gap-3 items-center justify-center">
               <input
@@ -1731,8 +1707,7 @@ function AppContent() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="🔍 Search 30 kits or items… (try 'planner' or 'bio')"
-                className="px-5 py-3 rounded-full bg-white dark:bg-[#1E293B] outline-none w-full sm:w-80 font-body text-sm text-[#1E2A4A] dark:text-slate-100 placeholder:text-slate-400"
-                style={{ border: theme === 'dark' ? '3px solid #CBD5E1' : '3px solid #1E2A4A' }}
+                className="px-5 py-3 rounded-full bg-white dark:bg-[#1E293B] border-2 border-[#F0E3B5] dark:border-slate-700 focus:border-[#FFD600] outline-none w-full sm:w-80 font-body text-sm text-[#10182B] dark:text-slate-100 placeholder:text-[#7B8498] shadow-xs"
                 aria-label="Search kits"
               />
               <div className="flex flex-wrap gap-2 justify-center" id="kit-filters">
@@ -1773,13 +1748,13 @@ function AppContent() {
 
             {/* Quick Search Tag Suggestions */}
             <div className="flex flex-wrap items-center justify-center gap-1.5 mt-4 text-xs font-display">
-              <span className="text-[#1E2A4A]/60 dark:text-slate-400 mr-1 font-semibold">Quick find:</span>
+              <span className="text-[#58647D] dark:text-slate-400 mr-1 font-semibold">Quick find:</span>
               {['Sticky Notes', 'Highlighters', 'Flashcards', 'Pomodoro', 'Bio', 'Planner'].map((tag) => (
                 <button
                   key={tag}
                   type="button"
                   onClick={() => setSearchQuery(tag.toLowerCase())}
-                  className="px-2.5 py-1 bg-white dark:bg-[#1E293B] hover:bg-amber-100 dark:hover:bg-slate-700 rounded-lg border border-[#1E2A4A]/30 dark:border-slate-600 text-[#1E2A4A]/80 dark:text-slate-200 transition-colors cursor-pointer"
+                  className="px-2.5 py-1 bg-white dark:bg-[#1E293B] hover:bg-[#FFF4B8] dark:hover:bg-slate-700 rounded-lg border border-[#F0E3B5] dark:border-slate-600 text-[#58647D] hover:text-[#10182B] dark:text-slate-200 transition-colors cursor-pointer shadow-2xs"
                 >
                   #{tag}
                 </button>
@@ -1796,16 +1771,16 @@ function AppContent() {
             </div>
 
             {/* Result count & sorting bar */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 mt-6 pt-4 border-t border-[#1E2A4A]/15 dark:border-slate-700 text-xs font-display">
-              <span className="text-[#1E2A4A]/75 dark:text-slate-300 font-semibold">
-                Showing <b className="text-[#1E2A4A] dark:text-white">{filteredProducts.length}</b> of {PRODUCTS.length} study kits
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 mt-6 pt-4 border-t border-[#F0E3B5] dark:border-slate-800 text-xs font-display">
+              <span className="text-[#58647D] dark:text-slate-300 font-semibold">
+                Showing <b className="text-[#10182B] dark:text-white">{filteredProducts.length}</b> of {PRODUCTS.length} study kits
               </span>
               <div className="flex items-center gap-2">
-                <span className="text-[#1E2A4A]/60 dark:text-slate-400">Sort by:</span>
+                <span className="text-[#58647D] dark:text-slate-400">Sort by:</span>
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as any)}
-                  className="bg-white dark:bg-[#1E293B] px-3 py-1.5 rounded-xl border-2 border-[#1E2A4A] dark:border-slate-300 font-display font-semibold outline-none cursor-pointer text-[#1E2A4A] dark:text-slate-100"
+                  className="bg-white dark:bg-[#1E293B] px-3 py-1.5 rounded-xl border border-[#F0E3B5] dark:border-slate-700 font-display font-semibold outline-none cursor-pointer text-[#10182B] dark:text-slate-100 shadow-2xs"
                 >
                   <option value="featured">✨ Featured</option>
                   <option value="bestsellers">⭐ Bestsellers First</option>
@@ -1821,31 +1796,31 @@ function AppContent() {
               if (!q || !funMode) return null;
               if (q.includes('procrastinat')) {
                 return (
-                  <div className="mt-3 p-3 bg-[#FFD6E0] dark:bg-[#381B2B] rounded-xl border-2 border-pink-400 text-xs font-body text-[#1E2A4A] dark:text-pink-100 flex items-center justify-between gap-2 animate-in fade-in">
+                  <div className="mt-3 p-3 bg-[#FFF0F5] dark:bg-[#381B2B] rounded-xl border border-[#FFCCD9] dark:border-pink-800 text-xs font-body text-[#10182B] dark:text-pink-100 flex items-center justify-between gap-2 animate-in fade-in">
                     <span><b>Search result:</b> We found exactly what you were looking for: a way to avoid studying. Unfortunately, we sell stationery. 🎨</span>
-                    <span className="font-display text-[10px] bg-pink-200 dark:bg-pink-900 px-2 py-0.5 rounded-full font-bold shrink-0">🥚 Egg Found!</span>
+                    <span className="font-display text-[10px] bg-[#FFD6E0] dark:bg-pink-900 text-[#10182B] px-2 py-0.5 rounded-full font-bold shrink-0">🥚 Egg Found!</span>
                   </div>
                 );
               }
               if (q.includes('coffee')) {
                 return (
-                  <div className="mt-3 p-3 bg-[#FFF2C6] dark:bg-[#2B2313] rounded-xl border-2 border-amber-400 text-xs font-body text-[#1E2A4A] dark:text-amber-100 flex items-center justify-between gap-2 animate-in fade-in">
+                  <div className="mt-3 p-3 bg-[#FFF9DF] dark:bg-[#2B2313] rounded-xl border border-[#F0E3B5] dark:border-amber-700 text-xs font-body text-[#10182B] dark:text-amber-100 flex items-center justify-between gap-2 animate-in fade-in">
                     <span><b>Coffee Protocol:</b> 0mg caffeine in paper, but 100% placebo boost when opening unblemished dot-grid notebooks! ☕</span>
-                    <span className="font-display text-[10px] bg-amber-200 dark:bg-amber-900 px-2 py-0.5 rounded-full font-bold shrink-0">🥚 Egg Found!</span>
+                    <span className="font-display text-[10px] bg-[#FFD600] text-[#10182B] px-2 py-0.5 rounded-full font-bold shrink-0">🥚 Egg Found!</span>
                   </div>
                 );
               }
               if (q.includes('exam')) {
                 return (
-                  <div className="mt-3 p-3 bg-[#CDE7FF] dark:bg-[#162D4A] rounded-xl border-2 border-blue-400 text-xs font-body text-[#1E2A4A] dark:text-blue-100 flex items-center justify-between gap-2 animate-in fade-in">
+                  <div className="mt-3 p-3 bg-[#FFF4C7] dark:bg-[#162D4A] rounded-xl border border-[#F0E3B5] dark:border-yellow-600 text-xs font-body text-[#10182B] dark:text-blue-100 flex items-center justify-between gap-2 animate-in fade-in">
                     <span><b>🚨 Exam Panic Detected:</b> Recommended student response: Panic responsibly, open fresh pastel highlighters. 📚</span>
-                    <span className="font-display text-[10px] bg-blue-200 dark:bg-blue-900 px-2 py-0.5 rounded-full font-bold shrink-0">🥚 Egg Found!</span>
+                    <span className="font-display text-[10px] bg-[#FFD600] text-[#10182B] px-2 py-0.5 rounded-full font-bold shrink-0">🥚 Egg Found!</span>
                   </div>
                 );
               }
               if (q.includes('homework')) {
                 return (
-                  <div className="mt-3 p-3 bg-[#D8F3DC] dark:bg-[#133020] rounded-xl border-2 border-emerald-400 text-xs font-body text-[#1E2A4A] dark:text-emerald-100 flex items-center justify-between gap-2 animate-in fade-in">
+                  <div className="mt-3 p-3 bg-[#E9FFF5] dark:bg-[#133020] rounded-xl border border-[#A7F3D0] dark:border-emerald-700 text-xs font-body text-[#10182B] dark:text-emerald-100 flex items-center justify-between gap-2 animate-in fade-in">
                     <span><b>Homework Alert:</b> Have you considered spending 3 hours color-coding the title instead of doing question 1? ✏️</span>
                   </div>
                 );
@@ -1858,7 +1833,7 @@ function AppContent() {
               id="no-results"
               className={`${
                 filteredProducts.length === 0 ? 'block' : 'hidden'
-              } text-center font-hand text-2xl mt-6 opacity-60 text-[#1E2A4A]/60 dark:text-slate-400`}
+              } text-center font-hand text-2xl mt-6 opacity-60 text-[#7B8498] dark:text-slate-400`}
             >
               no kits match… try &quot;cards&quot; or &quot;notes&quot; 🤔
             </p>
@@ -1870,7 +1845,7 @@ function AppContent() {
           {filteredProducts.map((p) => (
             <article
               key={p.id}
-              className={`doodle-card ${p.tilt} p-8 flex flex-col justify-between hover-lift cursor-default relative`}
+              className={`doodle-card ${p.tilt} p-6 sm:p-7 rounded-[18px] border border-[#F0E3B5] dark:border-slate-800 bg-white dark:bg-[#131D31] flex flex-col justify-between hover-lift cursor-default relative shadow-[0_4px_16px_-2px_rgba(240,227,181,0.4),0_2px_6px_-1px_rgba(16,24,43,0.04)]`}
               style={{ backgroundColor: getProductCardBg(p.color) }}
               data-id={p.id}
               onClick={() => recordProductInspection(p.id)}
@@ -1885,8 +1860,8 @@ function AppContent() {
                 }}
                 className={`absolute top-4 left-4 z-20 w-10 h-10 rounded-full flex items-center justify-center transition-all cursor-pointer active:scale-90 ${
                   isWishlisted(p.id)
-                    ? 'bg-rose-50 dark:bg-rose-950/90 text-rose-500 border-2 border-rose-500 shadow-[2px_2px_0_#f43f5e] scale-105'
-                    : 'bg-white/95 dark:bg-slate-800/95 text-slate-400 hover:text-rose-500 border-2 border-[#1E2A4A] dark:border-slate-400 shadow-[2px_2px_0_#1E2A4A] dark:shadow-[2px_2px_0_#000000] hover:scale-105'
+                    ? 'bg-[#FFF0F5] dark:bg-[#381B2B] text-[#FF719A] border-2 border-[#FF719A] shadow-xs scale-105'
+                    : 'bg-white/95 dark:bg-slate-800/95 text-[#7B8498] hover:text-[#FF719A] border border-[#F0E3B5] dark:border-slate-700 shadow-xs hover:scale-105'
                 }`}
                 aria-label={isWishlisted(p.id) ? `Remove ${p.name} from wishlist` : `Add ${p.name} to wishlist`}
                 title={isWishlisted(p.id) ? 'Saved in Wishlist ❤️' : 'Save for later 🤍'}
@@ -1898,8 +1873,7 @@ function AppContent() {
 
               {p.bestseller && (
                 <span
-                  className="absolute -top-4 -right-3 bg-[#FFC93C] text-[#1E2A4A] rounded-full px-4 py-1 font-display font-semibold rotate-6 text-sm shadow-[2px_2px_0_#1E2A4A] dark:shadow-[2px_2px_0_#000000]"
-                  style={{ border: theme === 'dark' ? '3px solid #CBD5E1' : '3px solid #1E2A4A' }}
+                  className="absolute -top-3.5 -right-2 bg-[#FFD600] text-[#10182B] rounded-full px-3.5 py-1 font-display font-bold text-xs border border-[#E5C000] rotate-6 shadow-xs"
                 >
                   ⭐ Bestseller
                 </span>
@@ -1917,13 +1891,13 @@ function AppContent() {
                     showBadge={true}
                   />
                 </div>
-                <span className="font-hand text-xl opacity-75 dark:opacity-90 font-semibold block text-[#1E2A4A] dark:text-amber-300">{p.tag}</span>
-                <h3 className="font-display font-bold text-2xl text-[#1E2A4A] dark:text-white mt-1">{p.name}</h3>
-                <p className="text-sm opacity-80 dark:opacity-90 mt-1 mb-4 leading-relaxed font-body text-[#1E2A4A] dark:text-slate-200">{p.blurb}</p>
+                <span className="font-hand text-xl opacity-80 dark:opacity-90 font-semibold block text-[#58647D] dark:text-yellow-400">{p.tag}</span>
+                <h3 className="font-display font-bold text-xl sm:text-2xl text-[#10182B] dark:text-white mt-1">{p.name}</h3>
+                <p className="text-sm text-[#58647D] dark:text-slate-300 mt-1 mb-4 leading-relaxed font-body">{p.blurb}</p>
 
                 <ul className="kit-check flex-1 mb-4 space-y-1">
                   {p.items.map((item, idx) => (
-                    <li key={idx} className="font-body text-[#1E2A4A]/90 dark:text-slate-200">{item}</li>
+                    <li key={idx} className="font-body text-[#58647D] dark:text-slate-200">{item}</li>
                   ))}
                 </ul>
 
@@ -1936,7 +1910,7 @@ function AppContent() {
                         e.stopPropagation();
                         openModal('compatibilityModal', { product: p });
                       }}
-                      className="px-2.5 py-1 bg-white/90 dark:bg-slate-800 hover:bg-emerald-50 dark:hover:bg-slate-700 text-[11px] font-display font-semibold rounded-lg border border-[#1E2A4A]/30 dark:border-slate-500 text-[#1E2A4A] dark:text-emerald-300 transition-all hover:scale-105 cursor-pointer flex items-center gap-1 shadow-2xs"
+                      className="px-2.5 py-1 bg-[#FFFDF5] dark:bg-slate-800 hover:bg-[#FFF4C7] dark:hover:bg-slate-700 text-[11px] font-display font-semibold rounded-lg border border-[#F0E3B5] dark:border-slate-700 text-[#10182B] dark:text-emerald-300 transition-all hover:scale-105 cursor-pointer flex items-center gap-1 shadow-2xs"
                       title="Check student compatibility percentage"
                     >
                       <span>🔍</span>
@@ -1948,7 +1922,7 @@ function AppContent() {
                         e.stopPropagation();
                         openModal('labModal', { product: p });
                       }}
-                      className="px-2.5 py-1 bg-white/90 dark:bg-slate-800 hover:bg-purple-50 dark:hover:bg-slate-700 text-[11px] font-display font-semibold rounded-lg border border-[#1E2A4A]/30 dark:border-slate-500 text-[#1E2A4A] dark:text-purple-300 transition-all hover:scale-105 cursor-pointer flex items-center gap-1 shadow-2xs"
+                      className="px-2.5 py-1 bg-[#FFFDF5] dark:bg-slate-800 hover:bg-[#FFF4C7] dark:hover:bg-slate-700 text-[11px] font-display font-semibold rounded-lg border border-[#F0E3B5] dark:border-slate-700 text-[#10182B] dark:text-purple-300 transition-all hover:scale-105 cursor-pointer flex items-center gap-1 shadow-2xs"
                       title="View RPG Stationery stats"
                     >
                       <span>🧪</span>
@@ -1958,7 +1932,7 @@ function AppContent() {
                 )}
               </div>
 
-              <div className="flex items-center justify-between mt-auto pt-4 border-t-2 border-[#1E2A4A]/15 dark:border-slate-700 gap-2">
+              <div className="flex items-center justify-between mt-auto pt-4 border-t border-[#F0E3B5] dark:border-slate-800 gap-2">
                 <span className="price-tag">₹{p.price}</span>
                 <div className="flex items-center gap-2">
                   {/* Secondary Heart Toggle Button beside Add to Cart */}
@@ -1968,10 +1942,10 @@ function AppContent() {
                       e.stopPropagation();
                       toggleWishlist(p);
                     }}
-                    className={`p-2 rounded-full border-2 transition-all cursor-pointer flex items-center justify-center text-sm ${
+                    className={`p-2 rounded-full border transition-all cursor-pointer flex items-center justify-center text-sm shadow-xs ${
                       isWishlisted(p.id)
-                        ? 'border-rose-500 text-rose-500 bg-rose-50 dark:bg-rose-950/80 shadow-[1px_1px_0_#f43f5e]'
-                        : 'border-[#1E2A4A]/40 dark:border-slate-500 text-slate-400 hover:text-rose-500 bg-white/70 dark:bg-slate-800/70'
+                        ? 'border-[#FF719A] text-[#FF719A] bg-[#FFF0F5] dark:bg-[#381B2B]'
+                        : 'border-[#F0E3B5] dark:border-slate-700 text-[#7B8498] hover:text-[#FF719A] bg-white dark:bg-slate-800'
                     }`}
                     title={isWishlisted(p.id) ? 'Remove from wishlist' : 'Save to wishlist'}
                     aria-label={isWishlisted(p.id) ? `Remove ${p.name} from wishlist` : `Save ${p.name} to wishlist`}
@@ -1993,16 +1967,16 @@ function AppContent() {
       </section>
 
       {/* CUSTOM KIT BUILDER SECTION */}
-      <section id="builder" className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full bg-[#FFFDF7] dark:bg-[#0B0F19] transition-colors">
-        <div className="doodle-card bg-[#FFF2C6] dark:bg-[#1A2234] p-8 md:p-12">
+      <section id="builder" className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full bg-[#FFF9E8] dark:bg-[#0B0F19] transition-colors">
+        <div className="doodle-card bg-[#FFF4C7] dark:bg-[#131D31] border border-[#F0E3B5] dark:border-slate-800 p-8 md:p-12 shadow-xs">
           <div className="text-center max-w-3xl mx-auto mb-10">
-            <span className="font-hand text-2xl text-amber-800 dark:text-amber-400 font-bold block">mix & match your grind</span>
-            <h2 className="font-display font-black text-3xl sm:text-4xl text-[#1E2A4A] dark:text-white">
+            <span className="font-hand text-2xl text-[#FFC928] dark:text-yellow-400 font-bold block">mix & match your grind</span>
+            <h2 className="font-display font-black text-3xl sm:text-4xl text-[#10182B] dark:text-white">
               🛠️ Build Your Own Custom Sprint Box
             </h2>
-            <p className="text-[#1E2A4A]/80 dark:text-slate-300 mt-2 font-body text-base">
+            <p className="text-[#58647D] dark:text-slate-300 mt-2 font-body text-base">
               Pick the exact items you need. Pick <b>5 or more items</b> to unlock our flat{' '}
-              <span className="font-display font-bold bg-[#FFC93C] text-[#1E2A4A] px-2 py-0.5 rounded-md border border-[#1E2A4A] dark:border-slate-300">
+              <span className="font-display font-bold bg-[#FFD600] text-[#10182B] px-2 py-0.5 rounded-md border border-[#E5C000]">
                 ₹499 Deal
               </span>{' '}
               (Save up to 40%)!
@@ -2016,10 +1990,10 @@ function AppContent() {
                 <div
                   key={item.id}
                   onClick={() => toggleBuilderItem(item.id)}
-                  className={`doodle-card p-4 cursor-pointer transition-all ${
+                  className={`doodle-card p-4 cursor-pointer transition-all border ${
                     isSelected
-                      ? 'ring-3 ring-[#1E2A4A] dark:ring-emerald-400 bg-[#D8F3DC] dark:bg-[#133020] translate-y-[-2px]'
-                      : 'bg-white dark:bg-[#0F172A] hover:bg-amber-50 dark:hover:bg-slate-800'
+                      ? 'ring-2 ring-[#FFD600] border-2 border-[#FFD600] bg-[#FFFDF5] dark:bg-[#1E293B] translate-y-[-2px] shadow-md'
+                      : 'border-[#F0E3B5] dark:border-slate-700 bg-white dark:bg-[#0F172A] hover:bg-[#FFFDF5] dark:hover:bg-slate-800 shadow-xs'
                   }`}
                 >
                   <div className="flex items-start justify-between gap-2">
@@ -2033,19 +2007,21 @@ function AppContent() {
                       />
                     </div>
                     <span
-                      className={`w-6 h-6 rounded-full border-2 border-[#1E2A4A] dark:border-slate-300 flex items-center justify-center font-bold text-xs shrink-0 ${
-                        isSelected ? 'bg-[#FFC93C] text-[#1E2A4A]' : 'bg-white dark:bg-slate-800 text-[#1E2A4A] dark:text-slate-200'
+                      className={`w-6 h-6 rounded-full border flex items-center justify-center font-bold text-xs shrink-0 ${
+                        isSelected
+                          ? 'bg-[#FFD600] text-[#10182B] border-[#E5C000]'
+                          : 'bg-white dark:bg-slate-800 text-[#58647D] dark:text-slate-200 border-[#F0E3B5] dark:border-slate-700'
                       }`}
                     >
                       {isSelected ? '✓' : '+'}
                     </span>
                   </div>
-                  <h4 className="font-display font-semibold text-base mt-2 text-[#1E2A4A] dark:text-white">
+                  <h4 className="font-display font-semibold text-base mt-2 text-[#10182B] dark:text-white">
                     {item.name}
                   </h4>
                   <div className="flex items-center justify-between mt-3 text-sm">
-                    <span className="text-xs text-[#1E2A4A]/60 dark:text-slate-400 font-medium">{item.category}</span>
-                    <span className="font-display font-bold text-emerald-800 dark:text-emerald-400">₹{item.price}</span>
+                    <span className="text-xs text-[#58647D] dark:text-slate-400 font-medium">{item.category}</span>
+                    <span className="font-display font-bold text-[#10182B] dark:text-yellow-400">₹{item.price}</span>
                   </div>
                 </div>
               );
@@ -2053,25 +2029,25 @@ function AppContent() {
           </div>
 
           {/* Builder Summary Bar */}
-          <div className="mt-8 bg-white dark:bg-[#0F172A] p-6 rounded-2xl border-3 border-[#1E2A4A] dark:border-slate-300 shadow-[4px_4px_0_#1E2A4A] dark:shadow-[4px_4px_0_#000000] flex flex-col md:flex-row items-center justify-between gap-6 text-[#1E2A4A] dark:text-slate-100">
+          <div className="mt-8 bg-white dark:bg-[#0F172A] p-6 rounded-2xl border border-[#F0E3B5] dark:border-slate-700 shadow-xs flex flex-col md:flex-row items-center justify-between gap-6 text-[#10182B] dark:text-slate-100">
             <div className="w-full md:w-auto">
               <div className="flex items-center gap-3">
-                <span className="font-display font-bold text-lg text-[#1E2A4A] dark:text-white">
+                <span className="font-display font-bold text-lg text-[#10182B] dark:text-white">
                   {selectedBuilderIds.length} items chosen
                 </span>
                 {isBuilderDealUnlocked ? (
-                  <span className="bg-[#D8F3DC] dark:bg-[#133020] text-emerald-900 dark:text-emerald-200 border border-[#1E2A4A] dark:border-slate-300 text-xs font-display font-bold px-2.5 py-1 rounded-full">
+                  <span className="bg-[#E9FFF5] dark:bg-[#133020] text-[#00B887] dark:text-emerald-200 border border-[#A7F3D0] dark:border-emerald-600 text-xs font-display font-bold px-2.5 py-1 rounded-full">
                     🎉 Flat ₹499 Unlocked!
                   </span>
                 ) : (
-                  <span className="text-xs font-hand text-amber-700 dark:text-amber-400 font-bold">
+                  <span className="text-xs font-hand text-[#FFC928] dark:text-yellow-400 font-bold">
                     Add {5 - selectedBuilderIds.length} more for ₹499 flat deal
                   </span>
                 )}
               </div>
-              <div className="w-full sm:w-64 bg-slate-100 dark:bg-slate-800 h-2.5 rounded-full border border-[#1E2A4A] dark:border-slate-300 overflow-hidden mt-2">
+              <div className="w-full sm:w-64 bg-[#FFF4C7] dark:bg-slate-800 h-2.5 rounded-full border border-[#F0E3B5] dark:border-slate-700 overflow-hidden mt-2">
                 <div
-                  className="bg-[#FFC93C] h-full transition-all duration-300"
+                  className="bg-[#FFD600] h-full transition-all duration-300"
                   style={{ width: `${Math.min(100, (selectedBuilderIds.length / 5) * 100)}%` }}
                 />
               </div>
@@ -2079,14 +2055,14 @@ function AppContent() {
 
             <div className="flex items-center gap-6 w-full md:w-auto justify-between md:justify-end">
               <div className="text-right">
-                <span className="text-xs text-[#1E2A4A]/70 dark:text-slate-400 block font-body">Custom Box Price</span>
+                <span className="text-xs text-[#58647D] dark:text-slate-400 block font-body">Custom Box Price</span>
                 <div className="flex items-center gap-2">
                   {isBuilderDealUnlocked && (
                     <span className="text-sm line-through text-red-500 font-bold">
                       ₹{rawBuilderTotal}
                     </span>
                   )}
-                  <span className="font-display font-bold text-2xl text-[#1E2A4A] dark:text-white">
+                  <span className="font-display font-bold text-2xl text-[#10182B] dark:text-white">
                     ₹{finalBuilderPrice}
                   </span>
                 </div>
@@ -2107,16 +2083,16 @@ function AppContent() {
       {/* REVIEWS SECTION (FUNNY & SELF-AWARE REVIEWS) */}
       <section id="reviews" className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <span className="font-hand text-2xl text-amber-700 dark:text-amber-400 font-bold block">
+          <span className="font-hand text-2xl text-[#FFC928] dark:text-yellow-400 font-bold block">
             wall of unverified claims 🤫
           </span>
-          <h2 className="font-display font-black text-3xl sm:text-4xl text-[#1E2A4A] dark:text-white">
+          <h2 className="font-display font-black text-3xl sm:text-4xl text-[#10182B] dark:text-white">
             Reviews From People Who Should Be Studying 😂
           </h2>
-          <p className="mt-2 text-[#1E2A4A]/70 dark:text-slate-300 text-sm sm:text-base font-body">
+          <p className="mt-2 text-[#58647D] dark:text-slate-300 text-sm sm:text-base font-body">
             We haven&apos;t raised $10M or paid famous influencers, so here are 100% genuine unfiltered thoughts from caffeine-fueled friends and 3 AM study survivors.
           </p>
-          <div className="mt-3 inline-flex items-center gap-2 bg-[#FFF2C6] dark:bg-[#1F2937] border-2 border-dashed border-[#1E2A4A] dark:border-slate-500 px-3.5 py-1 rounded-full text-xs font-hand text-[#1E2A4A] dark:text-amber-300 font-bold">
+          <div className="mt-3 inline-flex items-center gap-2 bg-[#FFF4C7] dark:bg-[#1F2937] border border-[#F0E3B5] dark:border-slate-600 px-3.5 py-1 rounded-full text-xs font-hand text-[#10182B] dark:text-yellow-300 font-bold">
             <span>⚠️ Disclaimer:</span>
             <span>Stationery cannot take your exams for you. We tried. It failed.</span>
           </div>
@@ -2135,10 +2111,10 @@ function AppContent() {
               key={tab.id}
               type="button"
               onClick={() => setReviewFilter(tab.id as any)}
-              className={`btn-doodle px-4 py-1.5 text-xs sm:text-sm cursor-pointer transition-all ${
+              className={`btn-doodle px-4 py-1.5 text-xs sm:text-sm cursor-pointer transition-all border ${
                 reviewFilter === tab.id
-                  ? 'bg-[#FFC93C] text-[#1E2A4A] font-bold scale-105'
-                  : 'bg-white dark:bg-[#162032] text-[#1E2A4A] dark:text-slate-200 hover:bg-amber-50 dark:hover:bg-slate-800'
+                  ? 'bg-[#FFD600] text-[#10182B] border-[#E5C000] font-bold scale-105 shadow-xs'
+                  : 'bg-white dark:bg-[#131D31] text-[#58647D] dark:text-slate-200 border-[#F0E3B5] dark:border-slate-700 hover:bg-[#FFFDF5] dark:hover:bg-slate-800'
               }`}
             >
               {tab.label}
@@ -2153,38 +2129,38 @@ function AppContent() {
             .map((r) => (
               <div
                 key={r.id}
-                className={`doodle-card bg-white dark:bg-[#162032] p-6 ${r.tilt} flex flex-col justify-between hover-lift transition-all`}
+                className={`doodle-card bg-white dark:bg-[#131D31] border border-[#F0E3B5] dark:border-slate-800 p-6 rounded-[18px] shadow-xs ${r.tilt} flex flex-col justify-between hover-lift transition-all`}
               >
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center gap-1 text-[#FFC93C] text-base">
+                    <div className="flex items-center gap-1 text-[#FFD600] text-base">
                       {Array.from({ length: r.rating }).map((_, i) => (
                         <span key={i}>⭐</span>
                       ))}
                     </div>
                     <span
-                      className={`${r.badgeBg} ${r.badgeText} text-xs font-display font-bold px-2.5 py-0.5 rounded-full border border-[#1E2A4A] dark:border-slate-400`}
+                      className={`${r.badgeBg} ${r.badgeText} text-xs font-display font-bold px-2.5 py-0.5 rounded-full border border-[#F0E3B5] dark:border-slate-700`}
                     >
                       {r.tag}
                     </span>
                   </div>
-                  <p className="text-sm text-[#1E2A4A]/90 dark:text-slate-200 italic font-body leading-relaxed">
+                  <p className="text-sm text-[#58647D] dark:text-slate-200 italic font-body leading-relaxed">
                     &quot;{r.text}&quot;
                   </p>
                 </div>
 
-                <div className="mt-5 pt-4 border-t border-[#1E2A4A]/10 dark:border-slate-700 flex items-center justify-between gap-3">
+                <div className="mt-5 pt-4 border-t border-[#F0E3B5] dark:border-slate-800 flex items-center justify-between gap-3">
                   <div className="flex items-center gap-3">
                     <div
-                      className={`w-10 h-10 rounded-full ${r.avatarBg} border-2 border-[#1E2A4A] dark:border-slate-300 flex items-center justify-center font-display font-bold text-sm text-[#1E2A4A] dark:text-white shrink-0`}
+                      className={`w-10 h-10 rounded-full ${r.avatarBg} border border-[#F0E3B5] dark:border-slate-700 flex items-center justify-center font-display font-bold text-sm text-[#10182B] dark:text-white shrink-0`}
                     >
                       {r.initials}
                     </div>
                     <div className="min-w-0">
-                      <b className="font-display text-sm block text-[#1E2A4A] dark:text-white truncate">
+                      <b className="font-display text-sm block text-[#10182B] dark:text-white truncate">
                         {r.name}
                       </b>
-                      <span className="text-xs text-[#1E2A4A]/60 dark:text-slate-400 block truncate">
+                      <span className="text-xs text-[#7B8498] dark:text-slate-400 block truncate">
                         {r.role}
                       </span>
                     </div>
@@ -2193,10 +2169,10 @@ function AppContent() {
                   <button
                     type="button"
                     onClick={() => toggleLikeReview(r.id)}
-                    className={`btn-doodle px-2.5 py-1 text-xs shrink-0 cursor-pointer transition-transform ${
+                    className={`btn-doodle px-2.5 py-1 text-xs shrink-0 cursor-pointer transition-transform border ${
                       likedReviews[r.id]
-                        ? 'bg-[#FFD6E0] dark:bg-[#431A2D] text-pink-700 dark:text-pink-200 font-bold scale-105'
-                        : 'bg-slate-50 dark:bg-slate-800 text-[#1E2A4A] dark:text-slate-300 hover:scale-105'
+                        ? 'bg-[#FFF0F5] dark:bg-[#431A2D] text-[#FF719A] dark:text-pink-200 border-[#FFCCD9] font-bold scale-105 shadow-xs'
+                        : 'bg-[#FFFDF5] dark:bg-slate-800 text-[#58647D] dark:text-slate-300 border-[#F0E3B5] dark:border-slate-700 hover:scale-105'
                     }`}
                     title="Mark as relatable"
                   >
@@ -2224,7 +2200,7 @@ function AppContent() {
               rollRandomExcuse();
               setReviewModalOpen(true);
             }}
-            className="btn-doodle btn-ghost px-5 py-2.5 text-sm sm:text-base inline-flex items-center gap-2 cursor-pointer hover:bg-amber-100 dark:hover:bg-slate-800"
+            className="btn-doodle btn-ghost px-5 py-2.5 text-sm sm:text-base inline-flex items-center gap-2 cursor-pointer hover:bg-[#FFFDF5] dark:hover:bg-slate-800"
           >
             <span>🎲 Roll a Random Student Excuse</span>
           </button>
@@ -2232,39 +2208,39 @@ function AppContent() {
       </section>
 
       {/* 3️⃣ DELIVERY & LIVE ORDER TRACKER SECTION */}
-      <section id="delivery" className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full bg-[#FFFDF7] dark:bg-[#0B0F19] transition-colors">
+      <section id="delivery" className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full bg-[#FFFDF5] dark:bg-[#0B0F19] transition-colors">
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <span className="font-hand text-2xl text-amber-700 dark:text-amber-400 font-bold block">from our desk to yours</span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#1E2A4A] dark:text-white">
+          <span className="font-hand text-2xl text-[#FFC928] dark:text-yellow-400 font-bold block">from our desk to yours</span>
+          <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#10182B] dark:text-white">
             Express Courier Delivery 🚚
           </h2>
-          <p className="mt-2 text-[#1E2A4A]/70 dark:text-slate-300">
+          <p className="mt-2 text-[#58647D] dark:text-slate-300">
             Speedy dispatch within 24 hours so you never lose your study momentum.
           </p>
         </div>
 
         {/* Checkpoint grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          <div className="doodle-card bg-white dark:bg-[#162032] p-6 text-center text-[#1E2A4A] dark:text-slate-100">
+          <div className="doodle-card bg-white dark:bg-[#131D31] border border-[#F0E3B5] dark:border-slate-800 p-6 rounded-[18px] text-center text-[#10182B] dark:text-slate-100 shadow-xs">
             <span className="text-4xl block mb-2">⚡</span>
-            <h4 className="font-display font-bold text-lg text-[#1E2A4A] dark:text-white">24h Express Dispatch</h4>
-            <p className="text-xs text-[#1E2A4A]/70 dark:text-slate-300 mt-1">Packaged with care and love from our Bangalore fulfillment hub.</p>
+            <h4 className="font-display font-bold text-lg text-[#10182B] dark:text-white">24h Express Dispatch</h4>
+            <p className="text-xs text-[#58647D] dark:text-slate-300 mt-1">Packaged with care and love from our Bangalore fulfillment hub.</p>
           </div>
-          <div className="doodle-card bg-white dark:bg-[#162032] p-6 text-center text-[#1E2A4A] dark:text-slate-100">
+          <div className="doodle-card bg-white dark:bg-[#131D31] border border-[#F0E3B5] dark:border-slate-800 p-6 rounded-[18px] text-center text-[#10182B] dark:text-slate-100 shadow-xs">
             <span className="text-4xl block mb-2">📱</span>
-            <h4 className="font-display font-bold text-lg text-[#1E2A4A] dark:text-white">Real-Time Tracking</h4>
-            <p className="text-xs text-[#1E2A4A]/70 dark:text-slate-300 mt-1">Live SMS updates and online tracker for every single parcel.</p>
+            <h4 className="font-display font-bold text-lg text-[#10182B] dark:text-white">Real-Time Tracking</h4>
+            <p className="text-xs text-[#58647D] dark:text-slate-300 mt-1">Live SMS updates and online tracker for every single parcel.</p>
           </div>
-          <div className="doodle-card bg-white dark:bg-[#162032] p-6 text-center text-[#1E2A4A] dark:text-slate-100">
+          <div className="doodle-card bg-white dark:bg-[#131D31] border border-[#F0E3B5] dark:border-slate-800 p-6 rounded-[18px] text-center text-[#10182B] dark:text-slate-100 shadow-xs">
             <span className="text-4xl block mb-2">🛡️</span>
-            <h4 className="font-display font-bold text-lg text-[#1E2A4A] dark:text-white">Damage-Free Guarantee</h4>
-            <p className="text-xs text-[#1E2A4A]/70 dark:text-slate-300 mt-1">Sturdy bubble wrap and rigid boxes ensure zero bent corners.</p>
+            <h4 className="font-display font-bold text-lg text-[#10182B] dark:text-white">Damage-Free Guarantee</h4>
+            <p className="text-xs text-[#58647D] dark:text-slate-300 mt-1">Sturdy bubble wrap and rigid boxes ensure zero bent corners.</p>
           </div>
         </div>
 
-        {/* Exact Order Tracker Block (Matching Requirement #3) */}
-        <div className="doodle-card bg-white dark:bg-[#162032] p-8 mt-14 max-w-xl mx-auto tilt-1 text-[#1E2A4A] dark:text-slate-100">
-          <h3 className="font-display font-semibold text-xl mb-4 text-center text-[#1E2A4A] dark:text-white">
+        {/* Exact Order Tracker Block */}
+        <div className="doodle-card bg-white dark:bg-[#131D31] border border-[#F0E3B5] dark:border-slate-800 p-8 rounded-[18px] mt-14 max-w-xl mx-auto shadow-xs text-[#10182B] dark:text-slate-100">
+          <h3 className="font-display font-semibold text-xl mb-4 text-center text-[#10182B] dark:text-white">
             📱 Track Your Order
           </h3>
           <form className="flex gap-3" onSubmit={handleTrackSubmit}>
@@ -2273,8 +2249,7 @@ function AppContent() {
               value={trackInput}
               onChange={(e) => setTrackInput(e.target.value)}
               placeholder="Enter Order ID (e.g. SS1234)"
-              className="flex-1 px-4 py-3 rounded-full bg-[#FFFDF7] dark:bg-[#0F172A] outline-none text-sm uppercase font-body text-[#1E2A4A] dark:text-slate-100"
-              style={{ border: theme === 'dark' ? '3px solid #CBD5E1' : '3px solid #1E2A4A' }}
+              className="flex-1 px-4 py-3 rounded-full bg-[#FFFDF5] dark:bg-[#0F172A] border-2 border-[#F0E3B5] dark:border-slate-700 focus:border-[#FFD600] outline-none text-sm uppercase font-body text-[#10182B] dark:text-slate-100 placeholder:text-[#7B8498] shadow-2xs"
               aria-label="Order ID"
             />
             <button type="submit" className="btn-doodle btn-primary px-5 py-2">
@@ -2286,18 +2261,18 @@ function AppContent() {
           <div id="track-result" className="mt-6">
             {trackSearched && (
               <>
-                {/* Playful Fictional Tracking Check Sequence (Requirement #7) */}
+                {/* Playful Fictional Tracking Check Sequence */}
                 {funMode && fictionalTrackingStep >= 0 && (
-                  <div className="mb-6 p-4 rounded-xl bg-amber-50 dark:bg-slate-900 border-2 border-amber-300 dark:border-amber-700 font-mono text-xs text-left animate-in fade-in">
-                    <div className="flex items-center justify-between border-b border-amber-200 dark:border-slate-700 pb-2 mb-2 font-display font-bold text-amber-900 dark:text-amber-300">
+                  <div className="mb-6 p-4 rounded-xl bg-[#FFF9DF] dark:bg-slate-900 border border-[#F0E3B5] dark:border-amber-700 font-mono text-xs text-left animate-in fade-in">
+                    <div className="flex items-center justify-between border-b border-[#F0E3B5] dark:border-slate-700 pb-2 mb-2 font-display font-bold text-[#10182B] dark:text-amber-300">
                       <span>🛰️ SCANNING ACADEMIC LOGISTICS...</span>
                       {fictionalTrackingStep < 6 ? (
-                        <span className="text-[10px] animate-pulse">SEARCHING...</span>
+                        <span className="text-[10px] animate-pulse text-[#FFC928]">SEARCHING...</span>
                       ) : (
-                        <span className="text-[10px] text-emerald-600 dark:text-emerald-400">COMPLETE ✓</span>
+                        <span className="text-[10px] text-[#00B887]">COMPLETE ✓</span>
                       )}
                     </div>
-                    <div className="space-y-1 text-slate-700 dark:text-slate-300">
+                    <div className="space-y-1 text-[#58647D] dark:text-slate-300">
                       {fictionalTrackingStep >= 0 && <p>✓ Locating Bangalore fulfillment warehouse...</p>}
                       {fictionalTrackingStep >= 1 && <p>✓ Checking pastel stationery inventory...</p>}
                       {fictionalTrackingStep >= 2 && <p>✓ Consulting delivery department speedsters...</p>}
@@ -2306,19 +2281,19 @@ function AppContent() {
                       {fictionalTrackingStep >= 5 && <p>✓ Searching for lost motivation...</p>}
                     </div>
                     {fictionalTrackingStep >= 6 && (
-                      <div className="mt-3 pt-2 border-t border-amber-200 dark:border-slate-700 font-body text-xs">
-                        <b className="font-display text-amber-900 dark:text-amber-200 block">STATUS:</b>
-                        <p className="italic text-slate-700 dark:text-slate-300">
+                      <div className="mt-3 pt-2 border-t border-[#F0E3B5] dark:border-slate-700 font-body text-xs">
+                        <b className="font-display text-[#10182B] dark:text-amber-200 block">STATUS:</b>
+                        <p className="italic text-[#58647D] dark:text-slate-300">
                           &quot;Your Study Kit is somewhere between &apos;Preparation&apos; and &apos;I should have started studying 3 weeks earlier.&apos;&quot;
                         </p>
-                        <p className="text-[11px] text-slate-500 mt-1">📍 Current Dimension: Academic Sector #7</p>
+                        <p className="text-[11px] text-[#7B8498] mt-1">📍 Current Dimension: Academic Sector #7</p>
                       </div>
                     )}
                   </div>
                 )}
 
                 {!trackedOrder ? (
-                  <p className="font-hand text-2xl text-center opacity-60 dark:opacity-80 text-[#1E2A4A]/60 dark:text-slate-400 pt-2">
+                  <p className="font-hand text-2xl text-center opacity-60 dark:opacity-80 text-[#7B8498] dark:text-slate-400 pt-2">
                     hmm… no order &quot;{trackInput || '???'}&quot; found 🤔<br />
                     <span className="text-lg">place an order to get your ID!</span>
                   </p>
@@ -2327,12 +2302,11 @@ function AppContent() {
                     const stage = getOrderStage(trackedOrder.ts);
                     return (
                       <div
-                        className="doodle-card bg-white dark:bg-[#0F172A] p-5 animate-in fade-in duration-300 text-[#1E2A4A] dark:text-slate-100"
-                        style={{ boxShadow: '3px 3px 0 rgba(0,0,0,.2)' }}
+                        className="doodle-card bg-white dark:bg-[#0F172A] border border-[#F0E3B5] dark:border-slate-700 p-5 rounded-2xl animate-in fade-in duration-300 text-[#10182B] dark:text-slate-100 shadow-xs"
                       >
-                        <div className="flex justify-between text-sm mb-3 border-b pb-2 border-[#1E2A4A]/10 dark:border-slate-700">
-                          <b className="font-display text-base text-[#1E2A4A] dark:text-white">{trackedOrder.id}</b>
-                          <span className="opacity-70 dark:opacity-85 text-xs sm:text-sm text-[#1E2A4A]/80 dark:text-slate-300">
+                        <div className="flex justify-between text-sm mb-3 border-b pb-2 border-[#F0E3B5] dark:border-slate-700">
+                          <b className="font-display text-base text-[#10182B] dark:text-white">{trackedOrder.id}</b>
+                          <span className="text-xs sm:text-sm text-[#58647D] dark:text-slate-300">
                             {trackedOrder.items} item(s) · ₹{trackedOrder.total} · {trackedOrder.pay}
                           </span>
                         </div>
@@ -2346,7 +2320,7 @@ function AppContent() {
                             <span className="dot">{i <= stage ? s.icon : ''}</span>
                             <span
                               className={`text-sm ${
-                                i === stage ? 'font-display font-semibold text-[#1E2A4A] dark:text-white' : 'text-[#1E2A4A]/80 dark:text-slate-300'
+                                i === stage ? 'font-display font-semibold text-[#10182B] dark:text-white' : 'text-[#58647D] dark:text-slate-300'
                               }`}
                             >
                               {s.label}
@@ -2354,13 +2328,13 @@ function AppContent() {
                             </span>
                           </div>
                         ))}
-                        <div className="h-3 rounded-full border-2 border-[#1E2A4A] dark:border-slate-300 overflow-hidden bg-white dark:bg-slate-800 mt-3">
+                        <div className="h-3 rounded-full border border-[#F0E3B5] dark:border-slate-700 overflow-hidden bg-[#FFF4C7] dark:bg-slate-800 mt-3">
                           <div
-                            className="h-full transition-all duration-700 bg-[#FFC93C]"
+                            className="h-full transition-all duration-700 bg-[#FFD600]"
                             style={{ width: `${((stage + 1) / 5) * 100}%` }}
                           />
                         </div>
-                        <p className="text-xs opacity-60 dark:opacity-80 mt-2 font-body text-center text-[#1E2A4A]/70 dark:text-slate-400">
+                        <p className="text-xs mt-2 font-body text-center text-[#7B8498] dark:text-slate-400">
                           {stage >= 4
                             ? '📍 Delivered! Happy studying ⚡'
                             : 'Demo: status advances ~1 step per minute after ordering.'}
@@ -2374,44 +2348,44 @@ function AppContent() {
           </div>
         </div>
 
-        <p className="text-center opacity-70 dark:opacity-80 mt-8 text-xs font-body text-[#1E2A4A]/70 dark:text-slate-400">
+        <p className="text-center mt-8 text-xs font-body text-[#7B8498] dark:text-slate-400">
           Need priority dispatch or bulk class orders? Reach out via our Contact modal in the footer.
         </p>
       </section>
 
       {/* ABOUT SECTION */}
       <section id="about" className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-        <div className="doodle-card bg-[#CDE7FF] dark:bg-[#14233D] p-8 sm:p-12 text-[#1E2A4A] dark:text-slate-100">
+        <div className="doodle-card bg-[#FFF4C7] dark:bg-[#131D31] border border-[#F0E3B5] dark:border-slate-800 p-8 sm:p-12 shadow-xs text-[#10182B] dark:text-slate-100">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div>
-              <span className="font-hand text-2xl text-blue-900 dark:text-blue-300 font-bold block">our small story</span>
-              <h2 className="font-display font-black text-3xl sm:text-4xl text-[#1E2A4A] dark:text-white mt-1">
+              <span className="font-hand text-2xl text-[#FFC928] dark:text-yellow-400 font-bold block">our small story</span>
+              <h2 className="font-display font-black text-3xl sm:text-4xl text-[#10182B] dark:text-white mt-1">
                 Stationery Made by Students, for Students 💡
               </h2>
-              <p className="mt-4 text-sm sm:text-base leading-relaxed text-[#1E2A4A]/80 dark:text-slate-200 font-body">
+              <p className="mt-4 text-sm sm:text-base leading-relaxed text-[#58647D] dark:text-slate-200 font-body">
                 StudySprint was born during late-night revision sessions in engineering hostel rooms. Tired of dull black pens, ink bleeding through cheap notebooks, and flimsy flashcards, we built what we wished existed: stationery that feels fun, cute, and genuinely boosts focus.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <span className="bg-white dark:bg-[#0F172A] border-2 border-[#1E2A4A] dark:border-slate-300 px-3.5 py-1.5 rounded-full text-xs font-display font-semibold text-[#1E2A4A] dark:text-slate-200">
+                <span className="bg-white dark:bg-[#0F172A] border border-[#F0E3B5] dark:border-slate-700 px-3.5 py-1.5 rounded-full text-xs font-display font-semibold text-[#10182B] dark:text-slate-200 shadow-2xs">
                   🌱 Eco-friendly Recycled Kraft Paper
                 </span>
-                <span className="bg-white dark:bg-[#0F172A] border-2 border-[#1E2A4A] dark:border-slate-300 px-3.5 py-1.5 rounded-full text-xs font-display font-semibold text-[#1E2A4A] dark:text-slate-200">
+                <span className="bg-white dark:bg-[#0F172A] border border-[#F0E3B5] dark:border-slate-700 px-3.5 py-1.5 rounded-full text-xs font-display font-semibold text-[#10182B] dark:text-slate-200 shadow-2xs">
                   ✏️ Zero-Bleed 100 GSM Paper
                 </span>
-                <span className="bg-white dark:bg-[#0F172A] border-2 border-[#1E2A4A] dark:border-slate-300 px-3.5 py-1.5 rounded-full text-xs font-display font-semibold text-[#1E2A4A] dark:text-slate-200">
+                <span className="bg-white dark:bg-[#0F172A] border border-[#F0E3B5] dark:border-slate-700 px-3.5 py-1.5 rounded-full text-xs font-display font-semibold text-[#10182B] dark:text-slate-200 shadow-2xs">
                   💌 Free Sticker Sheet in Every Box
                 </span>
               </div>
             </div>
 
             <div className="flex justify-center">
-              <div className="doodle-card bg-white dark:bg-[#0F172A] p-6 max-w-sm rotate-2 text-center text-[#1E2A4A] dark:text-slate-100">
+              <div className="doodle-card bg-white dark:bg-[#0F172A] border border-[#F0E3B5] dark:border-slate-700 p-6 max-w-sm rotate-2 text-center text-[#10182B] dark:text-slate-100 shadow-xs">
                 <div className="text-6xl mb-3">🎒📖</div>
-                <h4 className="font-display font-bold text-xl text-[#1E2A4A] dark:text-white">The StudySprint Pledge</h4>
-                <p className="text-xs text-[#1E2A4A]/70 dark:text-slate-300 mt-2 font-body leading-relaxed">
+                <h4 className="font-display font-bold text-xl text-[#10182B] dark:text-white">The StudySprint Pledge</h4>
+                <p className="text-xs text-[#58647D] dark:text-slate-300 mt-2 font-body leading-relaxed">
                   &quot;If any pen dries out prematurely or any kit item is defective, we send an instant replacement without asking you to ship it back.&quot;
                 </p>
-                <div className="mt-4 pt-3 border-t border-[#1E2A4A]/10 dark:border-slate-700 font-hand text-lg text-amber-800 dark:text-amber-400 font-bold">
+                <div className="mt-4 pt-3 border-t border-[#F0E3B5] dark:border-slate-700 font-hand text-lg text-[#FFC928] dark:text-yellow-400 font-bold">
                   — Sachin & Team StudySprint
                 </div>
               </div>
@@ -2421,18 +2395,19 @@ function AppContent() {
       </section>
 
       {/* FOOTER */}
-      <footer className="mt-auto bg-[#1E2A4A] dark:bg-[#060910] text-white py-12 px-4 sm:px-6 lg:px-8 border-t-4 border-[#FFC93C]">
+      <footer className="mt-auto bg-[#FFFDF5] dark:bg-[#0B1120] text-[#10182B] dark:text-slate-100 py-12 px-4 sm:px-6 lg:px-8 border-t-2 border-[#F0E3B5] dark:border-slate-800 transition-colors">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-center md:text-left">
             <div className="flex flex-col sm:flex-row items-center md:items-start gap-2 sm:gap-3">
-              <span className="font-display font-bold text-2xl tracking-tight text-[#FFC93C]">
-                StudySprint ⚡
+              <span className="font-display font-black text-2xl tracking-tight text-[#10182B] dark:text-white flex items-center gap-1">
+                <span>StudySprint</span>
+                <span className="text-[#FFD600]">⚡</span>
               </span>
               <a
                 href="https://www.linkedin.com/in/proffesionalsachin/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 hover:bg-[#FFC93C] text-xs font-display font-semibold text-white hover:text-[#1E2A4A] border border-white/20 transition-all hover:scale-105 shadow-sm"
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFF4C7] dark:bg-yellow-400/10 hover:bg-[#FFD600] text-xs font-display font-semibold text-[#10182B] dark:text-yellow-400 dark:hover:text-[#10182B] border border-[#F0E3B5] dark:border-yellow-400/20 transition-all hover:scale-105 shadow-2xs"
                 title="Sachin's LinkedIn Profile"
               >
                 <span>Store by Sachin</span>
@@ -2441,34 +2416,34 @@ function AppContent() {
                 </svg>
               </a>
             </div>
-            <p className="text-xs text-white/70 mt-1 font-body">
+            <p className="text-xs text-[#58647D] dark:text-slate-400 mt-1 font-body">
               Aesthetic stationery kits and active recall essentials for top scorers.
             </p>
           </div>
 
           {/* 5️⃣ Footer Links with working info modals */}
-          <div className="flex flex-wrap items-center justify-center gap-6 font-display text-sm font-medium">
-            <a href="#about" className="hover:text-[#FFC93C] transition-colors">
+          <div className="flex flex-wrap items-center justify-center gap-6 font-display text-sm font-medium text-[#58647D] dark:text-slate-300">
+            <a href="#about" className="hover:text-[#10182B] dark:hover:text-[#FFD600] transition-colors">
               About
             </a>
             <button
               type="button"
               onClick={() => openInfo('contact')}
-              className="hover:text-[#FFC93C] transition-colors cursor-pointer"
+              className="hover:text-[#10182B] dark:hover:text-[#FFD600] transition-colors cursor-pointer"
             >
               Contact
             </button>
             <button
               type="button"
               onClick={() => openInfo('faq')}
-              className="hover:text-[#FFC93C] transition-colors cursor-pointer"
+              className="hover:text-[#10182B] dark:hover:text-[#FFD600] transition-colors cursor-pointer"
             >
               FAQ
             </button>
             <button
               type="button"
               onClick={() => openInfo('shipping')}
-              className="hover:text-[#FFC93C] transition-colors cursor-pointer"
+              className="hover:text-[#10182B] dark:hover:text-[#FFD600] transition-colors cursor-pointer"
             >
               Shipping Policy
             </button>
@@ -2477,7 +2452,7 @@ function AppContent() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => discoverEasterEgg('footer_sachin_heart')}
-              className="text-[#FFC93C] hover:underline transition-colors inline-flex items-center gap-1"
+              className="text-[#FFC928] dark:text-yellow-400 hover:underline transition-colors inline-flex items-center gap-1 font-bold"
             >
               Store by Sachin ↗
             </a>
@@ -2485,20 +2460,20 @@ function AppContent() {
         </div>
 
         {/* Footer info area */}
-        <div className="max-w-7xl mx-auto mt-6 pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="text-xs text-white/60 dark:text-slate-400 font-body">
+        <div className="max-w-7xl mx-auto mt-6 pt-4 border-t border-[#F0E3B5] dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="text-xs text-[#7B8498] dark:text-slate-400 font-body">
             <span>StudySprint™ — Cute stationery that works 💡</span>
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto mt-4 pt-4 border-t border-white/5 text-center text-xs text-white/50 dark:text-slate-400 font-body flex flex-col sm:flex-row items-center justify-between gap-2">
+        <div className="max-w-7xl mx-auto mt-4 pt-4 border-t border-[#F0E3B5]/50 dark:border-slate-800/50 text-center text-xs text-[#7B8498] dark:text-slate-400 font-body flex flex-col sm:flex-row items-center justify-between gap-2">
           <span>Made for learners everywhere ✏️ 💖</span>
           <a
             href="https://www.linkedin.com/in/proffesionalsachin/"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => discoverEasterEgg('footer_sachin_heart')}
-            className="text-[#FFC93C] hover:underline font-medium inline-flex items-center gap-1"
+            className="text-[#FFC928] dark:text-yellow-400 hover:underline font-medium inline-flex items-center gap-1"
           >
             Store by Sachin ↗
           </a>
@@ -2508,17 +2483,17 @@ function AppContent() {
       {/* CART DRAWER */}
       {cartOpen && (
         <div
-          className="fixed inset-0 z-[105] flex justify-end bg-[#1E2A4A]/50 dark:bg-black/60 backdrop-blur-sm animate-in fade-in duration-200"
+          className="fixed inset-0 z-[105] flex justify-end bg-black/40 backdrop-blur-xs animate-in fade-in duration-200"
           onClick={() => setCartOpen(false)}
         >
           <div
-            className="bg-[#FFFDF7] dark:bg-[#0B0F19] w-full max-w-md h-full flex flex-col border-l-4 border-[#1E2A4A] dark:border-slate-300 shadow-2xl p-6 overflow-y-auto text-[#1E2A4A] dark:text-slate-100"
+            className="bg-[#FFFDF5] dark:bg-[#0B1120] w-full max-w-md h-full flex flex-col border-l-2 border-[#F0E3B5] dark:border-slate-800 shadow-2xl p-6 overflow-y-auto text-[#10182B] dark:text-slate-100"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between pb-4 border-b-2 border-[#1E2A4A] dark:border-slate-300">
+            <div className="flex items-center justify-between pb-4 border-b border-[#F0E3B5] dark:border-slate-700">
               <div className="flex items-center gap-2">
                 <span className="text-2xl">🛒</span>
-                <h3 className="font-display font-bold text-2xl text-[#1E2A4A] dark:text-white">Your Study Bag</h3>
+                <h3 className="font-display font-bold text-2xl text-[#10182B] dark:text-white">Your Study Bag</h3>
               </div>
               <button
                 type="button"
@@ -2532,9 +2507,9 @@ function AppContent() {
 
             {/* Cart Personality Box (Requirement #11) */}
             {funMode && (
-              <div className="my-3 p-3 rounded-xl border-2 border-[#1E2A4A]/20 dark:border-slate-700 bg-amber-50 dark:bg-slate-800/70 text-xs font-body animate-in fade-in">
+              <div className="my-3 p-3 rounded-xl border border-[#F0E3B5] dark:border-slate-700 bg-[#FFF4C7] dark:bg-slate-800/70 text-xs font-body animate-in fade-in">
                 <div className="flex items-center justify-between mb-0.5">
-                  <b className="font-display text-xs text-[#1E2A4A] dark:text-amber-300">
+                  <b className="font-display text-xs text-[#10182B] dark:text-yellow-300">
                     {cart.length === 0
                       ? CART_PERSONALITY_MESSAGES.empty.title
                       : cart.length === 1
@@ -2545,7 +2520,7 @@ function AppContent() {
                       ? CART_PERSONALITY_MESSAGES.heavy.title
                       : CART_PERSONALITY_MESSAGES.boss.title}
                   </b>
-                  <span className="text-[10px] font-display font-semibold bg-white dark:bg-slate-900 px-1.5 py-0.2 rounded border border-[#1E2A4A]/20 dark:border-slate-600">
+                  <span className="text-[10px] font-display font-semibold bg-white dark:bg-slate-900 px-1.5 py-0.2 rounded border border-[#F0E3B5] dark:border-slate-600">
                     {cart.length === 0
                       ? CART_PERSONALITY_MESSAGES.empty.tag
                       : cart.length === 1
@@ -2557,7 +2532,7 @@ function AppContent() {
                       : CART_PERSONALITY_MESSAGES.boss.tag}
                   </span>
                 </div>
-                <p className="text-[#1E2A4A]/70 dark:text-slate-300 italic text-[11px]">
+                <p className="text-[#58647D] dark:text-slate-300 italic text-[11px]">
                   {cart.length === 0
                     ? CART_PERSONALITY_MESSAGES.empty.subtitle
                     : cart.length === 1
@@ -2576,8 +2551,8 @@ function AppContent() {
               {cart.length === 0 ? (
                 <div className="text-center py-16">
                   <div className="text-6xl mb-3">🎒</div>
-                  <h4 className="font-display font-bold text-xl text-[#1E2A4A] dark:text-white">Your bag is empty</h4>
-                  <p className="text-xs text-[#1E2A4A]/70 dark:text-slate-300 mt-1 max-w-xs mx-auto">
+                  <h4 className="font-display font-bold text-xl text-[#10182B] dark:text-white">Your bag is empty</h4>
+                  <p className="text-xs text-[#58647D] dark:text-slate-300 mt-1 max-w-xs mx-auto">
                     Fill it with sticky notes, memory flashcards, or custom study bundles!
                   </p>
                   <button
@@ -2595,7 +2570,7 @@ function AppContent() {
                 cart.map((item) => (
                   <div
                     key={item.id}
-                    className="doodle-card bg-white dark:bg-[#162032] p-4 flex items-center justify-between gap-3 text-[#1E2A4A] dark:text-slate-100"
+                    className="doodle-card bg-white dark:bg-[#131D31] border border-[#F0E3B5] dark:border-slate-800 p-4 flex items-center justify-between gap-3 text-[#10182B] dark:text-slate-100 shadow-xs"
                   >
                     <div className="flex items-center gap-3 min-w-0">
                       <div className="w-12 h-12 shrink-0">
@@ -2608,14 +2583,14 @@ function AppContent() {
                         />
                       </div>
                       <div className="min-w-0">
-                        <b className="font-display text-sm text-[#1E2A4A] dark:text-white block leading-tight truncate">
+                        <b className="font-display text-sm text-[#10182B] dark:text-white block leading-tight truncate">
                           {item.name}
                         </b>
-                        <span className="font-display font-semibold text-emerald-700 dark:text-emerald-400 text-sm">
+                        <span className="font-display font-semibold text-[#10182B] dark:text-yellow-400 text-sm">
                           ₹{item.price} each
                         </span>
                         {item.customDetails && (
-                          <div className="text-[10px] text-[#1E2A4A]/60 dark:text-slate-400 mt-0.5 truncate">
+                          <div className="text-[10px] text-[#7B8498] dark:text-slate-400 mt-0.5 truncate">
                             {item.customDetails.slice(0, 2).join(', ')}...
                           </div>
                         )}
@@ -2623,11 +2598,11 @@ function AppContent() {
                     </div>
 
                     <div className="flex items-center gap-2">
-                      <div className="flex items-center border-2 border-[#1E2A4A] dark:border-slate-300 rounded-full overflow-hidden bg-slate-50 dark:bg-slate-800 text-[#1E2A4A] dark:text-slate-100">
+                      <div className="flex items-center border border-[#F0E3B5] dark:border-slate-700 rounded-full overflow-hidden bg-[#FFFDF5] dark:bg-slate-800 text-[#10182B] dark:text-slate-100">
                         <button
                           type="button"
                           onClick={() => updateCartQuantity(item.id, -1)}
-                          className="px-2.5 py-0.5 font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+                          className="px-2.5 py-0.5 font-bold hover:bg-[#FFF4C7] dark:hover:bg-slate-700 transition-colors"
                         >
                           -
                         </button>
@@ -2637,7 +2612,7 @@ function AppContent() {
                         <button
                           type="button"
                           onClick={() => updateCartQuantity(item.id, 1)}
-                          className="px-2.5 py-0.5 font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+                          className="px-2.5 py-0.5 font-bold hover:bg-[#FFF4C7] dark:hover:bg-slate-700 transition-colors"
                         >
                           +
                         </button>
@@ -2658,9 +2633,9 @@ function AppContent() {
 
             {/* Free shipping progress in cart */}
             {cart.length > 0 && (
-              <div className="bg-[#FFF2C6] dark:bg-[#252114] p-3 rounded-xl border-2 border-[#1E2A4A] dark:border-slate-300 mb-4 text-xs font-body text-[#1E2A4A] dark:text-slate-200">
+              <div className="bg-[#FFF4C7] dark:bg-[#252114] p-3 rounded-xl border border-[#F0E3B5] dark:border-slate-700 mb-4 text-xs font-body text-[#10182B] dark:text-slate-200">
                 {cartSubtotal >= 500 ? (
-                  <span className="font-display font-bold text-emerald-800 dark:text-emerald-300">
+                  <span className="font-display font-bold text-[#00B887] dark:text-emerald-300">
                     🎉 You unlocked FREE Shipping!
                   </span>
                 ) : (
@@ -2668,9 +2643,9 @@ function AppContent() {
                     Add <b>₹{500 - cartSubtotal}</b> more to get <b>FREE Shipping</b>!
                   </span>
                 )}
-                <div className="w-full bg-white dark:bg-slate-800 h-2 rounded-full border border-[#1E2A4A] dark:border-slate-300 overflow-hidden mt-1.5">
+                <div className="w-full bg-white dark:bg-slate-800 h-2 rounded-full border border-[#F0E3B5] dark:border-slate-700 overflow-hidden mt-1.5">
                   <div
-                    className="bg-[#FFC93C] h-full transition-all duration-300"
+                    className="bg-[#FFD600] h-full transition-all duration-300"
                     style={{ width: `${Math.min(100, (cartSubtotal / 500) * 100)}%` }}
                   />
                 </div>
@@ -2679,22 +2654,22 @@ function AppContent() {
 
             {/* Cart Footer */}
             {cart.length > 0 && (
-              <div className="pt-4 border-t-2 border-[#1E2A4A] dark:border-slate-300 space-y-3">
+              <div className="pt-4 border-t border-[#F0E3B5] dark:border-slate-700 space-y-3">
                 <div className="flex justify-between text-sm">
-                  <span className="text-[#1E2A4A]/70 dark:text-slate-300">Subtotal</span>
-                  <span className="font-display font-semibold text-[#1E2A4A] dark:text-white">₹{cartSubtotal}</span>
+                  <span className="text-[#58647D] dark:text-slate-300">Subtotal</span>
+                  <span className="font-display font-semibold text-[#10182B] dark:text-white">₹{cartSubtotal}</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-[#1E2A4A]/70 dark:text-slate-300">Delivery Fee</span>
+                  <span className="text-[#58647D] dark:text-slate-300">Delivery Fee</span>
                   <span className="font-display font-semibold">
                     {shippingFee === 0 ? (
-                      <span className="text-emerald-700 dark:text-emerald-400">FREE</span>
+                      <span className="text-[#00B887] font-bold">FREE</span>
                     ) : (
                       `₹${shippingFee}`
                     )}
                   </span>
                 </div>
-                <div className="flex justify-between text-lg font-display font-bold border-t border-[#1E2A4A]/10 dark:border-slate-700 pt-2 text-[#1E2A4A] dark:text-white">
+                <div className="flex justify-between text-lg font-display font-bold border-t border-[#F0E3B5] dark:border-slate-700 pt-2 text-[#10182B] dark:text-white">
                   <span>Total</span>
                   <span className="text-xl">₹{cartTotal}</span>
                 </div>
@@ -2712,17 +2687,16 @@ function AppContent() {
         </div>
       )}
 
-      {/* 4️⃣ CHECKOUT MODAL (EXACT STRUCTURE MATCHING PROMPT REQUIREMENT #4) */}
+      {/* 4️⃣ CHECKOUT MODAL */}
       <div
         id="checkout-modal"
         className={`fixed inset-0 z-[110] ${
           checkoutOpen ? 'flex' : 'hidden'
-        } items-center justify-center p-4`}
-        style={{ background: theme === 'dark' ? 'rgba(0,0,0,.7)' : 'rgba(30,42,74,.5)', backdropFilter: 'blur(4px)' }}
+        } items-center justify-center p-4 bg-black/50 backdrop-blur-xs`}
       >
-        <div className="doodle-card bg-[#FFFDF7] dark:bg-[#0F172A] max-w-lg w-full p-8 max-h-[90dvh] overflow-y-auto text-[#1E2A4A] dark:text-slate-100">
+        <div className="doodle-card bg-[#FFFDF5] dark:bg-[#0F172A] border-2 border-[#F0E3B5] dark:border-slate-700 max-w-lg w-full p-8 max-h-[90dvh] overflow-y-auto text-[#10182B] dark:text-slate-100 rounded-3xl shadow-xl">
           <div className="flex justify-between items-center mb-5">
-            <h3 className="font-display font-bold text-2xl text-[#1E2A4A] dark:text-white">Checkout 💳</h3>
+            <h3 className="font-display font-bold text-2xl text-[#10182B] dark:text-white">Checkout 💳</h3>
             <button
               type="button"
               className="btn-doodle btn-ghost px-3 py-1 cursor-pointer"
@@ -2739,7 +2713,7 @@ function AppContent() {
               value={ckName}
               onChange={(e) => setCkName(e.target.value)}
               placeholder="Full name"
-              className="w-full px-4 py-3 rounded-xl border-2 border-[#1E2A4A] dark:border-slate-300 bg-white dark:bg-[#1E293B] text-[#1E2A4A] dark:text-slate-100 dark:placeholder-slate-400 font-body outline-none"
+              className="w-full px-4 py-3 rounded-xl border-2 border-[#F0E3B5] dark:border-slate-700 focus:border-[#FFD600] bg-white dark:bg-[#1E293B] text-[#10182B] dark:text-slate-100 placeholder:text-[#7B8498] font-body outline-none"
               aria-label="Full name"
             />
             <input
@@ -2748,7 +2722,7 @@ function AppContent() {
               value={ckAddress}
               onChange={(e) => setCkAddress(e.target.value)}
               placeholder="Delivery address"
-              className="w-full px-4 py-3 rounded-xl border-2 border-[#1E2A4A] dark:border-slate-300 bg-white dark:bg-[#1E293B] text-[#1E2A4A] dark:text-slate-100 dark:placeholder-slate-400 font-body outline-none"
+              className="w-full px-4 py-3 rounded-xl border-2 border-[#F0E3B5] dark:border-slate-700 focus:border-[#FFD600] bg-white dark:bg-[#1E293B] text-[#10182B] dark:text-slate-100 placeholder:text-[#7B8498] font-body outline-none"
               aria-label="Address"
             />
             <input
@@ -2759,13 +2733,13 @@ function AppContent() {
               placeholder="Pincode"
               pattern="[0-9]{6}"
               maxLength={6}
-              className="w-full px-4 py-3 rounded-xl border-2 border-[#1E2A4A] dark:border-slate-300 bg-white dark:bg-[#1E293B] text-[#1E2A4A] dark:text-slate-100 dark:placeholder-slate-400 font-body outline-none"
+              className="w-full px-4 py-3 rounded-xl border-2 border-[#F0E3B5] dark:border-slate-700 focus:border-[#FFD600] bg-white dark:bg-[#1E293B] text-[#10182B] dark:text-slate-100 placeholder:text-[#7B8498] font-body outline-none"
               aria-label="Pincode"
             />
             <div>
-              <b className="font-display block mb-2 text-[#1E2A4A] dark:text-white">Payment method</b>
+              <b className="font-display block mb-2 text-[#10182B] dark:text-white">Payment method</b>
               <div className="grid grid-cols-2 gap-3">
-                <label className="doodle-card bg-[#CDE7FF] dark:bg-[#14233D] p-3 text-center cursor-pointer text-sm text-[#1E2A4A] dark:text-slate-100">
+                <label className={`doodle-card p-3 text-center cursor-pointer text-sm transition-all ${payMethod === 'UPI' ? 'border-2 border-[#FFD600] bg-[#FFF4C7] dark:bg-[#252114] text-[#10182B] font-bold shadow-xs' : 'border border-[#F0E3B5] dark:border-slate-700 bg-white dark:bg-[#14233D] text-[#58647D] dark:text-slate-100'}`}>
                   <input
                     type="radio"
                     name="pay"
@@ -2776,7 +2750,7 @@ function AppContent() {
                   />
                   📲 UPI
                 </label>
-                <label className="doodle-card bg-[#FFF2C6] dark:bg-[#252114] p-3 text-center cursor-pointer text-sm text-[#1E2A4A] dark:text-slate-100">
+                <label className={`doodle-card p-3 text-center cursor-pointer text-sm transition-all ${payMethod === 'Card' ? 'border-2 border-[#FFD600] bg-[#FFF4C7] dark:bg-[#252114] text-[#10182B] font-bold shadow-xs' : 'border border-[#F0E3B5] dark:border-slate-700 bg-white dark:bg-[#14233D] text-[#58647D] dark:text-slate-100'}`}>
                   <input
                     type="radio"
                     name="pay"
@@ -2787,7 +2761,7 @@ function AppContent() {
                   />
                   💳 Card
                 </label>
-                <label className="doodle-card bg-[#D8F3DC] dark:bg-[#12271C] p-3 text-center cursor-pointer text-sm text-[#1E2A4A] dark:text-slate-100">
+                <label className={`doodle-card p-3 text-center cursor-pointer text-sm transition-all ${payMethod === 'NetBanking' ? 'border-2 border-[#FFD600] bg-[#FFF4C7] dark:bg-[#252114] text-[#10182B] font-bold shadow-xs' : 'border border-[#F0E3B5] dark:border-slate-700 bg-white dark:bg-[#14233D] text-[#58647D] dark:text-slate-100'}`}>
                   <input
                     type="radio"
                     name="pay"
@@ -2798,7 +2772,7 @@ function AppContent() {
                   />
                   🏦 Net Banking
                 </label>
-                <label className="doodle-card bg-[#FFD6E0] dark:bg-[#291623] p-3 text-center cursor-pointer text-sm text-[#1E2A4A] dark:text-slate-100">
+                <label className={`doodle-card p-3 text-center cursor-pointer text-sm transition-all ${payMethod === 'COD' ? 'border-2 border-[#FFD600] bg-[#FFF4C7] dark:bg-[#252114] text-[#10182B] font-bold shadow-xs' : 'border border-[#F0E3B5] dark:border-slate-700 bg-white dark:bg-[#14233D] text-[#58647D] dark:text-slate-100'}`}>
                   <input
                     type="radio"
                     name="pay"
@@ -2812,21 +2786,20 @@ function AppContent() {
               </div>
             </div>
 
-            {/* ░░░ UPI PLACEHOLDER — wire Razorpay / UPI intent here ░░░ */}
+            {/* UPI PLACEHOLDER */}
             <div
               id="upi-box"
-              className={`doodle-card bg-[#CDE7FF] dark:bg-[#14233D] p-5 text-center text-[#1E2A4A] dark:text-slate-100 ${
+              className={`doodle-card bg-[#FFF9DF] dark:bg-[#14233D] border border-[#F0E3B5] dark:border-slate-700 p-5 text-center text-[#10182B] dark:text-slate-100 ${
                 payMethod === 'UPI' ? 'block' : 'hidden'
               }`}
             >
               <div
-                className="mx-auto w-32 h-32 bg-white dark:bg-[#0F172A] rounded-xl border-3 border-[#1E2A4A] dark:border-slate-300 grid place-items-center text-5xl mb-3 text-[#1E2A4A] dark:text-slate-100"
-                style={{ border: theme === 'dark' ? '3px dashed #CBD5E1' : '3px dashed #1E2A4A' }}
+                className="mx-auto w-32 h-32 bg-white dark:bg-[#0F172A] rounded-xl border-2 border-dashed border-[#F0E3B5] dark:border-slate-600 grid place-items-center text-5xl mb-3 text-[#10182B] dark:text-slate-100"
               >
                 ▦
               </div>
-              <p className="text-sm opacity-70 dark:opacity-85 mb-1 font-body">UPI QR / intent placeholder</p>
-              <p className="text-xs opacity-60 dark:opacity-80 mb-3 font-mono">
+              <p className="text-sm text-[#58647D] dark:text-slate-300 mb-1 font-body">UPI QR / intent placeholder</p>
+              <p className="text-xs text-[#7B8498] dark:text-slate-400 mb-3 font-mono">
                 Integrate Razorpay <code>upi://pay</code> intent here
               </p>
               <button
@@ -2839,14 +2812,13 @@ function AppContent() {
               </button>
               <p
                 id="upi-status"
-                className={`mt-2 font-display font-semibold text-emerald-800 dark:text-emerald-300 ${
+                className={`mt-2 font-display font-semibold text-[#00B887] dark:text-emerald-300 ${
                   upiPaid ? 'block' : 'hidden'
                 }`}
               >
                 ✅ Payment received (demo)
               </p>
             </div>
-            {/* ░░░ END UPI PLACEHOLDER ░░░ */}
 
             <div
               id="card-box"
@@ -2857,7 +2829,7 @@ function AppContent() {
                 onChange={(e) => setCardNumber(e.target.value)}
                 placeholder="Card number (demo)"
                 maxLength={19}
-                className="w-full px-4 py-3 rounded-xl border-2 border-[#1E2A4A] dark:border-slate-300 bg-white dark:bg-[#1E293B] text-[#1E2A4A] dark:text-slate-100 dark:placeholder-slate-400 font-body outline-none"
+                className="w-full px-4 py-3 rounded-xl border-2 border-[#F0E3B5] dark:border-slate-700 focus:border-[#FFD600] bg-white dark:bg-[#1E293B] text-[#10182B] dark:text-slate-100 placeholder:text-[#7B8498] font-body outline-none"
               />
               <div className="grid grid-cols-2 gap-3">
                 <input
@@ -2865,7 +2837,7 @@ function AppContent() {
                   onChange={(e) => setCardExpiry(e.target.value)}
                   placeholder="MM/YY"
                   maxLength={5}
-                  className="px-4 py-3 rounded-xl border-2 border-[#1E2A4A] dark:border-slate-300 bg-white dark:bg-[#1E293B] text-[#1E2A4A] dark:text-slate-100 dark:placeholder-slate-400 font-body outline-none"
+                  className="px-4 py-3 rounded-xl border-2 border-[#F0E3B5] dark:border-slate-700 focus:border-[#FFD600] bg-white dark:bg-[#1E293B] text-[#10182B] dark:text-slate-100 placeholder:text-[#7B8498] font-body outline-none"
                 />
                 <input
                   value={cardCvv}
@@ -2873,12 +2845,12 @@ function AppContent() {
                   placeholder="CVV"
                   maxLength={3}
                   type="password"
-                  className="px-4 py-3 rounded-xl border-2 border-[#1E2A4A] dark:border-slate-300 bg-white dark:bg-[#1E293B] text-[#1E2A4A] dark:text-slate-100 dark:placeholder-slate-400 font-body outline-none"
+                  className="px-4 py-3 rounded-xl border-2 border-[#F0E3B5] dark:border-slate-700 focus:border-[#FFD600] bg-white dark:bg-[#1E293B] text-[#10182B] dark:text-slate-100 placeholder:text-[#7B8498] font-body outline-none"
                 />
               </div>
             </div>
 
-            <div className="flex justify-between font-display font-bold text-lg pt-2 text-[#1E2A4A] dark:text-white">
+            <div className="flex justify-between font-display font-bold text-lg pt-2 text-[#10182B] dark:text-white">
               <span>Order Total</span>
               <span id="checkout-total">₹{cartTotal}</span>
             </div>
@@ -2897,17 +2869,16 @@ function AppContent() {
         id="success-modal"
         className={`fixed inset-0 z-[115] ${
           successModalOpen ? 'flex' : 'hidden'
-        } items-center justify-center p-4`}
-        style={{ background: theme === 'dark' ? 'rgba(0,0,0,.7)' : 'rgba(30,42,74,.5)', backdropFilter: 'blur(4px)' }}
+        } items-center justify-center p-4 bg-black/50 backdrop-blur-xs`}
       >
-        <div className="doodle-card bg-[#D8F3DC] dark:bg-[#12271C] max-w-md w-full p-10 text-center animate-in zoom-in-95 duration-200 text-[#1E2A4A] dark:text-emerald-100">
+        <div className="doodle-card bg-[#FFFDF5] dark:bg-[#12271C] border-2 border-[#F0E3B5] dark:border-emerald-800 max-w-md w-full p-8 sm:p-10 text-center animate-in zoom-in-95 duration-200 text-[#10182B] dark:text-emerald-100 rounded-3xl shadow-xl">
           <div className="text-6xl mb-3">🎉</div>
-          <h3 className="font-display font-bold text-2xl text-[#1E2A4A] dark:text-white">Order Placed!</h3>
-          <p className="mt-2 opacity-80 font-body text-[#1E2A4A] dark:text-slate-200">Order ID:</p>
-          <p id="success-order-id" className="font-display font-bold text-3xl my-2 hl-underline text-[#1E2A4A] dark:text-white">
+          <h3 className="font-display font-bold text-2xl text-[#10182B] dark:text-white">Order Placed!</h3>
+          <p className="mt-2 text-[#58647D] font-body dark:text-slate-200">Order ID:</p>
+          <p id="success-order-id" className="font-display font-bold text-3xl my-2 hl-underline text-[#10182B] dark:text-white">
             {lastOrderId || 'SS0000'}
           </p>
-          <p className="text-sm opacity-70 dark:opacity-85 mb-6 font-body text-[#1E2A4A] dark:text-slate-200">
+          <p className="text-sm text-[#7B8498] dark:text-slate-300 mb-6 font-body">
             Save this ID to track your delivery 🚚
           </p>
           <div className="flex gap-3 justify-center">
@@ -2939,16 +2910,15 @@ function AppContent() {
         id="info-modal"
         className={`fixed inset-0 z-[110] ${
           infoModalData ? 'flex' : 'hidden'
-        } items-center justify-center p-4`}
-        style={{ background: theme === 'dark' ? 'rgba(0,0,0,.7)' : 'rgba(30,42,74,.5)', backdropFilter: 'blur(4px)' }}
+        } items-center justify-center p-4 bg-black/50 backdrop-blur-xs`}
         onClick={() => setInfoModalData(null)}
       >
         <div
-          className="doodle-card bg-[#FFFDF7] dark:bg-[#0F172A] max-w-lg w-full p-8 max-h-[85dvh] overflow-y-auto animate-in zoom-in-95 duration-150 text-[#1E2A4A] dark:text-slate-100"
+          className="doodle-card bg-[#FFFDF5] dark:bg-[#0F172A] border-2 border-[#F0E3B5] dark:border-slate-700 max-w-lg w-full p-8 max-h-[85dvh] overflow-y-auto animate-in zoom-in-95 duration-150 text-[#10182B] dark:text-slate-100 rounded-3xl shadow-xl"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex justify-between items-center mb-4">
-            <h3 id="info-title" className="font-display font-bold text-2xl text-[#1E2A4A] dark:text-white">
+            <h3 id="info-title" className="font-display font-bold text-2xl text-[#10182B] dark:text-white">
               {infoModalData?.title}
             </h3>
             <button
@@ -2960,7 +2930,7 @@ function AppContent() {
               ✕
             </button>
           </div>
-          <div id="info-body" className="space-y-3 text-sm leading-relaxed font-body text-[#1E2A4A] dark:text-slate-200">
+          <div id="info-body" className="space-y-3 text-sm leading-relaxed font-body text-[#58647D] dark:text-slate-200">
             {infoModalData?.content}
           </div>
         </div>
@@ -2971,23 +2941,19 @@ function AppContent() {
         id="review-modal"
         className={`fixed inset-0 z-[110] ${
           reviewModalOpen ? 'flex' : 'hidden'
-        } items-center justify-center p-4`}
-        style={{
-          background: theme === 'dark' ? 'rgba(0,0,0,.75)' : 'rgba(30,42,74,.55)',
-          backdropFilter: 'blur(4px)',
-        }}
+        } items-center justify-center p-4 bg-black/50 backdrop-blur-xs`}
         onClick={() => setReviewModalOpen(false)}
       >
         <div
-          className="doodle-card bg-[#FFFDF7] dark:bg-[#0F172A] max-w-xl w-full p-6 sm:p-8 max-h-[90dvh] overflow-y-auto animate-in zoom-in-95 duration-150 text-[#1E2A4A] dark:text-slate-100"
+          className="doodle-card bg-[#FFFDF5] dark:bg-[#0F172A] border-2 border-[#F0E3B5] dark:border-slate-700 max-w-xl w-full p-6 sm:p-8 max-h-[90dvh] overflow-y-auto animate-in zoom-in-95 duration-150 text-[#10182B] dark:text-slate-100 rounded-3xl shadow-xl"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex justify-between items-start mb-4">
             <div>
-              <span className="font-hand text-lg text-amber-700 dark:text-amber-400 font-bold block">
+              <span className="font-hand text-lg text-[#FFC928] dark:text-yellow-400 font-bold block">
                 admit your study sins 🙈
               </span>
-              <h3 className="font-display font-black text-2xl sm:text-3xl text-[#1E2A4A] dark:text-white">
+              <h3 className="font-display font-black text-2xl sm:text-3xl text-[#10182B] dark:text-white">
                 Submit A Dubious Review ✍️
               </h3>
             </div>
@@ -3001,20 +2967,20 @@ function AppContent() {
             </button>
           </div>
 
-          <p className="text-xs sm:text-sm text-[#1E2A4A]/80 dark:text-slate-300 font-body mb-5">
+          <p className="text-xs sm:text-sm text-[#58647D] dark:text-slate-300 font-body mb-5">
             Real corporate reviews are boring. Confess your stationery crimes, 3 AM study delusions, or accidental artistic masterpieces!
           </p>
 
           {/* Quick random generator banner */}
-          <div className="bg-[#FFF2C6] dark:bg-[#1E293B] border-2 border-dashed border-[#1E2A4A] dark:border-slate-500 rounded-xl p-3.5 mb-5 flex items-center justify-between gap-3">
-            <div className="text-xs font-body text-[#1E2A4A] dark:text-slate-200">
+          <div className="bg-[#FFF4C7] dark:bg-[#1E293B] border border-[#F0E3B5] dark:border-slate-600 rounded-xl p-3.5 mb-5 flex items-center justify-between gap-3 shadow-2xs">
+            <div className="text-xs font-body text-[#10182B] dark:text-slate-200">
               <span className="font-bold block">Feeling uninspired?</span>
               <span className="opacity-80">Generate a relatable student study excuse in 1 tap.</span>
             </div>
             <button
               type="button"
               onClick={rollRandomExcuse}
-              className="btn-doodle bg-white dark:bg-slate-700 text-[#1E2A4A] dark:text-white px-3 py-1 text-xs shrink-0 cursor-pointer font-display"
+              className="btn-doodle bg-white dark:bg-slate-700 text-[#10182B] dark:text-white border border-[#F0E3B5] dark:border-slate-600 px-3 py-1 text-xs shrink-0 cursor-pointer font-display shadow-2xs"
             >
               🎲 Roll Random
             </button>
@@ -3023,7 +2989,7 @@ function AppContent() {
           <form onSubmit={handleReviewSubmit} className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-display font-bold mb-1 text-[#1E2A4A] dark:text-slate-200">
+                <label className="block text-xs font-display font-bold mb-1 text-[#10182B] dark:text-slate-200">
                   Your Name / Alter Ego *
                 </label>
                 <input
@@ -3031,26 +2997,26 @@ function AppContent() {
                   value={reviewForm.name}
                   onChange={(e) => setReviewForm({ ...reviewForm, name: e.target.value })}
                   placeholder="e.g. Kabir D. or Sleepy Crammer"
-                  className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[#1E2A4A] dark:border-slate-300 bg-white dark:bg-[#1E293B] text-[#1E2A4A] dark:text-slate-100 text-sm font-body outline-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[#F0E3B5] dark:border-slate-700 focus:border-[#FFD600] bg-white dark:bg-[#1E293B] text-[#10182B] dark:text-slate-100 placeholder:text-[#7B8498] text-sm font-body outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-display font-bold mb-1 text-[#1E2A4A] dark:text-slate-200">
+                <label className="block text-xs font-display font-bold mb-1 text-[#10182B] dark:text-slate-200">
                   College / Major / Life Situation
                 </label>
                 <input
                   value={reviewForm.role}
                   onChange={(e) => setReviewForm({ ...reviewForm, role: e.target.value })}
                   placeholder="e.g. CA Finalist · Overthinking Dept"
-                  className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[#1E2A4A] dark:border-slate-300 bg-white dark:bg-[#1E293B] text-[#1E2A4A] dark:text-slate-100 text-sm font-body outline-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[#F0E3B5] dark:border-slate-700 focus:border-[#FFD600] bg-white dark:bg-[#1E293B] text-[#10182B] dark:text-slate-100 placeholder:text-[#7B8498] text-sm font-body outline-none"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-display font-bold mb-1 text-[#1E2A4A] dark:text-slate-200">
+                <label className="block text-xs font-display font-bold mb-1 text-[#10182B] dark:text-slate-200">
                   Review Category
                 </label>
                 <select
@@ -3061,7 +3027,7 @@ function AppContent() {
                       category: e.target.value as any,
                     })
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[#1E2A4A] dark:border-slate-300 bg-white dark:bg-[#1E293B] text-[#1E2A4A] dark:text-slate-100 text-sm font-body outline-none cursor-pointer"
+                  className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[#F0E3B5] dark:border-slate-700 focus:border-[#FFD600] bg-white dark:bg-[#1E293B] text-[#10182B] dark:text-slate-100 text-sm font-body outline-none cursor-pointer"
                 >
                   <option value="aesthetic">🎨 Aesthetic Fails</option>
                   <option value="procrastination">⏱️ Pomodoro Excuses</option>
@@ -3071,20 +3037,20 @@ function AppContent() {
               </div>
 
               <div>
-                <label className="block text-xs font-display font-bold mb-1 text-[#1E2A4A] dark:text-slate-200">
+                <label className="block text-xs font-display font-bold mb-1 text-[#10182B] dark:text-slate-200">
                   Tag Badge
                 </label>
                 <input
                   value={reviewForm.tag}
                   onChange={(e) => setReviewForm({ ...reviewForm, tag: e.target.value })}
                   placeholder="e.g. 🎨 Aesthetic Failure, ☕ 400mg Caffeine"
-                  className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[#1E2A4A] dark:border-slate-300 bg-white dark:bg-[#1E293B] text-[#1E2A4A] dark:text-slate-100 text-sm font-body outline-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[#F0E3B5] dark:border-slate-700 focus:border-[#FFD600] bg-white dark:bg-[#1E293B] text-[#10182B] dark:text-slate-100 placeholder:text-[#7B8498] text-sm font-body outline-none"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-display font-bold mb-1 text-[#1E2A4A] dark:text-slate-200">
+              <label className="block text-xs font-display font-bold mb-1 text-[#10182B] dark:text-slate-200">
                 Your Dubious Review / Study Excuse *
               </label>
               <textarea
@@ -3093,14 +3059,14 @@ function AppContent() {
                 value={reviewForm.text}
                 onChange={(e) => setReviewForm({ ...reviewForm, text: e.target.value })}
                 placeholder="Tell us what actually happened when you bought study supplies..."
-                className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[#1E2A4A] dark:border-slate-300 bg-white dark:bg-[#1E293B] text-[#1E2A4A] dark:text-slate-100 text-sm font-body outline-none"
+                className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[#F0E3B5] dark:border-slate-700 focus:border-[#FFD600] bg-white dark:bg-[#1E293B] text-[#10182B] dark:text-slate-100 placeholder:text-[#7B8498] text-sm font-body outline-none"
               />
             </div>
 
             <div className="flex items-center justify-between pt-1">
-              <div className="flex items-center gap-1.5 text-xs text-[#1E2A4A]/80 dark:text-slate-300 font-display">
+              <div className="flex items-center gap-1.5 text-xs text-[#58647D] dark:text-slate-300 font-display">
                 <span>Rating:</span>
-                <span className="text-[#FFC93C] text-base">⭐⭐⭐⭐⭐</span>
+                <span className="text-[#FFD600] text-base">⭐⭐⭐⭐⭐</span>
                 <span className="text-[11px] opacity-70 font-hand">(5 stars mandatory by Dean&apos;s decree)</span>
               </div>
             </div>

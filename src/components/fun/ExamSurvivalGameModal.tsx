@@ -146,25 +146,25 @@ export const ExamSurvivalGameModal: React.FC = () => {
       aria-modal="true"
     >
       <div
-        className="doodle-card bg-[#FFFDF7] dark:bg-[#162032] max-w-lg w-full p-6 text-[#1E2A4A] dark:text-slate-100 animate-in zoom-in-95 duration-200 select-none"
+        className="doodle-card bg-[#FFFDF5] dark:bg-[#131D31] max-w-lg w-full p-6 text-[#10182B] dark:text-slate-100 animate-in zoom-in-95 duration-200 select-none border-2 border-[#F0E3B5] dark:border-slate-800"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex justify-between items-center pb-3 border-b-2 border-[#1E2A4A]/10 dark:border-slate-700">
+        <div className="flex justify-between items-center pb-3 border-b-2 border-[#F0E3B5] dark:border-slate-800">
           <div>
             <div className="flex items-center gap-2">
               <span className="text-2xl">⚡</span>
-              <h3 className="font-display font-bold text-xl text-[#1E2A4A] dark:text-white">
+              <h3 className="font-display font-bold text-xl text-[#10182B] dark:text-white">
                 Exam Survival Reflex
               </h3>
             </div>
-            <p className="text-xs text-[#1E2A4A]/70 dark:text-slate-300">
+            <p className="text-xs text-[#58647D] dark:text-slate-300">
               Click study items quickly! Avoid distractions!
             </p>
           </div>
           <button
             type="button"
             onClick={closeModal}
-            className="w-7 h-7 rounded-full border-2 border-[#1E2A4A] dark:border-slate-300 flex items-center justify-center font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+            className="w-8 h-8 rounded-full border border-[#F0E3B5] dark:border-slate-700 bg-white dark:bg-slate-800 flex items-center justify-center font-bold text-[#10182B] dark:text-white hover:bg-[#FFF4C7] dark:hover:bg-slate-700 transition-colors cursor-pointer"
             aria-label="Close"
           >
             ×
@@ -172,19 +172,19 @@ export const ExamSurvivalGameModal: React.FC = () => {
         </div>
 
         {/* HUD */}
-        <div className="flex items-center justify-between my-3 px-3 py-2 bg-pink-50 dark:bg-[#2D1627] rounded-xl border border-pink-200 dark:border-pink-900/60 font-display text-sm">
+        <div className="flex items-center justify-between my-3 px-3 py-2 bg-[#FFF4C7] dark:bg-[#1A263F] rounded-xl border border-[#F0E3B5] dark:border-slate-700 font-display text-sm text-[#10182B] dark:text-slate-200">
           <span>⏱️ Time: <b>{timeLeft}s</b></span>
-          <span>📚 Study Items: <b className="text-emerald-600 dark:text-emerald-400">{studyCollected}</b></span>
-          <span>⚠️ Traps: <b className="text-rose-500">{distractionsClicked}</b></span>
+          <span>📚 Study Items: <b className="text-[#00B887] dark:text-emerald-400">{studyCollected}</b></span>
+          <span>⚠️ Traps: <b className="text-[#FF719A]">{distractionsClicked}</b></span>
         </div>
 
         {/* Game Arena */}
-        <div className="relative w-full h-72 bg-[#FFFDF7] dark:bg-[#0B0F19] rounded-2xl border-3 border-[#1E2A4A] dark:border-slate-600 overflow-hidden shadow-inner">
+        <div className="relative w-full h-72 bg-[#FFFDF5] dark:bg-[#0B0F19] rounded-2xl border-2 border-[#F0E3B5] dark:border-slate-700 overflow-hidden shadow-inner">
           {gameState === 'idle' && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-white/90 dark:bg-[#162032]/90 backdrop-blur-xs z-20">
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-[#FFFDF5]/95 dark:bg-[#131D31]/95 backdrop-blur-xs z-20">
               <div className="text-5xl mb-2">🎯</div>
-              <h4 className="font-display font-bold text-lg mb-1">Survive The Exam Sprint!</h4>
-              <p className="font-body text-xs text-slate-600 dark:text-slate-300 mb-4 max-w-xs">
+              <h4 className="font-display font-bold text-lg mb-1 text-[#10182B] dark:text-white">Survive The Exam Sprint!</h4>
+              <p className="font-body text-xs text-[#58647D] dark:text-slate-300 mb-4 max-w-xs">
                 Items will flash all over the screen. Tap books, coffee, calculators, and pens. Avoid phones, naps, and games!
               </p>
               <button
@@ -198,15 +198,15 @@ export const ExamSurvivalGameModal: React.FC = () => {
           )}
 
           {gameState === 'over' && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-white/95 dark:bg-[#162032]/95 backdrop-blur-xs z-20">
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-[#FFFDF5]/95 dark:bg-[#131D31]/95 backdrop-blur-xs z-20">
               <div className="text-4xl mb-1">🏁</div>
-              <h4 className="font-display font-bold text-xl mb-1">Exam Concluded!</h4>
-              <div className="my-2 bg-amber-50 dark:bg-slate-800 p-3 rounded-xl border border-amber-300 dark:border-slate-700">
-                <span className="text-xs uppercase tracking-wider text-slate-500 block">Exam Survival Score</span>
-                <span className="font-display font-bold text-3xl text-emerald-600 dark:text-emerald-400">
+              <h4 className="font-display font-bold text-xl mb-1 text-[#10182B] dark:text-white">Exam Concluded!</h4>
+              <div className="my-2 bg-white dark:bg-slate-800 p-3 rounded-xl border border-[#F0E3B5] dark:border-slate-700">
+                <span className="text-xs uppercase tracking-wider text-[#58647D] dark:text-slate-400 block">Exam Survival Score</span>
+                <span className="font-display font-bold text-3xl text-[#00B887] dark:text-emerald-400">
                   {survivalRate}%
                 </span>
-                <p className="text-xs font-display mt-1 text-[#1E2A4A] dark:text-slate-200">
+                <p className="text-xs font-display mt-1 text-[#10182B] dark:text-slate-200">
                   Status: <b>{survivalRate >= 80 ? 'Barely prepared, but confident. 🏆' : 'Need more pastel highlighters! ✏️'}</b>
                 </p>
               </div>
@@ -221,7 +221,7 @@ export const ExamSurvivalGameModal: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => openModal('catchBooksGame')}
-                  className="btn-doodle btn-ghost px-3 py-2 text-xs border border-[#1E2A4A]/20"
+                  className="btn-doodle btn-ghost px-3 py-2 text-xs border border-[#F0E3B5]"
                   title="Switch to Catch The Books mini-game"
                 >
                   🎒 Catch The Books

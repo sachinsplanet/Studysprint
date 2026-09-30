@@ -14,7 +14,7 @@ export const FunToastContainer: React.FC = () => {
       {funToasts.map((toast) => (
         <div
           key={toast.id}
-          className="pointer-events-auto bg-[#1E2A4A]/95 dark:bg-slate-900/95 backdrop-blur-md text-white border border-[#FFC93C]/40 px-4 py-3 rounded-2xl shadow-xl flex items-center justify-between gap-3 animate-in fade-in slide-in-from-bottom-2 duration-150"
+          className="pointer-events-auto bg-[#10182B]/95 dark:bg-slate-900/95 backdrop-blur-md text-white border border-[#FFD600]/40 px-4 py-3 rounded-2xl shadow-xl flex items-center justify-between gap-3 animate-in fade-in slide-in-from-bottom-2 duration-150"
           role="status"
         >
           <div className="flex items-center gap-2.5 min-w-0">

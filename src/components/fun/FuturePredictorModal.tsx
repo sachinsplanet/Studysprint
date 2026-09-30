@@ -98,64 +98,64 @@ export const FuturePredictorModal: React.FC = () => {
       aria-modal="true"
     >
       <div
-        className="doodle-card bg-white dark:bg-[#162032] max-w-md w-full p-6 sm:p-8 text-[#1E2A4A] dark:text-slate-100 animate-in zoom-in-95 duration-200 text-center"
+        className="doodle-card bg-[#FFFDF5] dark:bg-[#131D31] max-w-md w-full p-6 sm:p-8 text-[#10182B] dark:text-slate-100 animate-in zoom-in-95 duration-200 text-center border-2 border-[#F0E3B5] dark:border-slate-800"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="w-14 h-14 rounded-full bg-[#E2D9F3] dark:bg-[#281A38] border-3 border-[#1E2A4A] dark:border-purple-400 mx-auto flex items-center justify-center text-3xl mb-3">
+        <div className="w-14 h-14 rounded-full bg-[#FFF4C7] dark:bg-[#281A38] border-2 border-[#F0E3B5] dark:border-purple-400 mx-auto flex items-center justify-center text-3xl mb-3">
           🔮
         </div>
 
-        <h3 className="font-display font-bold text-2xl text-[#1E2A4A] dark:text-white">
+        <h3 className="font-display font-bold text-2xl text-[#10182B] dark:text-white">
           Academic Future Oracle
         </h3>
-        <p className="font-body text-xs text-[#1E2A4A]/60 dark:text-slate-400 mt-1">
+        <p className="font-body text-xs text-[#58647D] dark:text-slate-400 mt-1">
           Peer into your semester destiny powered by doubtful stationery statistics.
         </p>
 
         {scanning ? (
-          <div className="my-8 py-6 bg-slate-50 dark:bg-slate-900 rounded-2xl border-2 border-dashed border-[#1E2A4A]/30 dark:border-slate-700">
+          <div className="my-8 py-6 bg-white dark:bg-slate-900 rounded-2xl border-2 border-dashed border-[#F0E3B5] dark:border-slate-700">
             <div className="inline-block animate-spin text-3xl mb-3">🌀</div>
-            <p className="font-display font-semibold text-sm text-[#1E2A4A] dark:text-amber-300 px-4 min-h-[40px] flex items-center justify-center">
+            <p className="font-display font-semibold text-sm text-[#10182B] dark:text-amber-300 px-4 min-h-[40px] flex items-center justify-center">
               {SCAN_STEPS[stepIdx]}
             </p>
-            <div className="w-48 h-2 bg-slate-200 dark:bg-slate-800 rounded-full mx-auto mt-4 overflow-hidden">
+            <div className="w-48 h-2 bg-[#FFF9DF] dark:bg-slate-800 rounded-full mx-auto mt-4 overflow-hidden border border-[#F0E3B5]/60">
               <div
-                className="h-full bg-purple-500 transition-all duration-300"
+                className="h-full bg-[#FFD600] transition-all duration-300"
                 style={{ width: `${((stepIdx + 1) / SCAN_STEPS.length) * 100}%` }}
               />
             </div>
           </div>
         ) : (
           <div className="my-6 text-left space-y-3 font-body text-xs">
-            <div className="bg-[#FFF2C6] dark:bg-[#272115] p-4 rounded-xl border-2 border-amber-300 dark:border-amber-700 space-y-2">
-              <div className="flex justify-between items-center text-sm font-display font-bold text-[#1E2A4A] dark:text-amber-200 border-b border-amber-200 dark:border-amber-900/60 pb-2">
+            <div className="bg-[#FFF4C7] dark:bg-[#272115] p-4 rounded-xl border-2 border-[#F0E3B5] dark:border-amber-700 space-y-2">
+              <div className="flex justify-between items-center text-sm font-display font-bold text-[#10182B] dark:text-amber-200 border-b border-[#F0E3B5] dark:border-amber-900/60 pb-2">
                 <span>YOUR UPCOMING SEMESTER:</span>
-                <span className="text-xs bg-amber-200 dark:bg-amber-900 px-2 py-0.5 rounded-full">
+                <span className="text-xs bg-[#FFD600] text-[#10182B] font-semibold px-2 py-0.5 rounded-full">
                   {prediction.confidence}% Confidence
                 </span>
               </div>
 
-              <div className="grid grid-cols-2 gap-2 pt-1">
+              <div className="grid grid-cols-2 gap-2 pt-1 text-[#10182B] dark:text-slate-200">
                 <p>
                   <b>Notebooks Purchased:</b> <span className="font-display text-sm">{prediction.buyNotebooks}</span>
                 </p>
                 <p>
-                  <b>Notebooks Actually Used:</b> <span className="font-display text-sm text-pink-600">{prediction.useNotebooks}</span>
+                  <b>Notebooks Actually Used:</b> <span className="font-display text-sm text-[#FF719A]">{prediction.useNotebooks}</span>
                 </p>
                 <p>
                   <b>Productivity Researched:</b> <span className="font-display text-sm">{prediction.researchHours} hrs</span>
                 </p>
                 <p>
-                  <b>Serious Studying Begins:</b> <span className="font-display text-sm text-amber-700 dark:text-amber-300">{prediction.daysBeforeExam} days prior</span>
+                  <b>Serious Studying Begins:</b> <span className="font-display text-sm text-[#FFD600] font-bold">{prediction.daysBeforeExam} days prior</span>
                 </p>
               </div>
 
-              <div className="pt-2 border-t border-amber-200 dark:border-amber-900/60 italic text-[#1E2A4A]/90 dark:text-slate-200">
+              <div className="pt-2 border-t border-[#F0E3B5] dark:border-amber-900/60 italic text-[#58647D] dark:text-slate-200">
                 &quot;{prediction.quote}&quot;
               </div>
             </div>
 
-            <div className="flex justify-between items-center text-[11px] text-slate-500 px-1">
+            <div className="flex justify-between items-center text-[11px] text-[#58647D] px-1">
               <span>Scientific Validity: <b>Questionable</b></span>
               <span>Prophecy Level: <b>Accurate</b></span>
             </div>
