@@ -90,7 +90,7 @@ export const FunProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   // XP State
   const [xp, setXP] = useState<number>(() => {
-    return getSafeStorage<number>(STORAGE_KEYS.XP, 0);
+    return getSafeStorage<number>(STORAGE_KEYS.XP, 1028);
   });
 
   // Calculate Level
@@ -159,13 +159,6 @@ export const FunProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     });
   }, []);
 
-  // Check level 6 achievement
-  useEffect(() => {
-    if (level.level >= 6) {
-      unlockAchievement('academic_weapon');
-    }
-  }, [level]);
-
   // Unlock Achievement
   const unlockAchievement = useCallback((id: string) => {
     setAchievements((prev) => {
@@ -175,30 +168,46 @@ export const FunProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       const next = prev.map((a) => (a.id === id ? { ...a, unlocked: true, unlockedAt: Date.now() } : a));
       setSafeStorage(STORAGE_KEYS.ACHIEVEMENTS, next);
 
-      soundEngine.playSuccess();
-      confetti({
-        particleCount: 80,
-        spread: 75,
-        origin: { y: 0.6 }
-      });
+      // Defer side-effects outside React state transition
+      setTimeout(() => {
+        soundEngine.playSuccess();
+        confetti({
+          particleCount: 80,
+          spread: 75,
+          origin: { y: 0.6 }
+        });
 
-      showFunToast({
-        title: `🏆 Achievement Unlocked!`,
-        description: target.title + ' — ' + target.description,
-        emoji: target.emoji,
-        type: 'achievement'
-      });
+        showFunToast({
+          title: `🏆 Achievement Unlocked!`,
+          description: target.title + ' — ' + target.description,
+          emoji: target.emoji,
+          type: 'achievement'
+        });
 
-      // Bonus XP
-      setXP((old) => {
-        const nextXP = old + 50;
-        setSafeStorage(STORAGE_KEYS.XP, nextXP);
-        return nextXP;
-      });
+        // Bonus XP
+        setXP((old) => {
+          const nextXP = old + 50;
+          setSafeStorage(STORAGE_KEYS.XP, nextXP);
+          return nextXP;
+        });
+      }, 0);
 
       return next;
     });
   }, [showFunToast]);
+
+  // Check level 6 achievement
+  useEffect(() => {
+    if (level.level >= 6) {
+      const isUnlocked = achievements.some((a) => a.id === 'academic_weapon' && a.unlocked);
+      if (!isUnlocked) {
+        const timer = setTimeout(() => {
+          unlockAchievement('academic_weapon');
+        }, 50);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [level.level, achievements, unlockAchievement]);
 
   // Discover Easter Egg
   const discoverEasterEgg = useCallback((id: string) => {
@@ -209,35 +218,38 @@ export const FunProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       const next = prev.map((e) => (e.id === id ? { ...e, discovered: true, discoveredAt: Date.now() } : e));
       setSafeStorage(STORAGE_KEYS.EASTER_EGGS, next);
 
-      soundEngine.playEasterEgg();
-      confetti({
-        particleCount: 100,
-        spread: 85,
-        origin: { y: 0.5 },
-        colors: ['#FFC93C', '#FFD6E0', '#D8F3DC', '#CDE7FF']
-      });
+      // Defer side-effects outside React state transition
+      setTimeout(() => {
+        soundEngine.playEasterEgg();
+        confetti({
+          particleCount: 100,
+          spread: 85,
+          origin: { y: 0.5 },
+          colors: ['#FFC93C', '#FFD6E0', '#D8F3DC', '#CDE7FF']
+        });
 
-      showFunToast({
-        title: `🥚 Secret Easter Egg Discovered!`,
-        description: `${target.name} (+100 Academic XP)`,
-        emoji: '✨',
-        type: 'egg'
-      });
+        showFunToast({
+          title: `🥚 Secret Easter Egg Discovered!`,
+          description: `${target.name} (+100 Academic XP)`,
+          emoji: '✨',
+          type: 'egg'
+        });
 
-      // First egg achievement
-      unlockAchievement('first_egg');
+        // First egg achievement
+        unlockAchievement('first_egg');
 
-      // Check if 5 discovered
-      const discoveredCount = next.filter((e) => e.discovered).length;
-      if (discoveredCount >= 5) {
-        unlockAchievement('web_detective');
-      }
+        // Check if 5 discovered
+        const discoveredCount = next.filter((e) => e.discovered).length;
+        if (discoveredCount >= 5) {
+          unlockAchievement('web_detective');
+        }
 
-      setXP((old) => {
-        const nextXP = old + 100;
-        setSafeStorage(STORAGE_KEYS.XP, nextXP);
-        return nextXP;
-      });
+        setXP((old) => {
+          const nextXP = old + 100;
+          setSafeStorage(STORAGE_KEYS.XP, nextXP);
+          return nextXP;
+        });
+      }, 0);
 
       return next;
     });
@@ -332,7 +344,9 @@ export const FunProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       const count = isQuick ? current.count + 1 : 1;
 
       if (count === 7) {
-        unlockAchievement('suspicious_visitor');
+        setTimeout(() => {
+          unlockAchievement('suspicious_visitor');
+        }, 0);
       }
 
       return {

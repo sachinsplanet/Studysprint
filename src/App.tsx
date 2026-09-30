@@ -3,7 +3,6 @@ import confetti from 'canvas-confetti';
 import { FunProvider, useFun } from './lib/fun/funContext';
 import { CART_PERSONALITY_MESSAGES } from './lib/fun/constants';
 import {
-  FunHeaderControls,
   FunToastContainer,
   AchievementModal,
   BrainBatteryModal,
@@ -17,6 +16,8 @@ import {
   CompatibilityScannerModal
 } from './components/fun';
 import { ProductImage } from './components/ProductImage';
+import { StudySprintHeader } from './components/StudySprintHeader';
+import { WishlistModal } from './components/WishlistModal';
 import productImagesData from './data/productImages.json';
 
 interface Product {
@@ -887,7 +888,7 @@ function AppContent() {
     } catch {
       // fallback
     }
-    return 'light';
+    return 'dark';
   });
 
   // Navigation & UI States
@@ -1078,10 +1079,31 @@ function AppContent() {
   const [cart, setCart] = useState<CartItem[]>(() => {
     try {
       const saved = localStorage.getItem('ss-cart');
-      return saved ? JSON.parse(saved) : [];
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
     } catch {
-      return [];
+      // fallback
     }
+    return [
+      {
+        id: 'f1',
+        name: 'Deep Focus Kit',
+        price: 499,
+        emoji: '🎯',
+        quantity: 2,
+        image: (productImagesData as Record<string, any>)['f1']?.image || null
+      },
+      {
+        id: 'f2',
+        name: 'Pomodoro Power Pack',
+        price: 349,
+        emoji: '⏱️',
+        quantity: 2,
+        image: (productImagesData as Record<string, any>)['f2']?.image || null
+      }
+    ];
   });
 
   const [orders, setOrders] = useState<Order[]>(() => {
@@ -1092,6 +1114,91 @@ function AppContent() {
       return [];
     }
   });
+
+  // Wishlist State persisted in localStorage
+  const [wishlist, setWishlist] = useState<Product[]>(() => {
+    try {
+      const saved = localStorage.getItem('ss-wishlist');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+  const [wishlistOpen, setWishlistOpen] = useState(false);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('ss-wishlist', JSON.stringify(wishlist));
+    } catch {
+      // ignore
+    }
+  }, [wishlist]);
+
+  const isWishlisted = (id: string) => wishlist.some((item) => item.id === id);
+
+  const toggleWishlist = (product: Product) => {
+    const exists = wishlist.some((item) => item.id === product.id);
+    if (exists) {
+      setWishlist((prev) => prev.filter((item) => item.id !== product.id));
+      showToast(`Removed "${product.name}" from Wishlist`);
+    } else {
+      setWishlist((prev) => [...prev, product]);
+      addXP(25, 'Saved study kit to wishlist');
+      showToast(`💖 Saved "${product.name}" to Wishlist! (+25 XP)`);
+      confetti({
+        particleCount: 35,
+        spread: 55,
+        origin: { y: 0.6 }
+      });
+    }
+  };
+
+  const removeFromWishlist = (id: string) => {
+    const target = wishlist.find((item) => item.id === id);
+    setWishlist((prev) => prev.filter((item) => item.id !== id));
+    if (target) {
+      showToast(`Removed "${target.name}" from Wishlist`);
+    }
+  };
+
+  const handleAddWishlistToCart = (product: any) => {
+    addToCart(product);
+    showToast(`🛒 Added "${product.name}" to Cart!`);
+  };
+
+  const handleMoveAllWishlistToCart = () => {
+    if (wishlist.length === 0) return;
+    wishlist.forEach((p) => {
+      setCart((prev) => {
+        const idx = prev.findIndex((item) => item.id === p.id);
+        if (idx >= 0) {
+          const next = [...prev];
+          next[idx] = { ...next[idx], quantity: next[idx].quantity + 1 };
+          return next;
+        }
+        return [
+          ...prev,
+          {
+            id: p.id,
+            name: p.name,
+            price: p.price,
+            emoji: p.emoji,
+            quantity: 1,
+            image: p.image || null,
+            imageAlt: p.imageAlt
+          }
+        ];
+      });
+    });
+    triggerCartPop();
+    showToast(`🛒 Moved ${wishlist.length} item(s) from Wishlist to Cart!`);
+    setWishlist([]);
+  };
+
+  const handleClearWishlist = () => {
+    setWishlist([]);
+    showToast('Wishlist cleared');
+  };
 
   // Filter & Search states
   const [searchQuery, setSearchQuery] = useState('');
@@ -1192,11 +1299,11 @@ function AppContent() {
     recordClick('add-to-bag');
     addXP(25, `Packed ${product.name} into study bag`);
 
+    if (cartCount + 1 >= 5) {
+      unlockAchievement('cart_overthinker');
+    }
+
     setCart((prev) => {
-      const nextCount = prev.reduce((acc, it) => acc + it.quantity, 0) + 1;
-      if (nextCount >= 5) {
-        unlockAchievement('cart_overthinker');
-      }
       const existing = prev.find((item) => item.id === product.id);
       if (existing) {
         return prev.map((item) =>
@@ -1466,183 +1573,33 @@ function AppContent() {
 
   return (
     <div className="min-h-screen doodle-pattern text-[#1E2A4A] dark:text-[#F1F5F9] flex flex-col font-body transition-colors duration-200">
-      {/* TOP ANNOUNCEMENT TICKER */}
-      <div className="bg-[#FFC93C] dark:bg-[#F59E0B] py-2 px-4 border-b-3 border-[#1E2A4A] dark:border-slate-300 text-center font-display font-semibold text-xs sm:text-sm tracking-wide text-[#1E2A4A] dark:text-slate-950 flex items-center justify-center gap-3 transition-colors">
-        <span>🎒 EXAM CRUNCH SPECIAL: Free Shipping on orders above ₹500!</span>
-        <span className="hidden md:inline">·</span>
-        <span className="hidden md:inline">Use code &apos;SPRINT10&apos; for secret stickers</span>
-      </div>
-
-      {/* 🎭 FUN LAYER CONTROLS */}
-      <FunHeaderControls />
-
-      {/* 1️⃣ NAVBAR */}
-      <header className="sticky top-0 z-50 bg-[#FFFDF7]/95 dark:bg-[#0B0F19]/95 backdrop-blur-md border-b-3 border-[#1E2A4A] dark:border-slate-300 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          {/* Logo with 5-click Easter Egg */}
-          <a
-            href="#home"
-            className="flex items-center gap-2 group select-none"
-            onClick={(e) => {
-              recordClick('logo-bolt');
-              const next = logoClicks + 1;
-              setLogoClicks(next);
-              if (next >= 5) {
-                e.preventDefault();
-                discoverEasterEgg('logo_doodle');
-                confetti({
-                  particleCount: 90,
-                  spread: 80,
-                  origin: { y: 0.2 }
-                });
-                showToast('⚡ Bzzzt! You supercharged the StudySprint logo! (+100 XP)');
-                setLogoClicks(0);
-              }
-            }}
-          >
-            <span className="text-3xl group-hover:rotate-12 transition-transform duration-200">⚡</span>
-            <div>
-              <span className="font-display font-black text-2xl tracking-tight block text-[#1E2A4A] dark:text-white">
-                StudySprint<span className="text-[#FFC93C]">.</span>
-              </span>
-              <span className="font-hand text-xs text-[#1E2A4A]/70 dark:text-slate-400 block -mt-1 font-semibold">
-                cute stationery that works 📝
-              </span>
-            </div>
-          </a>
-
-          {/* Desktop Nav Links */}
-          <nav className="hidden lg:flex items-center gap-7 font-display font-medium text-base">
-            <a href="#home" className="text-[#1E2A4A] dark:text-slate-200 hover:text-amber-600 dark:hover:text-[#FFC93C] transition-colors">🏠 Home</a>
-            <a href="#kits" className="text-[#1E2A4A] dark:text-slate-200 hover:text-amber-600 dark:hover:text-[#FFC93C] transition-colors">📦 Kits</a>
-            <a href="#builder" className="text-[#1E2A4A] dark:text-slate-200 hover:text-amber-600 dark:hover:text-[#FFC93C] transition-colors">🛠️ Customize</a>
-            <a href="#reviews" className="text-[#1E2A4A] dark:text-slate-200 hover:text-amber-600 dark:hover:text-[#FFC93C] transition-colors">⭐ Reviews</a>
-            <a href="#delivery" className="text-[#1E2A4A] dark:text-slate-200 hover:text-amber-600 dark:hover:text-[#FFC93C] transition-colors">🚚 Track Order</a>
-            <a href="#about" className="text-[#1E2A4A] dark:text-slate-200 hover:text-amber-600 dark:hover:text-[#FFC93C] transition-colors">💡 About</a>
-          </nav>
-
-          {/* Nav Actions (Theme Toggle + Cart + Shop Button + Hamburger) */}
-          <div className="flex items-center gap-3 sm:gap-4">
-            {/* Theme Toggle Button */}
-            <button
-              id="theme-toggle-btn"
-              type="button"
-              onClick={toggleTheme}
-              className="btn-doodle btn-ghost px-3 py-1.5 text-sm gap-1.5 cursor-pointer hover:rotate-3 transition-transform"
-              aria-label={theme === 'dark' ? 'Switch to Day Light Mode' : 'Switch to Midnight Dark Mode'}
-              title={theme === 'dark' ? 'Switch to Day Mode ☀️' : 'Switch to Midnight Cram 🌙'}
-            >
-              <span className="text-lg leading-none transition-transform duration-300 inline-block">
-                {theme === 'dark' ? '🌙' : '☀️'}
-              </span>
-              <span className="hidden sm:inline font-display font-semibold text-xs tracking-wide">
-                {theme === 'dark' ? 'Night' : 'Day'}
-              </span>
-            </button>
-
-            <button
-              id="cart-btn"
-              onClick={() => setCartOpen(true)}
-              onAnimationEnd={() => setCartPopping(false)}
-              className={`relative text-3xl p-1 cursor-pointer active:scale-95 transition-transform text-[#1E2A4A] dark:text-white ${
-                cartPopping ? 'cart-pop-active' : 'hover:scale-105'
-              }`}
-              aria-label="Open cart"
-            >
-              {cartPopping && <span className="cart-ripple" />}
-              <span className="inline-block select-none">🛒</span>
-              <span
-                id="cart-count-badge"
-                className={`absolute -top-1 -right-2 bg-[#FFC93C] text-[#1E2A4A] border-2 border-[#1E2A4A] dark:border-slate-300 rounded-full text-xs font-display font-bold w-6 h-6 flex items-center justify-center transition-all ${
-                  cartCount > 0 ? 'scale-100' : 'scale-75 opacity-70'
-                } ${cartPopping ? 'badge-pop-active' : ''}`}
-              >
-                {cartCount}
-              </span>
-            </button>
-            <a href="#kits" className="btn-doodle btn-primary px-5 py-2 hidden sm:inline-flex text-base">
-              Shop Kits ⚡
-            </a>
-            <button
-              id="menu-btn"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden text-3xl cursor-pointer p-1 text-[#1E2A4A] dark:text-white"
-              aria-label="Open menu"
-            >
-              {mobileMenuOpen ? '✕' : '☰'}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Menu Dropdown */}
-        <div
-          id="mobile-menu"
-          className={`${
-            mobileMenuOpen ? 'block' : 'hidden'
-          } lg:hidden border-t-3 border-[#1E2A4A] dark:border-slate-300 bg-[#FFFDF7] dark:bg-[#0B0F19] transition-all`}
-          style={{ borderTop: theme === 'dark' ? '3px solid #CBD5E1' : '3px solid #1E2A4A' }}
-        >
-          <div className="flex flex-col px-6 py-4 gap-3 font-display font-medium text-lg">
-            <a
-              href="#home"
-              className="mob-link"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              🏠 Home
-            </a>
-            <a
-              href="#kits"
-              className="mob-link"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              📦 Kits
-            </a>
-            <a
-              href="#builder"
-              className="mob-link"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              🛠️ Customize
-            </a>
-            <a
-              href="#reviews"
-              className="mob-link"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              ⭐ Reviews
-            </a>
-            <a
-              href="#delivery"
-              className="mob-link"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              🚚 Track Order
-            </a>
-            <a
-              href="#about"
-              className="mob-link"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              💡 About
-            </a>
-
-            {/* Mobile Menu Dark Mode Toggle Row */}
-            <div className="pt-3 pb-1 border-t-2 border-dashed border-[#1E2A4A]/20 dark:border-slate-700 flex items-center justify-between">
-              <span className="font-display font-semibold text-sm text-[#1E2A4A] dark:text-slate-300 flex items-center gap-2">
-                <span>{theme === 'dark' ? '🌙' : '☀️'}</span>
-                <span>Theme Mode</span>
-              </span>
-              <button
-                type="button"
-                onClick={toggleTheme}
-                className="btn-doodle btn-ghost px-3.5 py-1.5 text-xs flex items-center gap-1.5"
-              >
-                <span>{theme === 'dark' ? '☀️ Switch to Day' : '🌙 Switch to Night'}</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
+      {/* ⚡ REDESIGNED STUDYSPRINT MOBILE-FIRST HEADER (Sections A, B, C, D) */}
+      <StudySprintHeader
+        theme={theme}
+        toggleTheme={toggleTheme}
+        cartCount={cartCount}
+        cartPopping={cartPopping}
+        setCartOpen={setCartOpen}
+        setCartPopping={setCartPopping}
+        wishlistCount={wishlist.length}
+        onOpenWishlist={() => setWishlistOpen(true)}
+        onLogoClick={(e) => {
+          recordClick('logo-bolt');
+          const next = logoClicks + 1;
+          setLogoClicks(next);
+          if (next >= 5) {
+            e.preventDefault();
+            discoverEasterEgg('logo_doodle');
+            confetti({
+              particleCount: 90,
+              spread: 80,
+              origin: { y: 0.2 }
+            });
+            showToast('⚡ Bzzzt! You supercharged the StudySprint logo! (+100 XP)');
+            setLogoClicks(0);
+          }
+        }}
+      />
 
       {/* HERO SECTION */}
       <section id="home" className="pt-10 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
@@ -1913,11 +1870,32 @@ function AppContent() {
           {filteredProducts.map((p) => (
             <article
               key={p.id}
-              className={`doodle-card ${p.tilt} p-8 flex flex-col justify-between hover-lift cursor-default`}
+              className={`doodle-card ${p.tilt} p-8 flex flex-col justify-between hover-lift cursor-default relative`}
               style={{ backgroundColor: getProductCardBg(p.color) }}
               data-id={p.id}
               onClick={() => recordProductInspection(p.id)}
             >
+              {/* Heart Wishlist Toggle Button (Top-left floating badge) */}
+              <button
+                type="button"
+                data-wishlist-toggle={p.id}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleWishlist(p);
+                }}
+                className={`absolute top-4 left-4 z-20 w-10 h-10 rounded-full flex items-center justify-center transition-all cursor-pointer active:scale-90 ${
+                  isWishlisted(p.id)
+                    ? 'bg-rose-50 dark:bg-rose-950/90 text-rose-500 border-2 border-rose-500 shadow-[2px_2px_0_#f43f5e] scale-105'
+                    : 'bg-white/95 dark:bg-slate-800/95 text-slate-400 hover:text-rose-500 border-2 border-[#1E2A4A] dark:border-slate-400 shadow-[2px_2px_0_#1E2A4A] dark:shadow-[2px_2px_0_#000000] hover:scale-105'
+                }`}
+                aria-label={isWishlisted(p.id) ? `Remove ${p.name} from wishlist` : `Add ${p.name} to wishlist`}
+                title={isWishlisted(p.id) ? 'Saved in Wishlist ❤️' : 'Save for later 🤍'}
+              >
+                <span className="text-lg leading-none select-none" aria-hidden="true">
+                  {isWishlisted(p.id) ? '❤️' : '🤍'}
+                </span>
+              </button>
+
               {p.bestseller && (
                 <span
                   className="absolute -top-4 -right-3 bg-[#FFC93C] text-[#1E2A4A] rounded-full px-4 py-1 font-display font-semibold rotate-6 text-sm shadow-[2px_2px_0_#1E2A4A] dark:shadow-[2px_2px_0_#000000]"
@@ -1980,15 +1958,34 @@ function AppContent() {
                 )}
               </div>
 
-              <div className="flex items-center justify-between mt-auto pt-4 border-t-2 border-[#1E2A4A]/15 dark:border-slate-700">
+              <div className="flex items-center justify-between mt-auto pt-4 border-t-2 border-[#1E2A4A]/15 dark:border-slate-700 gap-2">
                 <span className="price-tag">₹{p.price}</span>
-                <button
-                  type="button"
-                  className="btn-doodle btn-primary px-5 py-2 text-base"
-                  onClick={(e) => addToCart(p, e)}
-                >
-                  Add to Cart
-                </button>
+                <div className="flex items-center gap-2">
+                  {/* Secondary Heart Toggle Button beside Add to Cart */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleWishlist(p);
+                    }}
+                    className={`p-2 rounded-full border-2 transition-all cursor-pointer flex items-center justify-center text-sm ${
+                      isWishlisted(p.id)
+                        ? 'border-rose-500 text-rose-500 bg-rose-50 dark:bg-rose-950/80 shadow-[1px_1px_0_#f43f5e]'
+                        : 'border-[#1E2A4A]/40 dark:border-slate-500 text-slate-400 hover:text-rose-500 bg-white/70 dark:bg-slate-800/70'
+                    }`}
+                    title={isWishlisted(p.id) ? 'Remove from wishlist' : 'Save to wishlist'}
+                    aria-label={isWishlisted(p.id) ? `Remove ${p.name} from wishlist` : `Save ${p.name} to wishlist`}
+                  >
+                    <span>{isWishlisted(p.id) ? '❤️' : '🤍'}</span>
+                  </button>
+                  <button
+                    type="button"
+                    className="btn-doodle btn-primary px-5 py-2 text-base"
+                    onClick={(e) => addToCart(p, e)}
+                  >
+                    Add to Cart
+                  </button>
+                </div>
               </div>
             </article>
           ))}
@@ -3128,6 +3125,15 @@ function AppContent() {
       </div>
 
       {/* 🎭 Fun Layer Modals & Interactive Widgets */}
+      <WishlistModal
+        isOpen={wishlistOpen}
+        onClose={() => setWishlistOpen(false)}
+        wishlist={wishlist}
+        onRemoveFromWishlist={removeFromWishlist}
+        onAddToCart={handleAddWishlistToCart}
+        onMoveAllToCart={handleMoveAllWishlistToCart}
+        onClearWishlist={handleClearWishlist}
+      />
       <AchievementModal />
       <BrainBatteryModal />
       <BehaviorAnalysisModal cartCount={cartCount} />

@@ -33,7 +33,7 @@ export const INITIAL_ACHIEVEMENTS: Achievement[] = [
     title: '📚 Academic Weapon',
     description: 'Accumulated enough Academic XP to reach Level 6 or beyond.',
     emoji: '⚔️',
-    unlocked: false,
+    unlocked: true,
     category: 'academic'
   },
   {
